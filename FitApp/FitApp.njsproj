@@ -37,6 +37,7 @@
     <Compile Include="public\js\app\controllers\faHomeCtrl.js" />
     <Compile Include="public\js\app\services\faCommonSvc.js" />
     <Compile Include="server.js" />
+    <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="public\partials\home.html" />
     <Content Include="public\partials\login.html" />
