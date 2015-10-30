@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include=".bowerrc" />
     <Compile Include="gruntfile.js" />
+    <Compile Include="public\js\main.js" />
     <Compile Include="public\js\app\faMain.js" />
     <Compile Include="public\js\app\controllers\faLoginCtrl.js" />
     <Compile Include="public\js\app\controllers\faHomeCtrl.js" />

@@ -1,6 +1,8 @@
 ﻿
-function faHomeCtrl($scope) {
-	$scope.message = "home";
-};
-
-faControllers.controller("faHomeCtrl", faHomeCtrl);
+define([], function () { 
+	function faHomeCtrl($scope) {
+		$scope.message = "home";
+	};
+	
+	return faHomeCtrl;
+});

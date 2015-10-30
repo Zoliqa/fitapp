@@ -1,13 +1,13 @@
 ﻿
-function faCommonSvc() {
-	var user = {};
+define([], function () {
+	function faCommonSvc() {
+		var user = {};
+		
+		return {
+			user: user
+		};
+	}
 	
-	return {
-		user: user
-	};
-}
-
-var faServices = angular.module("faServices", []);
-
-faServices.factory("faCommonSvc", faCommonSvc);
+	return faCommonSvc;
+});
 
