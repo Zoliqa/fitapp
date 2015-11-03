@@ -40,17 +40,21 @@
     <Compile Include="server.js" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
+    <Content Include="public\css\less\root.less" />
+    <Content Include="public\css\less\index.less" />
     <Content Include="public\partials\home.html" />
     <Content Include="public\partials\login.html" />
     <Content Include="README.md" />
     <Content Include="views\index.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="public\css\less\" />
     <Folder Include="public\js\" />
     <Folder Include="public\js\app\controllers\" />
     <Folder Include="public\js\app\services\" />
     <Folder Include="public\js\lib\" />
     <Folder Include="public\js\app\" />
+    <Folder Include="public\css\" />
     <Folder Include="public\partials\" />
     <Folder Include="views\" />
     <Folder Include="public\" />
