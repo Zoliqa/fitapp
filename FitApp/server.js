@@ -7,12 +7,12 @@ var express = require("express"),
 	MongoClient = require('mongodb').MongoClient,
 	dbUrl = 'mongodb://localhost:27017/fitApp',
 	bodyParser = require("body-parser"),
-	session = require('express-session');
+	session = require('express-session'),
+	cookieParser = require('cookie-parser');
+var db;
 
-MongoClient.connect(dbUrl, function (err, db) {
-	console.log("Connected correctly to server");
-	
-	db.close();
+MongoClient.connect(dbUrl, function (err, database) {
+	db = database;
 });
 
 app.engine("html", swig.renderFile);
@@ -25,19 +25,17 @@ passport.use(new LocalStrategy({
 		passwordField: 'password'
 	},
 	function (username, password, done) {
-		MongoClient.connect(dbUrl, function (err, db) {
-			db.collection("users").findOne({ name: username }, function (err, user) {
-				if (err)
-					return done(err);
+		db.collection("users").findOne({ name: username }, function (err, user) {
+			if (err)
+				return done(err);
 				
-				if (!user)
-					return done(null, false, { message: 'Incorrect username.' });
+			if (!user)
+				return done(null, false, { message: 'Incorrect username.' });
 				
-				if (user.password !== password)
-					return done(null, false, { message: 'Incorrect password.' });
+			if (user.password !== password)
+				return done(null, false, { message: 'Incorrect password.' });
 				
-				return done(null, user);
-			});
+			return done(null, user);
 		});
 	})
 );
@@ -47,19 +45,24 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (name, done) {
-	MongoClient.connect(dbUrl, function (err, db) {
-		db.collection("users").findOne({ name: name }, function (err, user) { 
-			done(null, user);
-			
-			db.close();
-		});
+	db.collection("users").findOne({ name: name }, function (err, user) { 
+		done(null, user);
 	});
 });
 
 app.use(session({ secret: "secret" }));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
+app.use(cookieParser());
 app.use(passport.session());
+
+var isAuthenticated = function (req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	
+	res.status(401).json({ message: "Unauthorized" });
+}
 
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -68,12 +71,14 @@ app.get("/", function (req, res) {
 });
 
 app.post('/login', passport.authenticate('local'), function (req, res) {
-	if (!req.user)
-		res.send("{ success: false }");
+	if (req.user)
+		res.json({ok: true});
 	else
-		res.send("{ success: true }");
+		res.json({ok: false});
+});
 
-	res.end();
+app.get("/users", isAuthenticated, function (req, res) { 
+	res.json({ user1: "user1", user2: "user2" });
 });
 
 if (!module.parent) {

@@ -1,15 +1,19 @@
 ﻿<h1>{{message}}</h1>
 
-<form action="/login" method="post">
+<div>
     <div>
         <label>Username:</label>
-        <input type="text" name="username" />
+        <input type="text" name="username" ng-model="credentials.username" />
     </div>
     <div>
         <label>Password:</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" ng-model="credentials.password" />
     </div>
     <div>
-        <input type="submit" value="Log In" />
+        <input type="button" value="Log In" ng-click="logIn()" />
     </div>
-</form> 
+</div>
+
+<div>
+    <input type="button" value="Get users" ng-click="getUsers()" />
+</div> 
