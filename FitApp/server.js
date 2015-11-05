@@ -54,17 +54,17 @@ app.use(session({ secret: "secret" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
-app.use(cookieParser());
-app.use(passport.session());
-
+app.use(cookieParser()); 
+app.use(passport.session());   
+   
 var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	
-	res.status(401).json({ message: "Unauthorized" });
+	res.status(401).json({ message: "Unauthorized" });      
 }
 
-app.use("/public", express.static(__dirname + "/public")); 
+app.use("/public", express.static(__dirname + "/public"));  
 
 app.get("/", function (req, res) {
 	res.render('index');

@@ -1,19 +1,21 @@
-﻿<h1>{{message}}</h1>
+﻿<div class="login-form well">
+    <div class="form-group">
+        <input type="text" class="form-control input-lg" placeholder="Username" ng-model="credentials.username">
+    </div>
 
-<div>
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username" ng-model="credentials.username" />
+    <div class="form-group">
+        <input type="text" class="form-control input-lg" placeholder="Password" ng-model="credentials.password">
     </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password" ng-model="credentials.password" />
+
+    <div class="form-group">
+        <button type="button" class="login-btn btn btn-primary btn-lg" ng-click="logIn()">Sign in</button>
     </div>
-    <div>
-        <input type="button" value="Log In" ng-click="logIn()" />
+
+    <div class="form-group">
+        <a class="btn btn-block btn-social btn-lg btn-facebook">
+            <i class="fa fa-facebook"></i>
+            Sign in with Facebook
+        </a>
     </div>
 </div>
 
-<div>
-    <input type="button" value="Get users" ng-click="getUsers()" />
-</div> 

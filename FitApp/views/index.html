@@ -5,11 +5,16 @@
     <meta charset="utf-8" />
     <title></title>
 
+    <link href="/public/lib/components-font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/public/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="/public/lib/bootstrap-social/bootstrap-social.css" rel="stylesheet" />
     <link href="/public/css/index.css" rel="stylesheet" />
 </head>
 <body>
-    <div ng-view></div>
+    <div class="container">
+        <div ng-view class="placeholder"></div>
+    </div>
 
-    <script src="/public/js/lib/requirejs/require.js" data-main="/public/js/main.js"></script>
+    <script src="/public/lib/requirejs/require.js" data-main="/public/js/main.js"></script>
 </body>
 </html>

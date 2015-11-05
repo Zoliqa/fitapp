@@ -31,16 +31,13 @@
 		},
 		concurrent: {
 			dev: {
-				tasks: ['nodemon', 'watch', 'less'],
+				tasks: ['nodemon', 'watch'],
 				options: {
 					logConcurrentOutput: true
 				}
 			}
 		}
 	});
-	
-	grunt.loadNpmTasks('grunt-nodemon');
-	grunt.loadNpmTasks('grunt-contrib-less');
 	
 	grunt.registerInitTask('default', 'concurrent:dev');
 };

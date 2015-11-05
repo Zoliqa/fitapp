@@ -52,7 +52,6 @@
     <Folder Include="public\js\" />
     <Folder Include="public\js\app\controllers\" />
     <Folder Include="public\js\app\services\" />
-    <Folder Include="public\js\lib\" />
     <Folder Include="public\js\app\" />
     <Folder Include="public\css\" />
     <Folder Include="public\partials\" />

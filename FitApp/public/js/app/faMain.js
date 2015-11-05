@@ -4,7 +4,8 @@ define([
 	"public/js/app/controllers/faHomeCtrl", 
 	"public/js/app/services/faCommonSvc",
 	"angular",
-	"angularRoute"
+	"angularRoute",
+	"bootstrap"
 	], function(faLoginCtrl, faHomeCtrl, faCommonSvc, angular, angularRoute) {
 	
 	var fitApp = angular.module("fitApp", ["ngRoute"]);
