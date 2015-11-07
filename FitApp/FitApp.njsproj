@@ -32,6 +32,8 @@
   <ItemGroup>
     <Compile Include=".bowerrc" />
     <Compile Include="gruntfile.js" />
+    <Compile Include="models\user.js" />
+    <Compile Include="public\js\app\controllers\faRegisterCtrl.js" />
     <Compile Include="public\js\main.js" />
     <Compile Include="public\js\app\faMain.js" />
     <Compile Include="public\js\app\controllers\faLoginCtrl.js" />
@@ -44,10 +46,12 @@
     <Content Include="public\css\less\index.less" />
     <Content Include="public\partials\home.html" />
     <Content Include="public\partials\login.html" />
+    <Content Include="public\partials\register.html" />
     <Content Include="README.md" />
     <Content Include="views\index.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="models\" />
     <Folder Include="public\css\less\" />
     <Folder Include="public\js\" />
     <Folder Include="public\js\app\controllers\" />

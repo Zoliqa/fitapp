@@ -1,12 +1,13 @@
 ﻿
 define([
 	"public/js/app/controllers/faLoginCtrl",
+	"public/js/app/controllers/faRegisterCtrl", 
 	"public/js/app/controllers/faHomeCtrl", 
 	"public/js/app/services/faCommonSvc",
 	"angular",
 	"angularRoute",
 	"bootstrap"
-	], function(faLoginCtrl, faHomeCtrl, faCommonSvc, angular, angularRoute) {
+	], function(faLoginCtrl, faRegisterCtrl, faHomeCtrl, faCommonSvc, angular, angularRoute) {
 	
 	var fitApp = angular.module("fitApp", ["ngRoute"]);
 
@@ -15,6 +16,10 @@ define([
 		.when("/", {
 			templateUrl: "/public/partials/login.html",
 			controller: "faLoginCtrl"
+		})
+		.when("/register", {
+			templateUrl: "/public/partials/register.html",
+			controller: "faRegisterCtrl"
 		})
 		.when("/home", {
 			templateUrl: "/public/partials/home.html",
@@ -36,6 +41,7 @@ define([
 	fitApp.config(config);
 	
 	fitApp.controller("faLoginCtrl", faLoginCtrl);
+	fitApp.controller("faRegisterCtrl", faRegisterCtrl);
 	fitApp.controller("faHomeCtrl", faHomeCtrl);
 	fitApp.factory("faCommonSvc", faCommonSvc);
 	

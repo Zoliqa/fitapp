@@ -1,7 +1,6 @@
 ﻿
 define([], function () { 
-	function faLoginCtrl($scope, $http) {
-		$scope.message = "login...";
+	function faLoginCtrl($scope, $http, $location) {
 		$scope.credentials = {
 			username: "",
 			password: ""
@@ -10,8 +9,12 @@ define([], function () {
 		$scope.logIn = function () {
 			$http.post("/login", $scope.credentials)
 				.success(function (result) {
-				console.log(result);
-			});
+					console.log(result);
+				});
+		};
+		
+		$scope.register = function () {
+			$location.path("/register");
 		};
 
 		$scope.getUsers = function () {

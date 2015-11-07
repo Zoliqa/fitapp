@@ -4,16 +4,15 @@ var express = require("express"),
     swig = require("swig"),
 	passport = require("passport");
 	LocalStrategy = require("passport-local").Strategy,
-	MongoClient = require('mongodb').MongoClient,
-	dbUrl = 'mongodb://localhost:27017/fitApp',
+	MongoClient = require("mongodb").MongoClient,
+	dbUrl = "mongodb://localhost:27017/fitApp",
 	bodyParser = require("body-parser"),
-	session = require('express-session'),
-	cookieParser = require('cookie-parser');
-var db;
+	session = require("express-session"),
+	cookieParser = require("cookie-parser"),
+	User = require("./models/user.js"),
+	mongoose = require("mongoose");
 
-MongoClient.connect(dbUrl, function (err, database) {
-	db = database;
-});
+mongoose.connect(dbUrl);
 
 app.engine("html", swig.renderFile);
 
@@ -21,31 +20,68 @@ app.set("view engine", "html");
 app.set("views", "./views");    
 
 passport.use(new LocalStrategy({
-		usernameField: 'username',
-		passwordField: 'password'
+		usernameField: "username",
+		passwordField: "password"
 	},
 	function (username, password, done) {
-		db.collection("users").findOne({ name: username }, function (err, user) {
+		User.findOne({ username: username }, function (err, user) {
 			if (err)
 				return done(err);
 				
 			if (!user)
-				return done(null, false, { message: 'Incorrect username.' });
+				return done(null, false, { message: "Incorrect username." });
 				
 			if (user.password !== password)
-				return done(null, false, { message: 'Incorrect password.' });
+				return done(null, false, { message: "Incorrect password." });
 				
 			return done(null, user);
 		});
 	})
 );
 
+passport.use("register", new LocalStrategy({
+		passReqToCallback: true
+	},
+	function (req, username, password, done) {
+		var profile = req.body;
+    		
+    	User.findOne({ username: profile.username }, function (err, user) {
+    		if (user) {
+			console.log("User " + user.username + " already exists");
+			
+    			return done(null, false);
+    		}
+    		else {
+				var user = new User();
+			
+				user.username = profile.username;
+				user.password = profile.password;
+				user.firstname = profile.firstname;
+				user.lastname = profile.lastname;
+				user.emailAddress = profile.emailAddress;
+				user.gender = profile.gender;
+				user.birthdate = new Date(profile.birthdate)
+    		
+				user.save(function (err) { 
+    				if (err) {
+    					console.log('Error in saving user: ' + err);
+    		    		throw err; 
+    				}
+    						
+    				console.log("user saved");
+    				return done(null, user);
+    			});
+    		}
+    	});
+	}
+));
+
 passport.serializeUser(function (user, done) {
-	done(null, user.name);
+	done(null, user.username);
 });
 
-passport.deserializeUser(function (name, done) {
-	db.collection("users").findOne({ name: name }, function (err, user) { 
+passport.deserializeUser(function (username, done) {
+	User.findOne({ username: username }, function (err, user) { 
 		done(null, user);
 	});
 });
@@ -67,14 +103,38 @@ var isAuthenticated = function (req, res, next) {
 app.use("/public", express.static(__dirname + "/public"));  
 
 app.get("/", function (req, res) {
-	res.render('index');
+	res.render("index");
 });
 
-app.post('/login', passport.authenticate('local'), function (req, res) {
+app.post("/login", passport.authenticate("local"), function (req, res) {
 	if (req.user)
 		res.json({ok: true});
 	else
 		res.json({ok: false});
+});
+
+app.post("/register", function (req, res, next) {
+	//console.log("I'm here, ");
+	
+	//if (req.user)
+	//	res.json({ ok: true });
+	//else
+	//	res.json({ ok: false });
+
+	passport.authenticate('register', function (err, user, info) {
+		if (err)
+			return next(err);
+
+		if (!user)
+			return res.json({ ok: false });
+
+		req.logIn(user, function (err) {
+			if (err)
+				return next(err);
+			
+			return res.json({ ok: true });
+		});
+	}) (req, res, next);
 });
 
 app.get("/users", isAuthenticated, function (req, res) { 
