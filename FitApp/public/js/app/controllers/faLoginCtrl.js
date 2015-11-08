@@ -8,7 +8,7 @@ define([], function () {
 		$scope.showErrorMessage = false;
 
 		$scope.logIn = function () {
-			$http.post("/login", $scope.credentials)
+			$http.post("/auth/login", $scope.credentials)
 				.success(function (result) {
 				if (result.success)
 					$location.path("/home");

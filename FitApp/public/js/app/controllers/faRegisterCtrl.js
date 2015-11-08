@@ -18,7 +18,7 @@ define([], function () {
 		$scope.errorMessage = "";
 
 		$scope.register = function () {
-			$http.post("/register", $scope.profile)
+			$http.post("/auth/register", $scope.profile)
 				.success(function (result) {
 				if (result.success)
 					$location.path("/home");
