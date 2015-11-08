@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include=".bowerrc" />
     <Compile Include="gruntfile.js" />
+    <Compile Include="models\dashboard.js" />
     <Compile Include="models\user.js" />
     <Compile Include="passport\login.js" />
     <Compile Include="passport\init.js" />
@@ -44,6 +45,7 @@
     <Compile Include="public\js\app\controllers\faLoginCtrl.js" />
     <Compile Include="public\js\app\controllers\faHomeCtrl.js" />
     <Compile Include="public\js\app\services\faCommonSvc.js" />
+    <Compile Include="routes\dashboard.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\auth.js" />
     <Compile Include="server.js" />

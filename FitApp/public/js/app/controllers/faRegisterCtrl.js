@@ -1,6 +1,6 @@
 ﻿
 define([], function () {
-	function faRegisterCtrl($scope, $http, $location) {
+	function faRegisterCtrl($scope, $http, $location, faCommonSvc) {
 		$scope.genders = {
 			male: 1,
 			female: 2
@@ -20,10 +20,13 @@ define([], function () {
 		$scope.register = function () {
 			$http.post("/auth/register", $scope.profile)
 				.success(function (result) {
-				if (result.success)
-					$location.path("/home");
-				else
-					$scope.errorMessage = result.message;
+					if (result.success) {
+						faCommonSvc.loggedInUser(result.user);
+						
+						$location.path("/home");
+					}
+					else
+						$scope.errorMessage = result.message;
 				});
 		};
 

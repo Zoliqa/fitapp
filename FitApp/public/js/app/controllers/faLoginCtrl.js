@@ -22,9 +22,9 @@ define([], function () {
 				$http.post("/auth/login", $scope.credentials)
 					.success(function (result) {
 						if (result.success) {
-							$location.path("/home");
-							
 							faCommonSvc.loggedInUser(result.user);
+
+							$location.path("/home");
 						}
 						else
 							$scope.errors.message = "Wrong username and/or password";

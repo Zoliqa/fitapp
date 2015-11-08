@@ -51,7 +51,7 @@ define([
 	
 	fitApp.run(function ($rootScope, $location, $route, faCommonSvc) {
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
-			if (!faCommonSvc.loggedInUser() && $location.path() !== "/" && $location.path() !== "/register")
+			if (!faCommonSvc.loggedInUser() && $location.path() !== "" && $location.path() !== "/" && $location.path() !== "/register")
 				event.preventDefault();
 		});
 	});
