@@ -40,7 +40,7 @@
         </div>
         <div class="radio">
             <label>
-                <input type="radio" ng-model="profile.gender" ng-value="gender.female">
+                <input type="radio" ng-model="profile.gender" ng-value="genders.female">
                 Female
             </label>
         </div>
@@ -56,5 +56,7 @@
         <button class="btn btn-primary btn-lg" ng-click="register()">Register</button>
         <button class="btn btn-primary btn-lg" ng-click="cancel()">Cancel</button>
     </div>
+
+    <div class="alert alert-danger" role="alert" ng-show="!!errorMessage">{{ errorMessage }}</div>
 </div>
 

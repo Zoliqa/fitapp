@@ -5,11 +5,15 @@ define([], function () {
 			username: "",
 			password: ""
 		};
+		$scope.showErrorMessage = false;
 
 		$scope.logIn = function () {
 			$http.post("/login", $scope.credentials)
 				.success(function (result) {
-					console.log(result);
+				if (result.success)
+					$location.path("/home");
+				else
+					$scope.showErrorMessage = true;
 				});
 		};
 		

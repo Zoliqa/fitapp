@@ -4,7 +4,6 @@ var express = require("express"),
     swig = require("swig"),
 	passport = require("passport");
 	LocalStrategy = require("passport-local").Strategy,
-	MongoClient = require("mongodb").MongoClient,
 	dbUrl = "mongodb://localhost:27017/fitApp",
 	bodyParser = require("body-parser"),
 	session = require("express-session"),
@@ -106,33 +105,41 @@ app.get("/", function (req, res) {
 	res.render("index");
 });
 
-app.post("/login", passport.authenticate("local"), function (req, res) {
-	if (req.user)
-		res.json({ok: true});
-	else
-		res.json({ok: false});
+app.post("/login", function (req, res, next) {
+	passport.authenticate('local', function (err, user, info) {
+		if (err)
+			return next(err);
+		
+		if (!user)
+			return res.json({ success: false });
+		
+		req.logIn(user, function (err) {
+			if (err)
+				return next(err);
+			
+			return res.json({ success: true });
+		});
+	})(req, res, next);
+});
+
+app.get("/logout", function (req, res) {
+	req.logout();
+	res.json({ success: true });
 });
 
 app.post("/register", function (req, res, next) {
-	//console.log("I'm here, ");
-	
-	//if (req.user)
-	//	res.json({ ok: true });
-	//else
-	//	res.json({ ok: false });
-
 	passport.authenticate('register', function (err, user, info) {
 		if (err)
 			return next(err);
 
 		if (!user)
-			return res.json({ ok: false });
+			return res.json({ success: false, message: "User with the given name already exists" });
 
 		req.logIn(user, function (err) {
 			if (err)
 				return next(err);
 			
-			return res.json({ ok: true });
+			return res.json({ success: true });
 		});
 	}) (req, res, next);
 });

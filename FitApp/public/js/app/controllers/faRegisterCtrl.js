@@ -5,7 +5,6 @@ define([], function () {
 			male: 1,
 			female: 2
 		};
-
 		$scope.profile = {
 			username: "",
 			password: "",
@@ -16,11 +15,15 @@ define([], function () {
 			gender: $scope.genders.male,
 			birthdate: new Date()
 		};
+		$scope.errorMessage = "";
 
 		$scope.register = function () {
 			$http.post("/register", $scope.profile)
 				.success(function (result) {
-					console.log(result);
+				if (result.success)
+					$location.path("/home");
+				else
+					$scope.errorMessage = result.message;
 				});
 		};
 
