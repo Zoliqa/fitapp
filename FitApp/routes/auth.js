@@ -15,7 +15,7 @@ function init(passport) {
 				if (err)
 					return next(err);
 				
-				return res.json({ success: true });
+				return res.json({ success: true, user: user });
 			});
 		})(req, res, next);
 	});
@@ -37,7 +37,7 @@ function init(passport) {
 				if (err)
 					return next(err);
 				
-				return res.json({ success: true });
+				return res.json({ success: true, user: user });
 			});
 		})(req, res, next);
 	});

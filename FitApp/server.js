@@ -8,7 +8,7 @@ var express = require("express"),
 	cookieParser = require("cookie-parser"),
 	mongoose = require("mongoose"),
 	dbUrl = "mongodb://localhost:27017/fitApp",
-	initPassport = require("./passport/init");
+	initPassport = require("./passport/init");     
 
 mongoose.connect(dbUrl);
 
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(cookieParser()); 
 app.use(passport.session());   
-
+ 
 initPassport(passport);
 
 var isAuthenticated = function (req, res, next) {

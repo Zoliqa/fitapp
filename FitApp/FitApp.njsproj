@@ -36,6 +36,8 @@
     <Compile Include="passport\login.js" />
     <Compile Include="passport\init.js" />
     <Compile Include="passport\register.js" />
+    <Compile Include="public\js\app\controllers\faNavigationCtrl.js" />
+    <Compile Include="public\js\app\controllers\faDashboardsCtrl.js" />
     <Compile Include="public\js\app\controllers\faRegisterCtrl.js" />
     <Compile Include="public\js\main.js" />
     <Compile Include="public\js\app\faMain.js" />
@@ -49,6 +51,8 @@
     <Content Include="package.json" />
     <Content Include="public\css\less\root.less" />
     <Content Include="public\css\less\index.less" />
+    <Content Include="public\partials\dashboards.html" />
+    <Content Include="public\partials\navbar.html" />
     <Content Include="public\partials\home.html" />
     <Content Include="public\partials\login.html" />
     <Content Include="public\partials\register.html" />

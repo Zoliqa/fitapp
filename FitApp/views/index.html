@@ -12,7 +12,9 @@
 </head>
 <body>
     <div class="container">
-        <div ng-view class="placeholder"></div>
+        <ng-include src="'public/partials/navbar.html'"></ng-include>
+
+        <div ng-view class="fa-placeholder"></div>
     </div>
 
     <script src="/public/lib/requirejs/require.js" data-main="/public/js/main.js"></script>

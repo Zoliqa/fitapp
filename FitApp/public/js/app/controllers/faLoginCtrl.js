@@ -1,6 +1,6 @@
 ﻿
 define([], function () { 
-	function faLoginCtrl($scope, $http, $location) {
+	function faLoginCtrl($scope, $http, $location, faCommonSvc) {
 		$scope.credentials = {
 			username: "",
 			password: ""
@@ -21,10 +21,13 @@ define([], function () {
 			if (!$scope.errors.isUsernameEmpty() && !$scope.errors.isPasswordEmpty())
 				$http.post("/auth/login", $scope.credentials)
 					.success(function (result) {
-					if (result.success)
-						$location.path("/home");
-					else
-						$scope.errors.message = "Wrong username and/or password";
+						if (result.success) {
+							$location.path("/home");
+							
+							faCommonSvc.loggedInUser(result.user);
+						}
+						else
+							$scope.errors.message = "Wrong username and/or password";
 				});
 			else
 				$scope.errors.message = "Username and/or password is empty";

@@ -1,15 +1,31 @@
 ﻿body {
     font-family: Verdana;
 
-    .placeholder {
+    .container {
         margin-top: 20px;
 
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
+        .fa-navbar {
+            .logout-btn {
+                margin-right: -5px;
+            }
 
-            .login-btn {
-                width: 100%;
+            &.disabled {
+                opacity: 0.4;
+
+                * {
+                    cursor: default;
+                }
+            }
+        }
+
+        .fa-placeholder {
+            .fa-login-form {
+                max-width: 400px;
+                margin: 0 auto;
+
+                .fa-login-btn {
+                    width: 100%;
+                }
             }
         }
     }

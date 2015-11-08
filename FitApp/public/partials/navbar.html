@@ -1,0 +1,18 @@
+﻿<nav class="fa-navbar navbar navbar-default" ng-controller="faNavigationCtrl" ng-class="{ 'disabled': !isUserLoggedIn() }">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ng-class="{ 'active': isActive('/home') }">
+                <a href="#/home">
+                    Home
+                </a>
+            </li>
+            <li ng-class="{ 'active': isActive('/dashboards') }">
+                <a href="#/dashboards" >
+                    Dashboards
+                </a>
+            </li>
+        </ul>
+
+        <button type="button" class="btn btn-default navbar-btn navbar-right logout-btn" ng-click="logout()">Sign out</button>
+    </div>
+</nav>
