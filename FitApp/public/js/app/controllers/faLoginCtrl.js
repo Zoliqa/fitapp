@@ -5,16 +5,29 @@ define([], function () {
 			username: "",
 			password: ""
 		};
-		$scope.showErrorMessage = false;
+		$scope.errors = {
+			isUsernameEmpty: function () { 
+				return $scope.credentials.username.length === 0 || !!/\s+/.exec($scope.credentials.username);
+			},
+			isPasswordEmpty: function () { 
+				return $scope.credentials.password.length === 0 || !!/\s+/.exec($scope.credentials.password);
+			},
+			message: ""
+		};
 
 		$scope.logIn = function () {
-			$http.post("/auth/login", $scope.credentials)
-				.success(function (result) {
-				if (result.success)
-					$location.path("/home");
-				else
-					$scope.showErrorMessage = true;
+			$scope.errors.message = "";
+
+			if (!$scope.errors.isUsernameEmpty() && !$scope.errors.isPasswordEmpty())
+				$http.post("/auth/login", $scope.credentials)
+					.success(function (result) {
+					if (result.success)
+						$location.path("/home");
+					else
+						$scope.errors.message = "Wrong username and/or password";
 				});
+			else
+				$scope.errors.message = "Username and/or password is empty";
 		};
 		
 		$scope.register = function () {
