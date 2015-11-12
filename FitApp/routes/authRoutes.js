@@ -75,6 +75,20 @@ function init() {
 			return res.json({ success: true });
 		});
 	});
+	
+	var isLoggedIn = function (req, res, next) {
+		if (req.isAuthenticated())
+			return next();
+		
+		res.status(401).json({ message: "Unauthorized" });
+	}
+
+	router.get("/profile", function (req, res, next) {
+		if (req.isAuthenticated())
+			res.json({ success: true, user: req.user });
+		else
+			res.json({ success: false });
+	});
 
 	return router;
 }

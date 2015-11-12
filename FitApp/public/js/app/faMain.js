@@ -49,11 +49,24 @@ define([
 	fitApp.controller("faDashboardsCtrl", faDashboardsCtrl);
 	fitApp.factory("faCommonSvc", faCommonSvc);
 	
-	fitApp.run(function ($rootScope, $location, $route, faCommonSvc) {
-		$rootScope.$on('$routeChangeStart', function (event, next, current) {
-			if (!faCommonSvc.loggedInUser() && $location.path() !== "" && $location.path() !== "/" && $location.path() !== "/register")
-				event.preventDefault();
-		});
+	fitApp.run(function ($rootScope, $location, $route, $http, faCommonSvc) {
+		
+		function init() { 
+			$rootScope.$on('$routeChangeStart', function (event, next, current) {
+				if ($location.path() !== "/" && !faCommonSvc.loggedInUser() && $location.path() !== "" && $location.path() !== "/" && $location.path() !== "/register") {
+					event.preventDefault();
+			});
+		}
+
+		$http.get("/auth/profile")
+		    .success(function (result) {
+				if (result.success) 
+					faCommonSvc.loggedInUser(result.user);
+				else
+					$location.path("/");
+
+				init();
+			});
 	});
 
 	angular.bootstrap(document, ["fitApp"]);
