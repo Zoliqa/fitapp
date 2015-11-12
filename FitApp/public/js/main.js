@@ -22,7 +22,7 @@
 			},
 			"uiBootstrapTpls": {
 				deps: ["angular"],
-				exports: "ui-bootstrap"
+				exports: "uiBootstrapTpls"
 			},
 			"jQuery": {
 				exports: "jQuery"

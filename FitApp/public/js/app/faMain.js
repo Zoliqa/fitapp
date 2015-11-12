@@ -17,8 +17,7 @@ define([
 				faDashboardsCtrl, 
 				faCommonSvc, 
 				angular, 
-				angularRoute,
-				uiBootstrapTpls) {
+				angularRoute) {
 	
 	var fitApp = angular.module("fitApp", ["ngRoute", "ui.bootstrap"]);
 
