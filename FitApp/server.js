@@ -1,14 +1,15 @@
 ﻿
-var express = require("express"),
-    app = express(),
-    swig = require("swig"),
-	passport = require("passport");
-	bodyParser = require("body-parser"),
-	session = require("express-session"),
+var express      = require("express"),
+    swig         = require("swig"),
+	passport     = require("passport");
+	bodyParser   = require("body-parser"),
+	session      = require("express-session"),
 	cookieParser = require("cookie-parser"),
-	mongoose = require("mongoose"),
-	dbUrl = "mongodb://localhost:27017/fitApp",
-	initPassport = require("./passport/init");     
+	mongoose     = require("mongoose"),
+	initPassport = require("./passport/init"),
+	indexRoutes  = require('./routes/indexRoutes'),
+	dbUrl        = "mongodb://localhost:27017/fitApp",
+	app		     = express();    
 
 mongoose.connect(dbUrl);
 
@@ -26,27 +27,20 @@ app.use(passport.session());
  
 initPassport(passport);
 
-//var isAuthenticated = function (req, res, next) {
-//	if (req.isAuthenticated())
-//		return next();
+var isAuthenticated = function (req, res, next) {
+	if (req.isAuthenticated())
+		return next();
 	
-//	res.status(401).json({ message: "Unauthorized" });      
-//}
+	res.status(401).json({ message: "Unauthorized" });      
+}
 
 app.use("/public", express.static(__dirname + "/public"));  
 
-var indexRoutes = require('./routes/index')();
-app.use('/', indexRoutes);
+indexRoutes(app, passport);
 
-var authRoutes = require("./routes/auth")(passport);
-app.use("/auth", authRoutes);
-
-var dashboardRoutes = require("./routes/dashboard")();
-app.use("/dashboard", dashboardRoutes);
-
-//app.get("/users", isAuthenticated, function (req, res) { 
-//	res.json({ user1: "user1", user2: "user2" });
-//});
+app.get("/users", isAuthenticated, function (req, res) { 
+	res.json({ user1: "user1", user2: "user2" });
+});
 
 if (!module.parent) {
 	app.listen(4000);

@@ -1,9 +1,52 @@
 ﻿
 var express = require("express"),
-	router = express.Router(),
-	dashboardModel = require('../models/dashboard');
+	dashboardQueries = require("../data/queries/dashboardQueries"),
+	router = express.Router();
 
-function init(passport) {
+function init() {
+	router.get("/", function (req, res, next) {
+		if (!req.params.id)
+			dashboardQueries.find(null, function (err, dashboards) {
+				if (err)
+					return next(err);
+				
+				return res.json({ success: true, dashboards: dashboards });
+			});
+		else
+			dashboardQueries.find(req.params.id, function (err, dashboard) {
+				if (err)
+					return next(err);
+				
+				res.json({ success: true, dashboard: dashboard });
+			});
+	});
+
+	router.post("/", function (req, res, next) {
+		dashboardQueries.create(req.body.username, req.body.title, function (err, dashboard) { 
+			if (err)
+				return next(err);
+			
+			res.json({ success: true, dashboard: dashboard });
+		});
+	});
+	
+	router.put("/:id", function (req, res, next) {
+		
+	});
+
+	router.delete("/:id", function (req, res, next) {
+		dashboardQueries.remove(req.params.id, function (err) {
+			if (err)
+				return next(err);
+			
+			res.json({ success: true });
+		});
+	});
+
+	return router;
+}
+
+function init2(passport) {
 	router.get("/", function (req, res, next) {
 		if (!req.params.id)
 			dashboardModel.find(function (err, dashboards) {
@@ -41,8 +84,6 @@ function init(passport) {
 	});
 
 	router.delete("/:id", function (req, res, next) {
-		console.log("delete: " + req.params.id); 
-
 		dashboardModel.remove({ _id: req.params.id }, function (err) { 
 			if (err)
 				return next(err);

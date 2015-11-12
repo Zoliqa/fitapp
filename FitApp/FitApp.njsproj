@@ -31,12 +31,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".bowerrc" />
+    <Compile Include="data\queries\dashboardQueries.js" />
+    <Compile Include="data\queries\userQueries.js" />
     <Compile Include="gruntfile.js" />
-    <Compile Include="models\dashboard.js" />
-    <Compile Include="models\user.js" />
-    <Compile Include="passport\login.js" />
+    <Compile Include="data\models\dashboard.js" />
+    <Compile Include="data\models\user.js" />
     <Compile Include="passport\init.js" />
-    <Compile Include="passport\register.js" />
     <Compile Include="public\js\app\controllers\faNavigationCtrl.js" />
     <Compile Include="public\js\app\controllers\faDashboardsCtrl.js" />
     <Compile Include="public\js\app\controllers\faRegisterCtrl.js" />
@@ -45,9 +45,9 @@
     <Compile Include="public\js\app\controllers\faLoginCtrl.js" />
     <Compile Include="public\js\app\controllers\faHomeCtrl.js" />
     <Compile Include="public\js\app\services\faCommonSvc.js" />
-    <Compile Include="routes\dashboard.js" />
-    <Compile Include="routes\index.js" />
-    <Compile Include="routes\auth.js" />
+    <Compile Include="routes\dashboardRoutes.js" />
+    <Compile Include="routes\indexRoutes.js" />
+    <Compile Include="routes\authRoutes.js" />
     <Compile Include="server.js" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
@@ -62,7 +62,9 @@
     <Content Include="views\index.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="models\" />
+    <Folder Include="data\models\" />
+    <Folder Include="data\" />
+    <Folder Include="data\queries\" />
     <Folder Include="routes\" />
     <Folder Include="passport\" />
     <Folder Include="public\css\less\" />

@@ -1,21 +1,19 @@
 ﻿
-var initLogin = require('./login');
-var initRegister = require('./register');
-var User = require('../models/user');
+var userQueries = require("../data/queries/userQueries");
 
 function init(passport) {
 	passport.serializeUser(function (user, done) {
-		done(null, user.username);
+		done(null, user._id);
 	});
 	
-	passport.deserializeUser(function (username, done) {
-		User.findOne({ username: username }, function (err, user) {
-			done(null, user);
+	passport.deserializeUser(function (id, done) {
+		userQueries.find({ _id: id }, function (err, user) {
+			if (err)
+				return done(null);
+			
+			return done(null, user);
 		});
 	});
-	
-	initLogin(passport);
-	initRegister(passport);
 }
 
 module.exports = init;
