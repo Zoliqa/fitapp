@@ -1,12 +1,12 @@
 ﻿
 define([], function () { 
-	function faDashboardsCtrl($scope, $http) {
+	function faDashboardsCtrl($scope, $http, $uibModal) {
 		$scope.dashboards = [];
-		$scope.isCreating = false;
 		$scope.newDashboard = {
 			title: "",
 			username: ""
 		};
+		$scope.createDashboardModal = null;
 
 		(function init() {
 			$http.get("/dashboard").success(function (result) { 
@@ -16,7 +16,12 @@ define([], function () {
 		})();
 
 		$scope.initCreate = function () { 
-			$scope.isCreating = true;
+			$scope.createDashboardModal = $uibModal.open({
+				animation: $scope.animationsEnabled,
+				templateUrl: 'create-dashboard.html',
+				size: "lg",
+				scope: $scope
+			});
 		};
 
 		$scope.create = function () {
@@ -24,13 +29,13 @@ define([], function () {
 				if (result.success) {
 					$scope.dashboards.push(result.dashboard);
 
-					$scope.isCreating = false;
+					$scope.createDashboardModal.dismiss();
 				}
 			});
 		};
 
 		$scope.cancel = function () { 
-			$scope.isCreating = false;
+			$scope.createDashboardModal.dismiss();
 		};
 
 		$scope.removeDashboard = function (dashboard) {

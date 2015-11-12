@@ -8,10 +8,19 @@ define([
 	"public/js/app/services/faCommonSvc",
 	"angular",
 	"angularRoute",
+	"uiBootstrapTpls",
 	"bootstrap"
-	], function(faNavigationCtrl, faLoginCtrl, faRegisterCtrl, faHomeCtrl, faDashboardsCtrl, faCommonSvc, angular, angularRoute) {
+	], function(faNavigationCtrl, 
+				faLoginCtrl, 
+				faRegisterCtrl, 
+				faHomeCtrl, 
+				faDashboardsCtrl, 
+				faCommonSvc, 
+				angular, 
+				angularRoute,
+				uiBootstrapTpls) {
 	
-	var fitApp = angular.module("fitApp", ["ngRoute"]);
+	var fitApp = angular.module("fitApp", ["ngRoute", "ui.bootstrap"]);
 
 	function config($routeProvider, $locationProvider) {
 		$routeProvider
@@ -55,6 +64,7 @@ define([
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
 				if ($location.path() !== "/" && !faCommonSvc.loggedInUser() && $location.path() !== "" && $location.path() !== "/" && $location.path() !== "/register") {
 					event.preventDefault();
+				}
 			});
 		}
 

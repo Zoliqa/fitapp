@@ -1,38 +1,43 @@
 ﻿
 (function () {
 	require.config({
-		baseUrl: '/',
+		baseUrl: "/",
 		paths: {
-			'app': 'public/js/app',
-			'angular': 'public/lib/angular/angular',
-			'angularRoute': 'public/lib/angular-route/angular-route',
-			'jQuery': 'public/lib/jQuery/dist/jquery',
-			'underscore': 'public/lib/underscore/underscore',
-			'bootstrap': 'public/lib/bootstrap/dist/js/bootstrap'
+			"app": "public/js/app",
+			"angular": "public/lib/angular/angular",
+			"angularRoute": "public/lib/angular-route/angular-route",
+			"jQuery": "public/lib/jQuery/dist/jquery",
+			"underscore": "public/lib/underscore/underscore",
+			"bootstrap": "public/lib/bootstrap/dist/js/bootstrap",
+			"uiBootstrapTpls": "public/lib/angular-bootstrap/ui-bootstrap-tpls"
 		},
 		
 		shim: {
-			'angular': {
-				exports: 'angular'
+			"angular": {
+				exports: "angular"
 			},
-			'angularRoute': {
-				deps: ['angular'],
-				exports: 'angularRoute'
+			"angularRoute": {
+				deps: ["angular"],
+				exports: "angularRoute"
 			},
-			'jQuery': {
-				exports: 'jQuery'
+			"uiBootstrapTpls": {
+				deps: ["angular"],
+				exports: "ui-bootstrap"
 			},
-			'underscore': {
-				exports: 'underscore'
+			"jQuery": {
+				exports: "jQuery"
 			},
-			'bootstrap': {
-				deps: ['jQuery'],
-				exports: 'bootstrap'
+			"underscore": {
+				exports: "underscore"
+			},
+			"bootstrap": {
+				deps: ["jQuery"],
+				exports: "bootstrap"
 			}
 		}
 
-		// deps: ['app/faMain']
+		// deps: ["app/faMain"]
 	});
 	
-	require(['app/faMain']);
+	require(["app/faMain"]);
 })();
