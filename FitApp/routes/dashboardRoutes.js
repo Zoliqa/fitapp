@@ -1,19 +1,19 @@
 ﻿
-var express = require("express"),
+var express			 = require("express"),
 	dashboardQueries = require("../data/queries/dashboardQueries"),
-	router = express.Router();
+	router			 = express.Router();
 
 function init() {
 	router.get("/", function (req, res, next) {
 		if (!req.params.id)
-			dashboardQueries.find(null, function (err, dashboards) {
+			dashboardQueries.findForUser(req.user._id, function (err, dashboards) {
 				if (err)
 					return next(err);
 				
 				return res.json({ success: true, dashboards: dashboards });
 			});
 		else
-			dashboardQueries.find(req.params.id, function (err, dashboard) {
+			dashboardQueries.findById(req.params.id, function (err, dashboard) {
 				if (err)
 					return next(err);
 				
@@ -22,7 +22,7 @@ function init() {
 	});
 
 	router.post("/", function (req, res, next) {
-		dashboardQueries.create(req.body.username, req.body.title, function (err, dashboard) { 
+		dashboardQueries.create(req.user._id, req.body.title, req.body.description, function (err, dashboard) { 
 			if (err)
 				return next(err);
 			

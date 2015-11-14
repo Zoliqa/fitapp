@@ -34,8 +34,8 @@
     <Compile Include="data\queries\dashboardQueries.js" />
     <Compile Include="data\queries\userQueries.js" />
     <Compile Include="gruntfile.js" />
-    <Compile Include="data\models\dashboard.js" />
-    <Compile Include="data\models\user.js" />
+    <Compile Include="data\models\Dashboard.js" />
+    <Compile Include="data\models\User.js" />
     <Compile Include="passport\init.js" />
     <Compile Include="public\js\app\controllers\faNavigationCtrl.js" />
     <Compile Include="public\js\app\controllers\faDashboardsCtrl.js" />

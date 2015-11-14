@@ -1,16 +1,16 @@
 ﻿
-var userModel = require('../models/user');
+var User = require('../models/User');
 
 function find(where, next) {
 	if (where)
-		userModel.findOne(where, function (err, user) {
+		User.findOne(where, function (err, user) {
 			if (err)
 				return next(err);
 			
 			return next(null, user);
 		});
 	else
-		userModel.find(function (err, users) {
+		User.find(function (err, users) {
 			if (err)
 				return next(err);
 			
@@ -19,7 +19,7 @@ function find(where, next) {
 }
 
 function create(username, password, firstname, lastname, email, gender, birthdate, next) {
-	var user = new userModel();
+	var user = new User();
 	
 	user.username = username;
 	user.password = password;
@@ -42,7 +42,7 @@ function update(next) {
 }
 
 function remove(id, next) {
-	userModel.remove({ _id: id }, function (err) {
+	User.remove({ _id: id }, function (err) {
 		if (err)
 			return next(err);
 		

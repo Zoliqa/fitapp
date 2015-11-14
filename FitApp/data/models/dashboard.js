@@ -1,11 +1,13 @@
 ﻿
-var mongoose = require("mongoose");
+var mongoose = require("mongoose"),
+	Schema   = mongoose.Schema;
 
-var dashboard = mongoose.model("dashboard", {
+var Dashboard = mongoose.model("Dashboard", {
 	id: String,
-	userId: String,
+	owner: { type: Schema.Types.ObjectId, ref: "User" },
 	title: String,
+	description: String,
 	created: Date
 });
 
-module.exports = dashboard;
+module.exports = Dashboard;

@@ -33,8 +33,20 @@
                     margin-bottom: 20px;
                 }
 
-                .fa-remove-dashboard {
-                    float: right;
+                .fa-dashboard {
+                    .fa-remove-dashboard {
+                        float: right;
+                        cursor: pointer;        
+                    }
+
+                    .fa-foot-note {
+                        text-align: right;
+                        font-size: smaller;
+                    }
+
+                    &:before { 
+                        content: "";
+                    }
                 }
             }
         }

@@ -4,7 +4,7 @@ define([], function () {
 		$scope.dashboards = [];
 		$scope.newDashboard = {
 			title: "",
-			username: ""
+			description: ""
 		};
 		$scope.createDashboardModal = null;
 
@@ -17,7 +17,7 @@ define([], function () {
 
 		$scope.initCreate = function () { 
 			$scope.createDashboardModal = $uibModal.open({
-				animation: $scope.animationsEnabled,
+				animation: true,
 				templateUrl: 'create-dashboard.html',
 				size: "lg",
 				scope: $scope

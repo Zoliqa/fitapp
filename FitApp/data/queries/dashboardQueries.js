@@ -1,28 +1,32 @@
 ﻿
-var dashboardModel = require('../models/dashboard');
+var Dashboard = require('../models/Dashboard');
 
-function find(id, next) { 
-	if (id)
-		dashboardModel.findOne({ _id: id }, function (err, dashboard) {
+function findById(id, next) { 
+	Dashboard.findOne({ _id: id }, function (err, dashboard) {
+		if (err)
+			return next(err);
+			
+		return next(null, dashboard);
+	});	
+}
+
+function findForUser(userId, next) { 
+	Dashboard.find({ owner: userId })
+		.populate("owner")
+		.exec(function(err, dashboards) {
 			if (err)
 				return next(err);
-			
-			return next(null, dashboard);
-		});
-	else
-		dashboardModel.find(function (err, dashboards) {
-			if (err)
-				return next(err);
-			
+		
 			return next(null, dashboards);
 		});
 }
 
-function create(username, title, next) { 
-	var dashboard = new dashboardModel();
+function create(userId, title, description, next) { 
+	var dashboard = new Dashboard();
 	
-	dashboard.userId = username;
+	dashboard.owner = userId;
 	dashboard.title = title;
+	dashboard.description = description;
 	dashboard.created = new Date();
 	
 	dashboard.save(function (err) {
@@ -38,7 +42,7 @@ function update(next) {
 }
 
 function remove(id, next) { 
-	dashboardModel.remove({ _id: id }, function (err) {
+	Dashboard.remove({ _id: id }, function (err) {
 		if (err)
 			return next(err);
 		
@@ -47,7 +51,8 @@ function remove(id, next) {
 }
 
 module.exports = {
-	find: find,
+	findById: findById,
+	findForUser: findForUser,
 	create: create,
 	update: update,
 	remove: remove
