@@ -10,7 +10,7 @@ function init() {
 				if (err)
 					return next(err);
 				
-				return res.json({ success: true, dashboards: dashboards });
+				res.json({ success: true, dashboards: dashboards });
 			});
 		else
 			dashboardQueries.findById(req.params.id, function (err, dashboard) {
@@ -31,7 +31,12 @@ function init() {
 	});
 	
 	router.put("/:id", function (req, res, next) {
-		
+		dashboardQueries.update(req.params.id, req.body.title, req.body.description, req.body.isActive, function (err) { 
+			if (err)
+				return next(err);
+
+			res.json({ success: true });
+		});
 	});
 
 	router.delete("/:id", function (req, res, next) {

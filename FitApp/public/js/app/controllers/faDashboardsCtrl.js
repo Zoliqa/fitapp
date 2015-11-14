@@ -1,5 +1,5 @@
 ﻿
-define([], function () { 
+define(["underscore"], function (_) { 
 	function faDashboardsCtrl($scope, $http, $uibModal) {
 		$scope.dashboards = [];
 		$scope.newDashboard = {
@@ -46,6 +46,23 @@ define([], function () {
 					$scope.dashboards.splice(index, 1);
 				}
 			})
+		};
+
+		$scope.setActive = function (dashboard) {
+			dashboard.isActive = true;
+
+			$http.put("/dashboard/" + dashboard._id, dashboard)
+			.success(function (result) {
+				var found = _.find($scope.dashboards, function (dashboard2) {
+					return dashboard2 !== dashboard && dashboard2.isActive;
+				});
+
+				if (found) {
+					found.isActive = false;
+
+					$http.put("/dashboard/" + found._id, found);
+				}
+			});
 		};
 	};
 	

@@ -5,6 +5,7 @@ define([
 	"public/js/app/controllers/faRegisterCtrl", 
 	"public/js/app/controllers/faHomeCtrl", 
 	"public/js/app/controllers/faDashboardsCtrl", 
+	"public/js/app/controllers/faSessionsCtrl",
 	"public/js/app/services/faCommonSvc",
 	"angular",
 	"angularRoute",
@@ -15,6 +16,7 @@ define([
 				faRegisterCtrl, 
 				faHomeCtrl, 
 				faDashboardsCtrl, 
+				faSessionsCtrl,
 				faCommonSvc, 
 				angular, 
 				angularRoute) {
@@ -39,9 +41,9 @@ define([
 			templateUrl: "/public/partials/dashboards.html",
 			controller: "faDashboardsCtrl"
 		})
-		.when("/groups", {
-			templateUrl: "/public/partials/groups.html",
-			controller: "faGroupsCtrl"
+		.when("/sessions", {
+			templateUrl: "/public/partials/sessions.html",
+			controller: "faSessionsCtrl"
 		})
 		.otherwise({
 			redirectTo: "/"
@@ -55,6 +57,7 @@ define([
 	fitApp.controller("faRegisterCtrl", faRegisterCtrl);
 	fitApp.controller("faHomeCtrl", faHomeCtrl);
 	fitApp.controller("faDashboardsCtrl", faDashboardsCtrl);
+	fitApp.controller("faSessionsCtrl", faSessionsCtrl);
 	fitApp.factory("faCommonSvc", faCommonSvc);
 	
 	fitApp.run(function ($rootScope, $location, $route, $http, faCommonSvc) {

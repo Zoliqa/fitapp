@@ -1,10 +1,14 @@
 ﻿
 <div id="fa-dashboards">
-    <button class="fa-create-btn btn btn-primary btn-md" ng-click="initCreate()">Create new dashboard</button>
+    <button class="fa-create-btn btn btn-primary btn-md" ng-click="initCreate()">Create dashboard</button>
 
     <div class="fa-dashboard panel panel-default" ng-repeat="dashboard in dashboards">
         <div class="panel-heading">
-            {{ dashboard.title }}
+            {{ dashboard.title }} 
+            
+            <span class="activate-btn glyphicon {{ dashboard.isActive ? 'glyphicon-star' : 'glyphicon-star-empty' }}"
+                  ng-click="setActive(dashboard)">
+            </span>
 
             <div class="fa-remove-dashboard glyphicon glyphicon-remove" ng-click="removeDashboard(dashboard)"></div>
         </div>

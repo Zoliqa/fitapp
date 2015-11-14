@@ -27,6 +27,7 @@ function create(userId, title, description, next) {
 	dashboard.owner = userId;
 	dashboard.title = title;
 	dashboard.description = description;
+	dashboard.isActive = false;
 	dashboard.created = new Date();
 	
 	dashboard.save(function (err) {
@@ -37,8 +38,17 @@ function create(userId, title, description, next) {
 	});
 }
 
-function update(next) { 
+function update(id, title, description, isActive, next) { 
+	Dashboard.update({ _id: id }, {
+		title: title,
+		description: description,
+		isActive: isActive
+	}, function (err) { 
+		if (err)
+			return next(err);
 
+		return next(null);
+	});
 }
 
 function remove(id, next) { 
