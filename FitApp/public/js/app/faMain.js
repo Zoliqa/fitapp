@@ -74,20 +74,14 @@ define([
 		.then(function (result) {
 			if (result.data.success) {
 				faCommonSvc.loggedInUser(result.user);
-			
-				return $http.get("/dashboard");
-			}
-			
-			$location.path("/");
-
-			return $q.reject();
-		})
-		.then(function (result) { 
-			var activeDashboard = _.find(result.data.dashboards, function (dashboard) { 
-				return dashboard.isActive;
-			});
 				
-			faCommonSvc.activeDashboard(activeDashboard);
+				return faCommonSvc.getActiveDashboard();
+			}
+			else {
+				$location.path("/");
+				
+				return $q.reject();
+			}
 		})
 		.finally(function () {
 			init();

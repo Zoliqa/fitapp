@@ -1,7 +1,7 @@
 ﻿
-define([], function () {
-	function faCommonSvc() {
-		var _user, _dashboard;
+define(["underscore"], function (_) {
+	function faCommonSvc($q, $http) {
+		var _user, _activeDashboard;
 		
 		function loggedInUser(user) { 
 			if (arguments.length === 0)
@@ -10,16 +10,30 @@ define([], function () {
 			_user = user;
 		}
 		
-		function activeDashboard(dashboard) {
+		function activeDashboard(activeDashboard) {
 			if (arguments.length === 0)
-				return _dashboard;
+				return _activeDashboard;
 			
-			_dashboard = dashboard;
+			_activeDashboard = activeDashboard;
+		}
+		
+		function getActiveDashboard() {
+			return $http.get("/dashboard").then(function (result) { 
+				var activeDashboard = _.find(result.data.dashboards, function (dashboard) {
+					return dashboard.isActive;
+				});
+						
+				activeDashboard(activeDashboard);
+
+				return $q.when({ activeDashboard: activeDashboard });
+			});
 		}
 
 		return {
 			loggedInUser: loggedInUser,
-			activeDashboard: activeDashboard
+			activeDashboard: activeDashboard,
+			getActiveDashboard: getActiveDashboard
+
 		};
 	}
 	
