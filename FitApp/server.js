@@ -18,7 +18,11 @@ app.engine("html", swig.renderFile);
 app.set("view engine", "html"); 
 app.set("views", "./views");    
 
-app.use(session({ secret: "secret" }));
+app.use(session({
+	secret: "secret", 
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());

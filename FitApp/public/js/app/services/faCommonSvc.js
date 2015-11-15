@@ -1,7 +1,7 @@
 ﻿
 define([], function () {
 	function faCommonSvc() {
-		var _user;
+		var _user, _dashboard;
 		
 		function loggedInUser(user) { 
 			if (arguments.length === 0)
@@ -10,8 +10,16 @@ define([], function () {
 			_user = user;
 		}
 		
+		function activeDashboard(dashboard) {
+			if (arguments.length === 0)
+				return _dashboard;
+			
+			_dashboard = dashboard;
+		}
+
 		return {
-			loggedInUser: loggedInUser
+			loggedInUser: loggedInUser,
+			activeDashboard: activeDashboard
 		};
 	}
 	

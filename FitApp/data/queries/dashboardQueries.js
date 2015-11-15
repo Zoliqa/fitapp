@@ -39,24 +39,26 @@ function create(userId, title, description, next) {
 }
 
 function update(id, title, description, isActive, next) { 
-	Dashboard.update({ _id: id }, {
+	Dashboard.findOneAndUpdate({ _id: id }, {
 		title: title,
 		description: description,
 		isActive: isActive
-	}, function (err) { 
+	}, {
+		new: true
+	}, function (err, dashboard) { 
 		if (err)
 			return next(err);
 
-		return next(null);
+		return next(null, dashboard);
 	});
 }
 
 function remove(id, next) { 
-	Dashboard.remove({ _id: id }, function (err) {
+	Dashboard.findOneAndRemove({ _id: id }, function (err, dashboard) {
 		if (err)
 			return next(err);
 		
-		return next(null);
+		return next(null, dashboard);
 	});
 }
 

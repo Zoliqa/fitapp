@@ -4,3 +4,44 @@
 
 </div>
 
+<script type="text/ng-template" id="create-session.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Create session for {{ activeDashboard.title }}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Date</label>
+            <input type="text" class="form-control input-lg" ng-model="newSession.date">
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Start time</label>
+            <input type="text" class="form-control input-lg" ng-model="newSession.startTime">
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Group</label>
+            <select class="form-control input-lg">
+                <option>Arms</option>
+                <option>Legs</option>
+                <option>Abs</option>
+            </select>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Notes</label>
+            <textarea rows="3" class="form-control input-lg" ng-model="newSession.notes"></textarea>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Location</label>
+            <input type="text" class="form-control input-lg" ng-model="newSession.location">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg" ng-click="create()">Create</button>
+            <button class="btn btn-primary btn-lg" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</script>

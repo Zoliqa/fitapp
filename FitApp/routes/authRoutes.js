@@ -2,6 +2,7 @@
 var express     = require("express"),
 	bcrypt      = require('bcrypt-nodejs'),
 	userQueries = require("../data/queries/userQueries"),
+	utilities   = require("../passport/utilities"),
 	router	    = express.Router();
 
 function init() {
@@ -30,7 +31,7 @@ function init() {
 		});
 	});
 
-	router.get("/logout", function (req, res) {
+	router.get("/logout", utilities.isAuthenticated, function (req, res) {
 		req.logout();
 		res.json({ success: true });
 	});
@@ -67,93 +68,20 @@ function init() {
 		});
 	});
 
-	router.post("/unregister/:id", function (req, res, next) { 
-		userQueries.delete(req.params.id, function (err) { 
+	router.post("/unregister/:id", utilities.isAuthenticated, function (req, res, next) { 
+		userQueries.remove(req.params.id, function (err, user) { 
 			if (err)
 				return next(err);
 
-			return res.json({ success: true });
+			return res.json({ user: user });
 		});
 	});
-	
-	var isLoggedIn = function (req, res, next) {
-		if (req.isAuthenticated())
-			return next();
-		
-		res.status(401).json({ message: "Unauthorized" });
-	}
 
 	router.get("/profile", function (req, res, next) {
 		if (req.isAuthenticated())
-			res.json({ success: true, user: req.user });
-		else
-			res.json({ success: false });
-	});
+			return res.json({ success: true, user: req.user });
 
-	return router;
-}
-
-function init2(passport) {
-	router.post("/login", function (req, res, next) {
-		//passport.authenticate("login", function (err, user, info) {
-		//	if (err)
-		//		return next(err);
-			
-		//	if (!user)
-		//		return res.json({ success: false });
-			
-		//	req.logIn(user, function (err) {
-		//		if (err)
-		//			return next(err);
-				
-		//		return res.json({ success: true, user: user });
-		//	});
-		//})(req, res, next);
-
-		userModel.findOne({ username: req.body.username }, function (err, user) {
-			if (err)
-				return next(err);
-			
-			if (!user)
-				return res.json({ success: false });
-			
-			bcrypt.compare(req.body.password, user.password, function (err, result) {
-				if (err)
-					return next(err);
-
-				if (!result)
-					return res.json({ success: false });
-				
-				req.logIn(user, function (err) {
-					if (err)
-						return next(err);
-				
-					return res.json({ success: true, user: user });
-				});
-			});
-		});
-	});
-	
-	router.get("/logout", function (req, res) {
-		req.logout();
-		res.json({ success: true });
-	});
-	
-	router.post("/register", function (req, res, next) {
-		passport.authenticate("register", function (err, user, info) {
-			if (err)
-				return next(err);
-			
-			if (!user)
-				return res.json({ success: false, message: "User with the given name already exists" });
-			
-			req.logIn(user, function (err) {
-				if (err)
-					return next(err);
-				
-				return res.json({ success: true, user: user });
-			});
-		})(req, res, next);
+		return res.json({ success: false });
 	});
 
 	return router;

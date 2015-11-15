@@ -60,7 +60,7 @@ define([
 	fitApp.controller("faSessionsCtrl", faSessionsCtrl);
 	fitApp.factory("faCommonSvc", faCommonSvc);
 	
-	fitApp.run(function ($rootScope, $location, $route, $http, faCommonSvc) {
+	fitApp.run(function ($rootScope, $location, $route, $http, $q, faCommonSvc) {
 		
 		function init() { 
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -71,14 +71,27 @@ define([
 		}
 
 		$http.get("/auth/profile")
-		    .success(function (result) {
-				if (result.success) 
-					faCommonSvc.loggedInUser(result.user);
-				else
-					$location.path("/");
+		.then(function (result) {
+			if (result.data.success) {
+				faCommonSvc.loggedInUser(result.user);
+			
+				return $http.get("/dashboard");
+			}
+			
+			$location.path("/");
 
-				init();
+			return $q.reject();
+		})
+		.then(function (result) { 
+			var activeDashboard = _.find(result.data.dashboards, function (dashboard) { 
+				return dashboard.isActive;
 			});
+				
+			faCommonSvc.activeDashboard(activeDashboard);
+		})
+		.finally(function () {
+			init();
+		});
 	});
 
 	angular.bootstrap(document, ["fitApp"]);

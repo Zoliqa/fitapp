@@ -36,6 +36,7 @@
     <Compile Include="gruntfile.js" />
     <Compile Include="data\models\Dashboard.js" />
     <Compile Include="data\models\User.js" />
+    <Compile Include="passport\utilities.js" />
     <Compile Include="passport\init.js" />
     <Compile Include="public\js\app\controllers\faNavigationCtrl.js" />
     <Compile Include="public\js\app\controllers\faDashboardsCtrl.js" />

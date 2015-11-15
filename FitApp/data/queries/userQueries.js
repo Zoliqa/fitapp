@@ -42,11 +42,11 @@ function update(next) {
 }
 
 function remove(id, next) {
-	User.remove({ _id: id }, function (err) {
+	User.findOneAndRemove({ _id: id }, function (err, user) {
 		if (err)
 			return next(err);
 		
-		return next(null);
+		return next(null, user);
 	});
 }
 
