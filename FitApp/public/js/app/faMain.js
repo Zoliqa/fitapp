@@ -73,9 +73,9 @@ define([
 		$http.get("/auth/profile")
 		.then(function (result) {
 			if (result.data.success) {
-				faCommonSvc.loggedInUser(result.user);
+				faCommonSvc.loggedInUser(result.data.user);
 				
-				return faCommonSvc.getActiveDashboard();
+				return faCommonSvc.getDashboards();
 			}
 			else {
 				$location.path("/");

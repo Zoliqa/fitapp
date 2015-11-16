@@ -22,7 +22,7 @@ define([], function () {
 				.success(function (result) {
 					if (result.success) {
 						faCommonSvc.loggedInUser(result.user);
-						
+
 						$location.path("/home");
 					}
 					else

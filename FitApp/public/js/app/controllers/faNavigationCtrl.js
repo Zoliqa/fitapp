@@ -1,6 +1,14 @@
 ﻿
-define([], function () { 
+define([], function () {
 	function faNavigationCtrl($scope, $http, $location, faCommonSvc) {
+		$scope.user = function () { 
+			return faCommonSvc.loggedInUser();
+		};
+		
+		$scope.activeDashboard = function () { 
+			return faCommonSvc.getActiveDashboard();
+		};
+
 		$scope.isActive = function (path) {
 			return $location.path() === path;
 		};

@@ -1,39 +1,49 @@
 ﻿
 define(["underscore"], function (_) {
 	function faCommonSvc($q, $http) {
-		var _user, _activeDashboard;
+		var _user, 
+			_dashboards,
+			_getDashboardsDeferred;
 		
 		function loggedInUser(user) { 
 			if (arguments.length === 0)
 				return _user;
 
 			_user = user;
-		}
-		
-		function activeDashboard(activeDashboard) {
-			if (arguments.length === 0)
-				return _activeDashboard;
-			
-			_activeDashboard = activeDashboard;
+			_getDashboardsDeferred = null;
 		}
 		
 		function getActiveDashboard() {
-			return $http.get("/dashboard").then(function (result) { 
-				var activeDashboard = _.find(result.data.dashboards, function (dashboard) {
-					return dashboard.isActive;
-				});
-						
-				activeDashboard(activeDashboard);
+			if (!_dashboards)
+				return null;
 
-				return $q.when({ activeDashboard: activeDashboard });
+			var activeDashboard = _.find(_dashboards, function (dashboard) {
+				return dashboard.isActive;
 			});
+
+			return activeDashboard;
+		}
+		
+		function getDashboards() {
+			if (!_getDashboardsDeferred) {
+				_getDashboardsDeferred = $q.defer();
+				
+				$http.get("/dashboard").then(function (result) {
+					_dashboards = result.data.dashboards;
+					
+					_getDashboardsDeferred.resolve({
+						dashboards: _dashboards
+					});
+				});
+			}
+
+			return _getDashboardsDeferred.promise;
 		}
 
 		return {
 			loggedInUser: loggedInUser,
-			activeDashboard: activeDashboard,
-			getActiveDashboard: getActiveDashboard
-
+			getActiveDashboard: getActiveDashboard,
+			getDashboards: getDashboards
 		};
 	}
 	

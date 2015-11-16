@@ -19,5 +19,7 @@
         </ul>
 
         <button type="button" class="btn btn-default navbar-btn navbar-right logout-btn" ng-click="logout()">Sign out</button>
+
+        <p class="navbar-text navbar-right" ng-if="isUserLoggedIn()" style="margin-right:20px;">{{ user().username }} @ {{ activeDashboard().title }}</p>
     </div>
 </nav>

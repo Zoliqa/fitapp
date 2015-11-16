@@ -20,14 +20,15 @@ define([], function () {
 
 			if (!$scope.errors.isUsernameEmpty() && !$scope.errors.isPasswordEmpty())
 				$http.post("/auth/login", $scope.credentials)
-					.success(function (result) {
-						if (result.success) {
-							faCommonSvc.loggedInUser(result.user);
+				.success(function (result) {
+					if (result.success) {
+						faCommonSvc.loggedInUser(result.user);
+						faCommonSvc.getDashboards();
 
-							$location.path("/home");
-						}
-						else
-							$scope.errors.message = "Wrong username and/or password";
+						$location.path("/home");
+					}
+					else
+						$scope.errors.message = "Wrong username and/or password";
 				});
 			else
 				$scope.errors.message = "Username and/or password is empty";
@@ -35,13 +36,6 @@ define([], function () {
 		
 		$scope.register = function () {
 			$location.path("/register");
-		};
-
-		$scope.getUsers = function () {
-			$http.get("/users")
-				.success(function (result) { 
-					console.log(result);	
-				});
 		};
 	};
 

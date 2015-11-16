@@ -9,7 +9,7 @@ define(["underscore"], function (_) {
 		$scope.createDashboardModal = null;
 
 		(function init() {
-			$http.get("/dashboard").success(function (result) { 
+			faCommonSvc.getDashboards().then(function (result) { 
 				$scope.dashboards = result.dashboards;
 			});
 		})();
@@ -53,8 +53,6 @@ define(["underscore"], function (_) {
 
 			$http.put("/dashboard/" + dashboard._id, dashboard)
 			.success(function (result) {
-				faCommonSvc.activeDashboard(dashboard);
-
 				var found = _.find($scope.dashboards, function (dashboard2) {
 					return dashboard2 !== dashboard && dashboard2.isActive;
 				});
