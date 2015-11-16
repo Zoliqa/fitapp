@@ -5,7 +5,6 @@ define([], function () {
 		
 		};
 		$scope.createSessionModal = null;
-		$scope.activeDashboard = faCommonSvc.activeDashboard();
 
 		$scope.initCreate = function () { 
 			$scope.createSessionModal = $uibModal.open({
