@@ -1,12 +1,23 @@
 ﻿
 define([], function () {
 	function faNavigationCtrl($scope, $http, $location, faCommonSvc) {
+		$scope.activeDashboard = null;
+
+		(function init() {
+			$scope.$watch(function () { 
+				return faCommonSvc.loggedInUser();
+			}, function (user) { 
+				if (user)
+					faCommonSvc.getActiveDashboard().then(function (dashboard) { 
+						$scope.activeDashboard = dashboard;
+					});
+				else
+					$scope.activeDashboard = null;
+			})
+		})();
+
 		$scope.user = function () { 
 			return faCommonSvc.loggedInUser();
-		};
-		
-		$scope.activeDashboard = function () { 
-			return faCommonSvc.getActiveDashboard();
 		};
 
 		$scope.isActive = function (path) {

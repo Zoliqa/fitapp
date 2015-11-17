@@ -1,49 +1,32 @@
 ﻿
 define(["underscore"], function (_) {
-	function faCommonSvc($q, $http) {
-		var _user, 
-			_dashboards,
-			_getDashboardsDeferred;
+	function faCommonSvc(faDashboard) {
+		var _user;
 		
 		function loggedInUser(user) { 
 			if (arguments.length === 0)
 				return _user;
 
 			_user = user;
-			_getDashboardsDeferred = null;
 		}
 		
 		function getActiveDashboard() {
-			if (!_dashboards)
-				return null;
-
-			var activeDashboard = _.find(_dashboards, function (dashboard) {
-				return dashboard.isActive;
-			});
-
-			return activeDashboard;
-		}
-		
-		function getDashboards() {
-			if (!_getDashboardsDeferred) {
-				_getDashboardsDeferred = $q.defer();
-				
-				$http.get("/dashboard").then(function (result) {
-					_dashboards = result.data.dashboards;
-					
-					_getDashboardsDeferred.resolve({
-						dashboards: _dashboards
+			if (_user) {
+				return faDashboard.query().$promise.then(function (dashboards) { 
+					var activeDashboard = _.find(dashboards, function (dashboard) {
+						return dashboard.isActive;
 					});
+					
+					return activeDashboard;
 				});
 			}
 
-			return _getDashboardsDeferred.promise;
+			return null;
 		}
 
 		return {
 			loggedInUser: loggedInUser,
-			getActiveDashboard: getActiveDashboard,
-			getDashboards: getDashboards
+			getActiveDashboard: getActiveDashboard
 		};
 	}
 	

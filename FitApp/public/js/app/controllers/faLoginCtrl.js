@@ -23,7 +23,6 @@ define([], function () {
 				.success(function (result) {
 					if (result.success) {
 						faCommonSvc.loggedInUser(result.user);
-						faCommonSvc.getDashboards();
 
 						$location.path("/home");
 					}

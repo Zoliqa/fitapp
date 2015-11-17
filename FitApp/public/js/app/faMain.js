@@ -63,7 +63,7 @@ define([
 	fitApp.factory("faCommonSvc", faCommonSvc);
 	fitApp.factory("faDashboard", faDashboard);
 	
-	fitApp.run(function ($rootScope, $location, $route, $http, $q, faCommonSvc) {
+	fitApp.run(function ($rootScope, $location, $route, $http, faCommonSvc) {
 		
 		function init() { 
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -77,13 +77,9 @@ define([
 		.then(function (result) {
 			if (result.data.success) {
 				faCommonSvc.loggedInUser(result.data.user);
-				
-				return faCommonSvc.getDashboards();
 			}
 			else {
 				$location.path("/");
-				
-				return $q.reject();
 			}
 		})
 		.finally(function () {

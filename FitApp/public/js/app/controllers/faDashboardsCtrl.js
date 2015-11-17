@@ -8,14 +8,6 @@ define(["underscore"], function (_) {
 		};
 		$scope.createDashboardModal = null;
 
-		(function init() {
-			//faCommonSvc.getDashboards().then(function (result) { 
-			//	$scope.dashboards = result.dashboards;
-			//});
-
-			// faDashboardSvc.query();
-		})();
-
 		$scope.initCreate = function () { 
 			$scope.createDashboardModal = $uibModal.open({
 				animation: true,
@@ -64,19 +56,6 @@ define(["underscore"], function (_) {
 					faDashboard.update({ id: found._id }, found);
 				}
 			});
-
-			//$http.put("/dashboard/" + dashboard._id, dashboard)
-			//.success(function (result) {
-			//	var found = _.find($scope.dashboards, function (dashboard2) {
-			//		return dashboard2 !== dashboard && dashboard2.isActive;
-			//	});
-					
-			//	if (found) {
-			//		found.isActive = false;
-						
-			//		$http.put("/dashboard/" + found._id, found);
-			//	}
-			//});
 		};
 	};
 	
