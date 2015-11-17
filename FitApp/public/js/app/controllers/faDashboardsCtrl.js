@@ -1,7 +1,7 @@
 ﻿
 define(["underscore"], function (_) { 
-	function faDashboardsCtrl($scope, $http, $uibModal, faCommonSvc) {
-		$scope.dashboards = [];
+	function faDashboardsCtrl($scope, $http, $uibModal, faCommonSvc, faDashboard) {
+		$scope.dashboards = faDashboard.query();
 		$scope.newDashboard = {
 			title: "",
 			description: ""
@@ -9,9 +9,11 @@ define(["underscore"], function (_) {
 		$scope.createDashboardModal = null;
 
 		(function init() {
-			faCommonSvc.getDashboards().then(function (result) { 
-				$scope.dashboards = result.dashboards;
-			});
+			//faCommonSvc.getDashboards().then(function (result) { 
+			//	$scope.dashboards = result.dashboards;
+			//});
+
+			// faDashboardSvc.query();
 		})();
 
 		$scope.initCreate = function () { 
@@ -24,8 +26,8 @@ define(["underscore"], function (_) {
 		};
 
 		$scope.create = function () {
-			$http.post("/dashboard", $scope.newDashboard).success(function (result) { 
-				$scope.dashboards.push(result.dashboard);
+			faDashboard.save($scope.newDashboard, function (dashboard) { 
+				$scope.dashboards.push(dashboard);
 
 				$scope.createDashboardModal.dismiss();
 			});
@@ -36,33 +38,45 @@ define(["underscore"], function (_) {
 		};
 
 		$scope.removeDashboard = function (dashboard) {
-			$http.delete("/dashboard/" + dashboard._id).success(function (result) {
+			faDashboard.delete({ id: dashboard._id }, function () { 
 				var index = $scope.dashboards.indexOf(dashboard);
-					
+				
 				$scope.dashboards.splice(index, 1);
-
-				if (result.dashboard.isActive) {
+				
+				if (dashboard.isActive) {
 					if ($scope.dashboards.length > 0)
 						$scope.setActive($scope.dashboards[0]);
 				}
-			})
+			});
 		};
 
 		$scope.setActive = function (dashboard) {
 			dashboard.isActive = true;
-
-			$http.put("/dashboard/" + dashboard._id, dashboard)
-			.success(function (result) {
+			
+			faDashboard.update({ id: dashboard._id }, dashboard, function () { 
 				var found = _.find($scope.dashboards, function (dashboard2) {
 					return dashboard2 !== dashboard && dashboard2.isActive;
 				});
-					
+				
 				if (found) {
 					found.isActive = false;
-						
-					$http.put("/dashboard/" + found._id, found);
+					
+					faDashboard.update({ id: found._id }, found);
 				}
 			});
+
+			//$http.put("/dashboard/" + dashboard._id, dashboard)
+			//.success(function (result) {
+			//	var found = _.find($scope.dashboards, function (dashboard2) {
+			//		return dashboard2 !== dashboard && dashboard2.isActive;
+			//	});
+					
+			//	if (found) {
+			//		found.isActive = false;
+						
+			//		$http.put("/dashboard/" + found._id, found);
+			//	}
+			//});
 		};
 	};
 	

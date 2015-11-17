@@ -7,8 +7,10 @@ define([
 	"public/js/app/controllers/faDashboardsCtrl", 
 	"public/js/app/controllers/faSessionsCtrl",
 	"public/js/app/services/faCommonSvc",
+	"public/js/app/services/faDashboard",
 	"angular",
 	"angularRoute",
+	"angularResource",
 	"uiBootstrapTpls",
 	"bootstrap"
 	], function(faNavigationCtrl, 
@@ -18,10 +20,10 @@ define([
 				faDashboardsCtrl, 
 				faSessionsCtrl,
 				faCommonSvc, 
-				angular, 
-				angularRoute) {
+				faDashboard,
+				angular) {
 	
-	var fitApp = angular.module("fitApp", ["ngRoute", "ui.bootstrap"]);
+	var fitApp = angular.module("fitApp", ["ngResource", "ngRoute", "ui.bootstrap"]);
 
 	function config($routeProvider, $locationProvider) {
 		$routeProvider
@@ -59,6 +61,7 @@ define([
 	fitApp.controller("faDashboardsCtrl", faDashboardsCtrl);
 	fitApp.controller("faSessionsCtrl", faSessionsCtrl);
 	fitApp.factory("faCommonSvc", faCommonSvc);
+	fitApp.factory("faDashboard", faDashboard);
 	
 	fitApp.run(function ($rootScope, $location, $route, $http, $q, faCommonSvc) {
 		

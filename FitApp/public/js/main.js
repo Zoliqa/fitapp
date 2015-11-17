@@ -6,6 +6,7 @@
 			"app": "public/js/app",
 			"angular": "public/lib/angular/angular",
 			"angularRoute": "public/lib/angular-route/angular-route",
+			"angularResource": "public/lib/angular-resource/angular-resource",
 			"jQuery": "public/lib/jQuery/dist/jquery",
 			"underscore": "public/lib/underscore/underscore",
 			"bootstrap": "public/lib/bootstrap/dist/js/bootstrap",
@@ -19,6 +20,10 @@
 			"angularRoute": {
 				deps: ["angular"],
 				exports: "angularRoute"
+			},
+			"angularResource": {
+				deps: ["angular"],
+				exports: "angularResource"
 			},
 			"uiBootstrapTpls": {
 				deps: ["angular"],

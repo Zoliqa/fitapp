@@ -31,20 +31,9 @@ app.use(passport.session());
  
 initPassport(passport);
 
-var isAuthenticated = function (req, res, next) {
-	if (req.isAuthenticated())
-		return next();
-	
-	res.status(401).json({ message: "Unauthorized" });      
-}
-
 app.use("/public", express.static(__dirname + "/public"));  
 
 indexRoutes(app, passport);
-
-app.get("/users", isAuthenticated, function (req, res) { 
-	res.json({ user1: "user1", user2: "user2" });
-});
 
 if (!module.parent) {
 	app.listen(4000);

@@ -11,7 +11,7 @@ function init() {
 				if (err)
 					return next(err);
 				
-				res.json({ dashboards: dashboards });
+				res.json(dashboards);
 			});
 		else
 			dashboardQueries.findById(req.params.id, function (err, dashboard) {
@@ -27,7 +27,7 @@ function init() {
 			if (err)
 				return next(err);
 			
-			res.json({ dashboard: dashboard });
+			res.json(dashboard);
 		});
 	});
 	
@@ -36,7 +36,7 @@ function init() {
 			if (err)
 				return next(err);
 
-			res.json({ dashboard: dashboard });
+			res.json(dashboard);
 		});
 	});
 
@@ -45,7 +45,7 @@ function init() {
 			if (err)
 				return next(err);
 			
-			res.json({ dashboard: dashboard });
+			res.json(dashboard);
 		});
 	});
 
