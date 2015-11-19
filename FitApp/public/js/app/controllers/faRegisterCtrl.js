@@ -1,11 +1,11 @@
 ﻿
 define([], function () {
-	function faRegisterCtrl($scope, $http, $location, faCommonSvc) {
+	function faRegisterCtrl($scope, $http, $location, faCommonSvc, faUser) {
 		$scope.genders = {
 			male: 1,
 			female: 2
 		};
-		$scope.profile = {
+		$scope.user = {
 			username: "",
 			password: "",
 			confirmedPassword: "",
@@ -18,20 +18,13 @@ define([], function () {
 		$scope.errorMessage = "";
 
 		$scope.register = function () {
-			$http.post("/auth/register", $scope.profile)
-				.success(function (result) {
-					if (result.success) {
-						faCommonSvc.loggedInUser(result.user);
-
-						$location.path("/home");
-					}
-					else
-						$scope.errorMessage = result.message;
-				});
+			faUser.save($scope.user).$promise.then(function (user) { 
+				$location.path("/login").search("username", user.username);
+			});
 		};
 
 		$scope.cancel = function () {
-			$location.path("/");
+			$location.path("/login");
 		};
 	};
 

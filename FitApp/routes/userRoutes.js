@@ -36,7 +36,14 @@ function init() {
 		res.json({ success: true });
 	});
 	
-	router.post("/register", function (req, res, next) {
+	router.get("/profile", function (req, res, next) {
+		if (req.isAuthenticated())
+			return res.json({ success: true, user: req.user });
+		
+		return res.json({ success: false });
+	});
+
+	router.post("/", function (req, res, next) {
 		userQueries.find({ username: req.body.username }, function (err, user) { 
 			if (err)
 				return next(err);
@@ -57,31 +64,30 @@ function init() {
 						if (err)
 							return next(err);
 					
-						req.logIn(user, function (err) {
-							if (err)
-								return next(err);
+						res.json(user);
+
+						//req.logIn(user, function (err) {
+						//	if (err)
+						//		return next(err);
 						
-							return res.json({ success: true, user: user });
-						});
+						//	return res.json({ success: true, user: user });
+						//});
 					});
 			});
 		});
 	});
+	
+	router.put(":/id", utilities.isAuthenticated, function (req, res, next) { 
+		// update...
+	});
 
-	router.post("/unregister/:id", utilities.isAuthenticated, function (req, res, next) { 
+	router.delete("/:id", utilities.isAuthenticated, function (req, res, next) { 
 		userQueries.remove(req.params.id, function (err, user) { 
 			if (err)
 				return next(err);
 
 			return res.json({ user: user });
 		});
-	});
-
-	router.get("/profile", function (req, res, next) {
-		if (req.isAuthenticated())
-			return res.json({ success: true, user: req.user });
-
-		return res.json({ success: false });
 	});
 
 	return router;

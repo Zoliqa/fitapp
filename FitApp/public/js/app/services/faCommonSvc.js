@@ -8,10 +8,11 @@ define(["underscore"], function (_) {
 				return _user;
 
 			_user = user;
-
-			 getActiveDashboard().then(function (activeDashboard) { 
-				_activeDashboard = activeDashboard;
-			});
+			
+			if (_user)
+				getActiveDashboard().then(function (activeDashboard) { 
+					_activeDashboard = activeDashboard;
+				});
 		}
 		
 		function getActiveDashboard() { 

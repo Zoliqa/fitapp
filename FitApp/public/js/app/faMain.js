@@ -7,6 +7,7 @@ define([
 	"public/js/app/controllers/faDashboardsCtrl", 
 	"public/js/app/controllers/faSessionsCtrl",
 	"public/js/app/services/faCommonSvc",
+	"public/js/app/services/faUser",
 	"public/js/app/services/faDashboard",
 	"angular",
 	"angularRoute",
@@ -20,6 +21,7 @@ define([
 				faDashboardsCtrl, 
 				faSessionsCtrl,
 				faCommonSvc, 
+				faUser,
 				faDashboard,
 				angular) {
 	
@@ -27,7 +29,7 @@ define([
 
 	function config($routeProvider, $locationProvider) {
 		$routeProvider
-		.when("/", {
+		.when("/login", {
 			templateUrl: "/public/partials/login.html",
 			controller: "faLoginCtrl"
 		})
@@ -48,7 +50,7 @@ define([
 			controller: "faSessionsCtrl"
 		})
 		.otherwise({
-			redirectTo: "/"
+			redirectTo: "/login"
 		});
 	}
 	
@@ -61,25 +63,26 @@ define([
 	fitApp.controller("faDashboardsCtrl", faDashboardsCtrl);
 	fitApp.controller("faSessionsCtrl", faSessionsCtrl);
 	fitApp.factory("faCommonSvc", faCommonSvc);
+	fitApp.factory("faUser", faUser);
 	fitApp.factory("faDashboard", faDashboard);
 	
 	fitApp.run(function ($rootScope, $location, $route, $http, faCommonSvc) {
 		
 		function init() { 
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
-				if ($location.path() !== "/" && !faCommonSvc.loggedInUser() && $location.path() !== "" && $location.path() !== "/" && $location.path() !== "/register") {
+				if (!faCommonSvc.loggedInUser() && $location.path() !== "/login" && $location.path() !== "/register" && $location.path() !== "") {
 					event.preventDefault();
 				}
 			});
 		}
 
-		$http.get("/auth/profile")
+		$http.get("/user/profile")
 		.then(function (result) {
 			if (result.data.success) {
 				faCommonSvc.loggedInUser(result.data.user);
 			}
 			else {
-				$location.path("/");
+				$location.path("/login");
 			}
 		})
 		.finally(function () {

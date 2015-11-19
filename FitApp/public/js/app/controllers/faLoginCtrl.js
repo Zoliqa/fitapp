@@ -2,7 +2,7 @@
 define([], function () { 
 	function faLoginCtrl($scope, $http, $location, faCommonSvc) {
 		$scope.credentials = {
-			username: "",
+			username: $location.search().username || "",
 			password: ""
 		};
 		$scope.errors = {
@@ -19,7 +19,7 @@ define([], function () {
 			$scope.errors.message = "";
 
 			if (!$scope.errors.isUsernameEmpty() && !$scope.errors.isPasswordEmpty())
-				$http.post("/auth/login", $scope.credentials)
+				$http.post("/user/login", $scope.credentials)
 				.success(function (result) {
 					if (result.success) {
 						faCommonSvc.loggedInUser(result.user);

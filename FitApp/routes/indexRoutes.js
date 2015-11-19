@@ -9,8 +9,8 @@ function init(app, passport) {
 	
 	app.use("/", router);
 
-	var authRoutes = require("./authRoutes")(passport);
-	app.use("/auth", authRoutes);
+	var authRoutes = require("./userRoutes")(passport);
+	app.use("/user", authRoutes);
 	
 	var dashboardRoutes = require("./dashboardRoutes")();
 	app.use("/dashboard", dashboardRoutes);

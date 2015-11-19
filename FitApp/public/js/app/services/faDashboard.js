@@ -4,7 +4,7 @@ define([], function () {
 		var dashboardsCache = $cacheFactory("dashboards");
 		var resource = $resource("/dashboard/:id", null, {
 			"update": { method: "PUT" },
-			"query": { method: "GET", cache: true, isArray: true }
+			"query": { method: "GET", cache: false, isArray: true }
 		});
 		
 		return resource;

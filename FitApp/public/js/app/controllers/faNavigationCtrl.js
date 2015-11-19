@@ -14,8 +14,8 @@ define([], function () {
 		};
 
 		$scope.logout = function () {
-			$http.get("/auth/logout").success(function () {
-				$location.path("/");
+			$http.get("/user/logout").success(function () {
+				$location.path("/login");
 
 				faCommonSvc.loggedInUser(null);
 			});
