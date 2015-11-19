@@ -1,6 +1,6 @@
 ﻿
 define(["underscore"], function (_) { 
-	function faDashboardsCtrl($scope, $http, $uibModal, faCommonSvc, faDashboard) {
+	function faDashboardsCtrl($scope, $uibModal, faCommonSvc, faDashboard) {
 		$scope.dashboards = faDashboard.query();
 		$scope.newDashboard = {
 			title: "",
@@ -45,6 +45,8 @@ define(["underscore"], function (_) {
 		$scope.setActive = function (dashboard) {
 			dashboard.isActive = true;
 			
+			faCommonSvc.activeDashboard(dashboard);
+
 			faDashboard.update({ id: dashboard._id }, dashboard, function () { 
 				var found = _.find($scope.dashboards, function (dashboard2) {
 					return dashboard2 !== dashboard && dashboard2.isActive;
