@@ -1,6 +1,6 @@
 ﻿
-define([], function () {
-	function faRegisterCtrl($scope, $http, $location, faCommonSvc, faUser) {
+define(["bcrypt"], function (bcrypt) {
+	function faRegisterCtrl($scope, $location, faUser) {
 		$scope.genders = {
 			male: 1,
 			female: 2
@@ -11,14 +11,23 @@ define([], function () {
 			confirmedPassword: "",
 			firstname: "",
 			lastname: "",
-			emailAddress: "",
+			email: "",
 			gender: $scope.genders.male,
 			birthdate: new Date()
 		};
 		$scope.errorMessage = "";
 
 		$scope.register = function () {
-			faUser.save($scope.user).$promise.then(function (user) { 
+			if ($scope.user.password !== $scope.user.confirmedPassword) {
+				$scope.errorMessage = "Password and confirmed password don't match.";
+				
+				return;
+			}
+			
+			var salt = bcrypt.genSaltSync(10);
+			$scope.user.password = bcrypt.hashSync($scope.user.password, salt);
+
+			faUser.save($scope.user, function (user) { 
 				$location.path("/login").search("username", user.username);
 			});
 		};

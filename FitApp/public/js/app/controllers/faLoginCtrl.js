@@ -1,5 +1,5 @@
 ﻿
-define([], function () { 
+define(["bcrypt"], function (bcrypt) { 
 	function faLoginCtrl($scope, $http, $location, faCommonSvc) {
 		$scope.credentials = {
 			username: $location.search().username || "",
@@ -17,18 +17,21 @@ define([], function () {
 
 		$scope.logIn = function () {
 			$scope.errors.message = "";
-
-			if (!$scope.errors.isUsernameEmpty() && !$scope.errors.isPasswordEmpty())
+			
+			if (!$scope.errors.isUsernameEmpty() && !$scope.errors.isPasswordEmpty()) {
+				var salt = bcrypt.genSaltSync(10);
+				
 				$http.post("/user/login", $scope.credentials)
-				.success(function (result) {
-					if (result.success) {
-						faCommonSvc.loggedInUser(result.user);
-
+				.success(function (user) {
+					if (user) {
+						faCommonSvc.loggedInUser(user);
+						
 						$location.path("/home");
 					}
 					else
 						$scope.errors.message = "Wrong username and/or password";
 				});
+			}
 			else
 				$scope.errors.message = "Username and/or password is empty";
 		};

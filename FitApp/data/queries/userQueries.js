@@ -18,27 +18,26 @@ function find(where, next) {
 		}); 
 }
 
-function create(username, password, firstname, lastname, email, gender, birthdate, next) {
-	var user = new User();
+function create(user, next) {
+	var newUser = new User(user);
 	
-	user.username = username;
-	user.password = password;
-	user.firstname = firstname;
-	user.lastname = lastname;
-	user.emailAddress = email;
-	user.gender = gender;
-	user.birthdate = new Date(birthdate)
-	
-	user.save(function (err) {
+	newUser.save(function (err) {
 		if (err)
 			return next(err);
 		
-		next(null, user);
+		next(null, newUser);
 	});
 }
 
-function update(next) { 
-
+function update(id, user, next) {
+	User.findOneAndUpdate({ _id: id }, user, {
+		new: true
+	}, function (err, updatedUser) {
+		if (err)
+			return next(err);
+		
+		return next(null, updatedUser);
+	});
 }
 
 function remove(id, next) {

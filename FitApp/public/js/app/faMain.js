@@ -3,6 +3,7 @@ define([
 	"public/js/app/controllers/faNavigationCtrl",
 	"public/js/app/controllers/faLoginCtrl",
 	"public/js/app/controllers/faRegisterCtrl", 
+	"public/js/app/controllers/faProfileCtrl", 
 	"public/js/app/controllers/faHomeCtrl", 
 	"public/js/app/controllers/faDashboardsCtrl", 
 	"public/js/app/controllers/faSessionsCtrl",
@@ -17,6 +18,7 @@ define([
 	], function(faNavigationCtrl, 
 				faLoginCtrl, 
 				faRegisterCtrl, 
+				faProfileCtrl,
 				faHomeCtrl, 
 				faDashboardsCtrl, 
 				faSessionsCtrl,
@@ -36,6 +38,10 @@ define([
 		.when("/register", {
 			templateUrl: "/public/partials/register.html",
 			controller: "faRegisterCtrl"
+		})
+		.when("/profile", {
+			templateUrl: "/public/partials/profile.html",
+			controller: "faProfileCtrl"
 		})
 		.when("/home", {
 			templateUrl: "/public/partials/home.html",
@@ -59,6 +65,7 @@ define([
 	fitApp.controller("faNavigationCtrl", faNavigationCtrl);
 	fitApp.controller("faLoginCtrl", faLoginCtrl);
 	fitApp.controller("faRegisterCtrl", faRegisterCtrl);
+	fitApp.controller("faProfileCtrl", faProfileCtrl);
 	fitApp.controller("faHomeCtrl", faHomeCtrl);
 	fitApp.controller("faDashboardsCtrl", faDashboardsCtrl);
 	fitApp.controller("faSessionsCtrl", faSessionsCtrl);
@@ -66,7 +73,7 @@ define([
 	fitApp.factory("faUser", faUser);
 	fitApp.factory("faDashboard", faDashboard);
 	
-	fitApp.run(function ($rootScope, $location, $route, $http, faCommonSvc) {
+	fitApp.run(function ($rootScope, $location, $route, faUser, faCommonSvc) {
 		
 		function init() { 
 			$rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -76,16 +83,12 @@ define([
 			});
 		}
 
-		$http.get("/user/profile")
-		.then(function (result) {
-			if (result.data.success) {
-				faCommonSvc.loggedInUser(result.data.user);
-			}
-			else {
+		faUser.profile(function (user) {
+			if (user && user._id)
+				faCommonSvc.loggedInUser(user);
+			else 
 				$location.path("/login");
-			}
-		})
-		.finally(function () {
+		}).$promise.then(function () { 
 			init();
 		});
 	});

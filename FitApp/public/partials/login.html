@@ -4,7 +4,7 @@
     </div>
 
     <div class="form-group" ng-class="{ 'has-error': errors.isPasswordEmpty() && !!errors.message }">
-        <input type="text" class="form-control input-lg" placeholder="Password" ng-model="credentials.password">
+        <input type="password" class="form-control input-lg" placeholder="Password" ng-model="credentials.password">
     </div>
 
     <div class="alert alert-danger" role="alert" ng-show="!!errors.message">{{ errors.message }}</div>

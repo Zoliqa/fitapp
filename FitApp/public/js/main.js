@@ -10,7 +10,8 @@
 			"jQuery": "public/lib/jQuery/dist/jquery",
 			"underscore": "public/lib/underscore/underscore",
 			"bootstrap": "public/lib/bootstrap/dist/js/bootstrap",
-			"uiBootstrapTpls": "public/lib/angular-bootstrap/ui-bootstrap-tpls"
+			"uiBootstrapTpls": "public/lib/angular-bootstrap/ui-bootstrap-tpls",
+			"bcrypt": "public/lib/bcryptjs/dist/bcrypt"
 		},
 		
 		shim: {
@@ -38,6 +39,9 @@
 			"bootstrap": {
 				deps: ["jQuery"],
 				exports: "bootstrap"
+			},
+			"bcrypt": {
+				exports: "bcrypt"
 			}
 		}
 

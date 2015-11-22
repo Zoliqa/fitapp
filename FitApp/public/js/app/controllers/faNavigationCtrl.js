@@ -1,6 +1,6 @@
 ﻿
 define([], function () {
-	function faNavigationCtrl($scope, $http, $location, faCommonSvc) {
+	function faNavigationCtrl($scope, $http, $location, faCommonSvc, faUser) {
 		$scope.activeDashboard = function () { 
 			return faCommonSvc.activeDashboard();
 		};
@@ -14,7 +14,7 @@ define([], function () {
 		};
 
 		$scope.logout = function () {
-			$http.get("/user/logout").success(function () {
+			faUser.logout(function () { 
 				$location.path("/login");
 
 				faCommonSvc.loggedInUser(null);

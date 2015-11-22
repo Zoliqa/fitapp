@@ -12,20 +12,20 @@ function init() {
 				return next(err);
 			
 			if (!user)
-				return res.json({ success: false });
-			
+				return res.json(null);
+
 			bcrypt.compare(req.body.password, user.password, function (err, result) {
 				if (err)
 					return next(err);
 				
 				if (!result)
-					return res.json({ success: false });
+					return res.json(null);
 				
 				req.logIn(user, function (err) {
 					if (err)
 						return next(err);
 					
-					return res.json({ success: true, user: user });
+					return res.json(user);
 				});
 			});
 		});
@@ -33,52 +33,32 @@ function init() {
 
 	router.get("/logout", utilities.isAuthenticated, function (req, res) {
 		req.logout();
-		res.json({ success: true });
+		res.json({});
 	});
 	
 	router.get("/profile", function (req, res, next) {
 		if (req.isAuthenticated())
-			return res.json({ success: true, user: req.user });
+			return res.json(req.user);
 		
-		return res.json({ success: false });
+		return res.json(null);
 	});
 
 	router.post("/", function (req, res, next) {
-		userQueries.find({ username: req.body.username }, function (err, user) { 
+		userQueries.create(req.body, function (err, user) {
 			if (err)
 				return next(err);
-			
-			if (user)
-				return res.json({ success: false, message: "User with the given name already exists" });
-			
-			bcrypt.hash(req.body.password, null, null, function (err, passwordHash) {
-				userQueries.create(
-					req.body.username, 
-					passwordHash, 
-					req.body.firstname, 
-					req.body.lastname, 
-					req.body.email, 
-					req.body.gender,
-					req.body.birthdate, 
-					function (err, user) { 
-						if (err)
-							return next(err);
-					
-						res.json(user);
-
-						//req.logIn(user, function (err) {
-						//	if (err)
-						//		return next(err);
-						
-						//	return res.json({ success: true, user: user });
-						//});
-					});
-			});
+				
+			res.json(user);
 		});
 	});
 	
-	router.put(":/id", utilities.isAuthenticated, function (req, res, next) { 
-		// update...
+	router.put("/:id", utilities.isAuthenticated, function (req, res, next) {
+		userQueries.update(req.params.id, req.body, function (err, user) { 
+			if (err)
+				return next(err);
+			
+			res.json(user);
+		});
 	});
 
 	router.delete("/:id", utilities.isAuthenticated, function (req, res, next) { 
