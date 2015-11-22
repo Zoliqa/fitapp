@@ -10,6 +10,7 @@ define([
 	"public/js/app/services/faCommonSvc",
 	"public/js/app/services/faUser",
 	"public/js/app/services/faDashboard",
+	"public/js/app/services/faSession",
 	"angular",
 	"angularRoute",
 	"angularResource",
@@ -25,6 +26,7 @@ define([
 				faCommonSvc, 
 				faUser,
 				faDashboard,
+				faSession,
 				angular) {
 	
 	var fitApp = angular.module("fitApp", ["ngResource", "ngRoute", "ui.bootstrap"]);
@@ -72,6 +74,7 @@ define([
 	fitApp.factory("faCommonSvc", faCommonSvc);
 	fitApp.factory("faUser", faUser);
 	fitApp.factory("faDashboard", faDashboard);
+	fitApp.factory("faSession", faSession);
 	
 	fitApp.run(function ($rootScope, $location, $route, faUser, faCommonSvc) {
 		

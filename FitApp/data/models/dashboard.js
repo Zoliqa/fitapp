@@ -1,6 +1,7 @@
 ﻿
 var mongoose = require("mongoose"),
-	Schema   = mongoose.Schema;
+	Schema   = mongoose.Schema,
+	Session	 = require("./Session.js");
 
 var Dashboard = mongoose.model("Dashboard", {
 	id: String,
@@ -8,7 +9,8 @@ var Dashboard = mongoose.model("Dashboard", {
 	title: String,
 	description: String,
 	isActive: Boolean,
-	created: Date
+	created: Date,
+	sessions: [Session]
 });
 
 module.exports = Dashboard;

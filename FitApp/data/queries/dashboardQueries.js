@@ -32,8 +32,13 @@ function create(dashboard, next) {
 	});
 }
 
-function update(id, dashboard, next) { 
-	Dashboard.findOneAndUpdate({ _id: id }, dashboard, {
+function update(id, dashboard, next) {
+	Dashboard.findOneAndUpdate({ _id: id }, {
+		title: dashboard.title,
+		description: dashboard.description,
+		isActive: dashboard.isActive,
+		created: dashboard.created
+	}, {
 		new: true
 	}, function (err, dashboard) { 
 		if (err)
