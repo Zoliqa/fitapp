@@ -23,7 +23,7 @@ function init() {
 	});
 
 	router.post("/", utilities.isAuthenticated, function (req, res, next) {
-		dashboardQueries.create(req.user._id, req.body.title, req.body.description, function (err, dashboard) { 
+		dashboardQueries.create(req.body, function (err, dashboard) { 
 			if (err)
 				return next(err);
 			
@@ -32,7 +32,7 @@ function init() {
 	});
 	
 	router.put("/:id", utilities.isAuthenticated, function (req, res, next) {
-		dashboardQueries.update(req.params.id, req.body.title, req.body.description, req.body.isActive, function (err, dashboard) { 
+		dashboardQueries.update(req.params.id, req.body, function (err, dashboard) { 
 			if (err)
 				return next(err);
 

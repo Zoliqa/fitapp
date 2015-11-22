@@ -3,8 +3,10 @@ define(["underscore"], function (_) {
 	function faDashboardsCtrl($scope, $uibModal, faCommonSvc, faDashboard) {
 		$scope.dashboards = faDashboard.query();
 		$scope.newDashboard = {
+			owner: faCommonSvc.loggedInUser()._id,
 			title: "",
-			description: ""
+			description: "",
+			created: new Date()
 		};
 		$scope.createDashboardModal = null;
 

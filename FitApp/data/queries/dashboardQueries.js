@@ -21,29 +21,19 @@ function findForUser(userId, next) {
 		});
 }
 
-function create(userId, title, description, next) { 
-	var dashboard = new Dashboard();
+function create(dashboard, next) { 
+	var newDashboard = new Dashboard(dashboard);
 	
-	dashboard.owner = userId;
-	dashboard.title = title;
-	dashboard.description = description;
-	dashboard.isActive = false;
-	dashboard.created = new Date();
-	
-	dashboard.save(function (err) {
+	newDashboard.save(function (err) {
 		if (err)
 			return next(err);
 		
-		next(null, dashboard);
+		next(null, newDashboard);
 	});
 }
 
-function update(id, title, description, isActive, next) { 
-	Dashboard.findOneAndUpdate({ _id: id }, {
-		title: title,
-		description: description,
-		isActive: isActive
-	}, {
+function update(id, dashboard, next) { 
+	Dashboard.findOneAndUpdate({ _id: id }, dashboard, {
 		new: true
 	}, function (err, dashboard) { 
 		if (err)
