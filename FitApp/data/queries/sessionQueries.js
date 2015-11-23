@@ -6,8 +6,6 @@ var Dashboard = require("../models/Dashboard"),
 function create(dashboardId, session, next) {
 	var newSession = new Session.Session(session);
 	
-	console.log(newSession);
-
 	Dashboard.findOneAndUpdate({
 		_id: dashboardId
 	}, {
@@ -15,13 +13,12 @@ function create(dashboardId, session, next) {
 			sessions: newSession
 		}
 	}, {
-		upsert: true,
 		new: true
-	}, function (err, dashboard) {
+	}, function (err) {
 		if (err)
 			return next(err);
 		
-		return next(null, dashboard);
+		return next(null, newSession);
 	});
 }
 

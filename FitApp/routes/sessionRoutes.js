@@ -6,11 +6,11 @@ var express        = require("express"),
 
 function init() {
 	router.post("/:dashboardId", utilities.isAuthenticated, function (req, res, next) {
-		sessionQueries.create(req.params.dashboardId, req.body, function (err, dashboard) {
+		sessionQueries.create(req.params.dashboardId, req.body, function (err, session) {
 			if (err)
 				return next(err);
 			
-			res.json(dashboard);
+			res.json(session);
 		});
 	});
 
