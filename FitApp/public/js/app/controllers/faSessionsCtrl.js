@@ -8,7 +8,7 @@ define(["underscore"], function (_) {
 			location: "",
 			selectedGroups: []
 		};
-		$scope.createSessionModal = null;
+		$scope.addSessionModal = null;
 		$scope.date = {
 			options: {
 				formatYear: 'yy',
@@ -33,8 +33,8 @@ define(["underscore"], function (_) {
 			return faCommonSvc.activeDashboard();
 		};
 
-		$scope.initCreate = function () { 
-			$scope.createSessionModal = $uibModal.open({
+		$scope.initAddSession = function () { 
+			$scope.addSessionModal = $uibModal.open({
 				animation: true,
 				templateUrl: 'create-session.html',
 				size: "lg",
@@ -46,21 +46,23 @@ define(["underscore"], function (_) {
 			$scope.newSession.startTime = new Date();
 		};
 
-		$scope.startSession = function () {
+		$scope.addSession = function () {
 			_.each($scope.groups, function (group) { 
 				if (group.selected)
 					$scope.newSession.selectedGroups.push(group.id);
 			})
 
-			faSession.save($scope.newSession, function () {
-				console.log("Session created");
+			faSession.save({
+				dashboardId: faCommonSvc.activeDashboard()._id
+			}, $scope.newSession, function () {
+				console.log("Session added");
 
-				$scope.createSessionModal.dismiss();
+				$scope.addSessionModal.dismiss();
 			});
 		};
 
-		$scope.cancelSession = function () {
-			$scope.createSessionModal.dismiss();
+		$scope.cancelAddSession = function () {
+			$scope.addSessionModal.dismiss();
 		};
 	};
 

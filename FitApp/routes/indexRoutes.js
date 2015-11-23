@@ -14,8 +14,9 @@ function init(app, passport) {
 	
 	var dashboardRoutes = require("./dashboardRoutes")();
 	app.use("/dashboard", dashboardRoutes);
+
+	var sessionRoutes = require("./sessionRoutes")();
+	app.use("/session", sessionRoutes);
 }
-
-
 
 module.exports = init;

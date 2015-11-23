@@ -1,13 +1,18 @@
 ﻿
 var mongoose = require("mongoose"),
-	Schema  = mongoose.Schema;
+	Schema   = mongoose.Schema;
 
-var Session = mongoose.model("Session", {
-	_id: Schema.Types.ObjectId,
+var SessionSchema = {
+	id: String,
 	date: Date,
 	selectedGroups: [Number],
 	notes: String,
 	location: String
-});
+};
 
-module.exports = Session;
+var Session = mongoose.model("Session", SessionSchema);
+
+module.exports = {
+	Session: Session,
+	SessionSchema: SessionSchema
+};

@@ -1,12 +1,41 @@
 ﻿
-var Dashboard = require('../models/Dashboard');
+var Dashboard = require("../models/Dashboard"),
+	Session   = require("../models/Session"),
+	mongoose  = require("mongoose");
+
+function create(dashboardId, session, next) {
+	var newSession = new Session.Session(session);
+	
+	console.log(newSession);
+
+	Dashboard.findOneAndUpdate({
+		_id: dashboardId
+	}, {
+		$push: {
+			sessions: newSession
+		}
+	}, {
+		upsert: true,
+		new: true
+	}, function (err, dashboard) {
+		if (err)
+			return next(err);
+		
+		return next(null, dashboard);
+	});
+}
 
 function update(dashboardId, sessionId, session, next) {
+	var newSession = new Session(session);
+	
+	if (!sessionId)
+		newSssion.id = mongoose.Types.ObjectId();
+
 	Dashboard.findOneAndUpdate({
 		_id: dashboardId, 
 		"sessions.id": sessionId
 	}, {
-		"$set": {
+		$set: {
 			"session.$": session
 		}
 	}, {
@@ -33,6 +62,7 @@ function remove(dashboardId, sessionId, next) {
 }
 
 module.exports = {
+	create: create,
 	update: update,
 	remove: remove
 };

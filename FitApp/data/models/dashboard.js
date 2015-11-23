@@ -10,7 +10,7 @@ var Dashboard = mongoose.model("Dashboard", {
 	description: String,
 	isActive: Boolean,
 	created: Date,
-	sessions: [Session]
+	sessions: [Session.SessionSchema]
 });
 
 module.exports = Dashboard;

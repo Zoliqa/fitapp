@@ -1,7 +1,7 @@
 ﻿
 define([], function () {
 	function faSession($resource) {
-		var resource = $resource("/session/:id", null, {
+		var resource = $resource("/session/:dashboardId", null, {
 			"update": { method: "PUT" }
 		});
 		
