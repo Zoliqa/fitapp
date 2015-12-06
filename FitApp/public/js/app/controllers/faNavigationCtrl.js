@@ -1,10 +1,6 @@
 ﻿
 define([], function () {
 	function faNavigationCtrl($scope, $http, $location, faCommonSvc, faUser) {
-		$scope.activeDashboard = function () { 
-			return faCommonSvc.activeDashboard();
-		};
-
 		$scope.user = function () { 
 			return faCommonSvc.loggedInUser();
 		};

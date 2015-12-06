@@ -8,7 +8,7 @@ var Dashboard = mongoose.model("Dashboard", {
 	owner: { type: Schema.Types.ObjectId, ref: "User" },
 	title: String,
 	description: String,
-	isActive: Boolean,
+	// sharedWith: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	created: Date,
 	sessions: [Session.SessionSchema]
 });

@@ -6,7 +6,7 @@ define([
 	"public/js/app/controllers/faProfileCtrl", 
 	"public/js/app/controllers/faHomeCtrl", 
 	"public/js/app/controllers/faDashboardsCtrl", 
-	"public/js/app/controllers/faSessionsCtrl",
+	"public/js/app/controllers/faAddSessionCtrl",
 	"public/js/app/services/faCommonSvc",
 	"public/js/app/services/faUser",
 	"public/js/app/services/faDashboard",

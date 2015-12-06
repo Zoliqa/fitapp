@@ -8,7 +8,7 @@ define(["underscore"], function (_) {
 			description: "",
 			created: new Date()
 		};
-		$scope.createDashboardModal = null;
+        $scope.createDashboardModal = null;
 
 		$scope.initCreate = function () { 
 			$scope.createDashboardModal = $uibModal.open({
@@ -44,23 +44,30 @@ define(["underscore"], function (_) {
 			});
 		};
 
-		$scope.setActive = function (dashboard) {
-			dashboard.isActive = true;
-			
-			faCommonSvc.activeDashboard(dashboard);
+		$scope.isShared = function (dashboard) {
+		    return true;
+        };
 
-			faDashboard.update({ id: dashboard._id }, dashboard, function () { 
-				var found = _.find($scope.dashboards, function (dashboard2) {
-					return dashboard2 !== dashboard && dashboard2.isActive;
-				});
-				
-				if (found) {
-					found.isActive = false;
-					
-					faDashboard.update({ id: found._id }, found);
-				}
-			});
-		};
+        $scope.initAddSession = function (dashboard) { 
+            var modal = $uibModal.open({
+                animation: true,
+                templateUrl: 'add-session-modal.html',
+                size: "lg",
+                scope: $scope,
+                controller: "faSessionsCtrl",
+                resolve: {
+                    dashboard: function () {
+                        return dashboard;
+                    }
+                }
+            });
+
+            modal.result.then(function (session) { 
+                console.log("session has been created: " + session);
+            });
+        };
+
+        
 	};
 	
 	return faDashboardsCtrl;
