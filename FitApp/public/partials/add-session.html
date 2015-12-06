@@ -1,0 +1,82 @@
+﻿
+<script type="text/ng-template" id="add-session-modal.html">
+    <div id="add-session-modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Add new session for {{ dashboard.title }}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error': false }">
+                <label>Date</label>
+
+                <p class="input-group">
+                    <input type="text"
+                           class="form-control input-lg"
+                           uib-datepicker-popup="longDate"
+                           ng-model="newSession.date"
+                           is-open="date.opened"
+                           datepicker-options="date.options"
+                           ng-required="true"
+                           close-text="Close"
+                           disabled="disabled" />
+                    <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default btn-lg"
+                                ng-click="date.opened = !date.opened">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': false }">
+                <label>Start time</label>
+
+                <div class="start-time">
+                    <div class="pull-left">
+                        <uib-timepicker ng-model="newSession.date"></uib-timepicker>
+                    </div>
+
+                    <button type="button"
+                            class="btn btn-default btn-lg pull-right"
+                            ng-click="updateStartTime()">
+                        Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': false }">
+                <label>Group</label>
+                <select class="form-control input-lg">
+                    <option ng-repeat="group in groups" ng-attr-value="{{ group.id }}">{{ group.name }}</option>
+                </select>
+
+                <div class="groups btn-group">
+                    <label class="btn btn-default group" 
+                           ng-repeat="group in groups" 
+                           ng-model="group.selected" 
+                           uib-btn-checkbox>
+                        <div class="inner">
+                            {{ group.name }}
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': false }">
+                <label>Notes</label>
+                <textarea rows="3" class="form-control input-lg" ng-model="newSession.notes"></textarea>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error': false }">
+                <label>Location</label>
+                <input type="text" class="form-control input-lg" ng-model="newSession.location">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg" ng-click="addSession()">Start</button>
+                <button class="btn btn-primary btn-lg" ng-click="cancelAddSession()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</script>
