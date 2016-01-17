@@ -4,19 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-
-    <link href="/public/lib/components-font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="/public/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="/public/lib/bootstrap-social/bootstrap-social.css" rel="stylesheet" />
-    <link href="/public/css/index.css" rel="stylesheet" />
 </head>
-<body>
+<body>   
     <div class="container">
-        <ng-include src="'public/partials/navbar.html'"></ng-include>
-
-        <div ng-view id="fa-placeholder"></div>
+        <div ng-view></div>
     </div>
-
-    <script src="/public/lib/requirejs/require.js" data-main="/public/js/main.js"></script>
+                         
+    <script src="/public/lib/requirejs/require.js" data-main="/public/js/require.main.js"></script>      
 </body>
 </html>

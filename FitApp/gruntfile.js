@@ -1,13 +1,13 @@
-﻿module.exports = function (grunt) {
-
-	require('load-grunt-tasks')(grunt);
-
+﻿
+module.exports = function (grunt) {
+	
+	require("load-grunt-tasks")(grunt);
+	
 	grunt.initConfig({
 		nodemon: {
 			dev: {
-				script: 'server.js',
-				watch: ['*.js']
-			}
+				script: "server.js"
+			}  
 		},
 		less: {
 			development: {
@@ -22,16 +22,19 @@
 		},
 		watch: {
 			styles: {
-				files: ['public/css/**/*.less'],
-				tasks: ['less'],
+				files: ["public/css/**/*.less"],
+				tasks: ["less"],
 				options: {
 					nospawn: true
 				}
-			}
+			},
+			server: {
+				files: ['views/index.html']
+			} 
 		},
-		concurrent: {
+		concurrent: {  
 			dev: {
-				tasks: ['nodemon', 'watch'],
+				tasks: ["nodemon:dev", "watch:styles", "watch:server"],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -39,5 +42,5 @@
 		}
 	});
 	
-	grunt.registerInitTask('default', 'concurrent:dev');
+	grunt.registerInitTask("default", "concurrent:dev");
 };

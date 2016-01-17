@@ -3,14 +3,14 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <Name>FitApp</Name>
-    <RootNamespace>FitApp</RootNamespace>
+    <Name>fitapp</Name>
+    <RootNamespace>fitapp</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>bce2a0f2-70e5-458b-b6d2-4d9389d88d63</ProjectGuid>
+    <ProjectGuid>03db18e1-db2f-4e3b-a9a8-debcaad6f1e7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>server.js</StartupFile>
     <SearchPath>
@@ -30,63 +30,45 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include=".bowerrc" />
-    <Compile Include="data\models\Session.js" />
-    <Compile Include="data\queries\dashboardQueries.js" />
-    <Compile Include="data\queries\sessionQueries.js" />
-    <Compile Include="data\queries\userQueries.js" />
+    <Compile Include="data\user\user.model.js" />
+    <Compile Include="data\user\user.queries.js" />
     <Compile Include="gruntfile.js" />
-    <Compile Include="data\models\Dashboard.js" />
-    <Compile Include="data\models\User.js" />
-    <Compile Include="passport\utilities.js" />
-    <Compile Include="passport\init.js" />
-    <Compile Include="public\js\app\controllers\faAddSessionCtrl.js" />
-    <Compile Include="public\js\app\controllers\faProfileCtrl.js" />
-    <Compile Include="public\js\app\controllers\faNavigationCtrl.js" />
-    <Compile Include="public\js\app\controllers\faDashboardsCtrl.js" />
-    <Compile Include="public\js\app\controllers\faRegisterCtrl.js" />
-    <Compile Include="public\js\app\services\faSession.js" />
-    <Compile Include="public\js\app\services\faUser.js" />
-    <Compile Include="public\js\app\services\faDashboard.js" />
-    <Compile Include="public\js\main.js" />
-    <Compile Include="public\js\app\faMain.js" />
-    <Compile Include="public\js\app\controllers\faLoginCtrl.js" />
-    <Compile Include="public\js\app\controllers\faHomeCtrl.js" />
-    <Compile Include="public\js\app\services\faCommonSvc.js" />
-    <Compile Include="routes\dashboardRoutes.js" />
-    <Compile Include="routes\indexRoutes.js" />
-    <Compile Include="routes\sessionRoutes.js" />
-    <Compile Include="routes\userRoutes.js" />
+    <Compile Include="passport\passport.utilities.js" />
+    <Compile Include="passport\passport.init.js" />
+    <Compile Include="public\js\app\app.init.js" />
+    <Compile Include="public\js\app\main\home.controller.js" />
+    <Compile Include="public\js\app\users\user.data.service.js" />
+    <Compile Include="public\js\app\users\user.resource.service.js" />
+    <Compile Include="public\js\app\users\register.controller.js" />
+    <Compile Include="public\js\app\users\login.controller.js" />
+    <Compile Include="public\js\app\users\users.module.js" />
+    <Compile Include="public\js\app\main\main.module.js" />
+    <Compile Include="public\js\require.main.js" />
+    <Compile Include="routes\routes.user.js" />
+    <Compile Include="routes\routes.index.js" />
     <Compile Include="server.js" />
+    <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
-    <Content Include="public\css\less\root.less" />
     <Content Include="public\css\less\index.less" />
-    <Content Include="public\partials\add-session.html" />
-    <Content Include="public\partials\profile.html" />
-    <Content Include="public\partials\dashboards.html" />
-    <Content Include="public\partials\navbar.html" />
-    <Content Include="public\partials\home.html" />
-    <Content Include="public\partials\login.html" />
-    <Content Include="public\partials\register.html" />
-    <Content Include="README.md" />
+    <Content Include="public\js\app\main\home.html" />
+    <Content Include="public\js\app\users\register.html" />
+    <Content Include="public\js\app\users\login.html" />
     <Content Include="views\index.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="data\models\" />
     <Folder Include="data\" />
-    <Folder Include="data\queries\" />
-    <Folder Include="routes\" />
-    <Folder Include="passport\" />
+    <Folder Include="data\user\" />
+    <Folder Include="public\css\" />
     <Folder Include="public\css\less\" />
     <Folder Include="public\js\" />
-    <Folder Include="public\js\app\controllers\" />
-    <Folder Include="public\js\app\services\" />
     <Folder Include="public\js\app\" />
-    <Folder Include="public\css\" />
-    <Folder Include="public\partials\" />
+    <Folder Include="public\js\app\main\" />
+    <Folder Include="public\js\app\users\" />
     <Folder Include="views\" />
     <Folder Include="public\" />
+    <Folder Include="routes\" />
+    <Folder Include="passport\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

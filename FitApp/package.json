@@ -1,10 +1,10 @@
 {
-  "name": "FitApp",
+  "name": "fitapp",
   "version": "0.0.0",
-  "description": "FitApp",
+  "description": "fitapp",
   "main": "server.js",
   "author": {
-    "name": "Zoliqa",
+    "name": "azoli",
     "email": ""
   },
   "devDependencies": {
