@@ -2,9 +2,11 @@
 define([], 
 	function () { 
 
-		function HomeController($scope, userDataService) {
+		function HomeController(userDataService) {
 			
-			$scope.message = "Welcome home " + userDataService.loggedInUser().username;
+			var vm = this;
+		
+			this.message = "Welcome home " + userDataService.loggedInUser().username;
 		}
 
 		return HomeController;

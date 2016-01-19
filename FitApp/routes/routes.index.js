@@ -7,6 +7,10 @@ function init(app, passport) {
 		res.render("index");
 	});
 	
+	router.get("/tests", function (req, res) {
+		res.render("tests-index");
+	});
+	
 	app.use("/", router);
 	
 	var routesUser = require("./routes.user")(passport);

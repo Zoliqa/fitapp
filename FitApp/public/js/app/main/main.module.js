@@ -13,7 +13,8 @@ define([
 				$routeProvider
 					.when("/home", {
 						templateUrl: "/public/js/app/main/home.html",
-						controller: "HomeController"
+						controller: "HomeController",
+						controllerAs: "vm"
 					})
 					.otherwise({
 						redirectTo: "/login"

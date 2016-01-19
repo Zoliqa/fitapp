@@ -13,5 +13,9 @@
     "bootstrap-social": "~4.10.1",
     "angular-bootstrap": "~0.14.3",
     "bcryptjs": "~2.3.0"
+  },
+  "devDependencies": {
+    "jasq": "~0.4.2",
+    "jasmine-core": "jasmine#~2.4.1"
   }
 }
