@@ -45,7 +45,7 @@ define([
 						controllerAs: "vm"
 					})
 					.otherwise({
-						redirectTo: "/login"
+						redirectTo: "/user/login"
 					});
 			});
 	}

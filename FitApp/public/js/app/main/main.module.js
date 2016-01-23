@@ -17,7 +17,7 @@ define([
 						controllerAs: "vm"
 					})
 					.otherwise({
-						redirectTo: "/login"
+						redirectTo: "/user/login"
 					});
 			})
 			.run(function ($rootScope, $location, userDataService) {

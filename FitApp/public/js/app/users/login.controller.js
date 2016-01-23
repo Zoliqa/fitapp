@@ -2,10 +2,10 @@
 define([], 
 	function () { 
 
-		function LoginController($http, $location, bcrypt, userDataService) {
+		function LoginController($http, $location, bcrypt, userDataService) { 
 		
-			var vm = this;
-		
+			var vm = this;    
+		 
 			vm.credentials = {
 				username: $location.search().username || "",
 				password: ""

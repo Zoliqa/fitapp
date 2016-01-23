@@ -38,8 +38,7 @@
     <Compile Include="public\js\app\app.init.js" />
     <Compile Include="public\js\app\main\home.controller.js" />
     <Compile Include="public\js\app\main\main.module.js" />
-    <Compile Include="public\js\app\tests\spec.js" />
-    <Compile Include="public\js\app\tests\specrunner.js" />
+    <Compile Include="public\js\app\tests\demo2spec.js" />
     <Compile Include="public\js\app\users\profile.controller.js" />
     <Compile Include="public\js\app\users\login.controller.js" />
     <Compile Include="public\js\app\users\user.data.service.js" />
@@ -50,6 +49,8 @@
     <Compile Include="routes\routes.user.js" />
     <Compile Include="routes\routes.index.js" />
     <Compile Include="server.js" />
+    <Compile Include="tests\client\karma.config.js" />
+    <Compile Include="tests\client\test-main.js" />
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
@@ -72,6 +73,7 @@
     <Folder Include="public\js\app\" />
     <Folder Include="public\js\app\main\" />
     <Folder Include="public\js\app\users\" />
+    <Folder Include="tests\client\" />
     <Folder Include="views\" />
     <Folder Include="public\" />
     <Folder Include="routes\" />

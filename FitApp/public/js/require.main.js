@@ -4,7 +4,7 @@
 	require.config({
 		baseUrl: "/",
 		paths: {
-			"app": "public/js/app",
+			"app": "public/js/app", 
 			"angular": "public/lib/angular/angular",
 			"angularRoute": "public/lib/angular-route/angular-route",
 			"angularResource": "public/lib/angular-resource/angular-resource",
