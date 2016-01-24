@@ -1,7 +1,7 @@
 ﻿
 define([
 	"angularMocks",
-	"public/js/app/users/users.module"
+	"public/app/users/users.module"
 	], 
 	function (angularMocks, usersModule) {
 	

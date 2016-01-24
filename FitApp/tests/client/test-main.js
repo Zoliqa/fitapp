@@ -17,7 +17,7 @@ require.config({
 	baseUrl: '/base',
 	
 	paths: {
-		"app": "public/js/app", 
+		"app": "public/app", 
 		"angular": "public/lib/angular/angular",
 		"angularMocks": "public/lib/angular-mocks/angular-mocks",
 		"angularRoute": "public/lib/angular-route/angular-route",

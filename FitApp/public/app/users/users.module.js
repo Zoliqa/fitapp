@@ -4,11 +4,11 @@ define([
 	"angularRoute", 
 	"angularResource",
 	"bcrypt", 
-	"public/js/app/users/login.controller",
-	"public/js/app/users/register.controller",
-	"public/js/app/users/profile.controller",
-	"public/js/app/users/user.resource.service",
-	"public/js/app/users/user.data.service"], 
+	"public/app/users/login.controller",
+	"public/app/users/register.controller",
+	"public/app/users/profile.controller",
+	"public/app/users/user.resource.service",
+	"public/app/users/user.data.service"], 
 	function (angular, 
 			  angularRoute, 
 			  angularResource, 
@@ -30,17 +30,17 @@ define([
 
 				$routeProvider
 					.when("/user/login", {
-						templateUrl: "/public/js/app/users/login.html",
+						templateUrl: "/public/app/users/login.html",
 						controller: "LoginController",
 						controllerAs: "vm"
 					})
 					.when("/user/register", {
-						templateUrl: "/public/js/app/users/register.html",
+						templateUrl: "/public/app/users/register.html",
 						controller: "RegisterController",
 						controllerAs: "vm"
 					})
 					.when("/user/profile", {
-						templateUrl: "/public/js/app/users/profile.html",
+						templateUrl: "/public/app/users/profile.html",
 						controller: "ProfileController",
 						controllerAs: "vm"
 					})

@@ -1,10 +1,9 @@
 ﻿
-
 (function () {
 	require.config({
 		baseUrl: "/",
 		paths: {
-			"app": "public/js/app", 
+			"app": "public/app", 
 			"angular": "public/lib/angular/angular",
 			"angularRoute": "public/lib/angular-route/angular-route",
 			"angularResource": "public/lib/angular-resource/angular-resource",
@@ -37,7 +36,7 @@
 			"underscore": {
 				exports: "underscore"
 			},
-			"bootstrap": {   
+			"bootstrap": {
 				deps: ["jQuery"],
 				exports: "bootstrap"
 			},
@@ -49,5 +48,5 @@
 		// deps: ["app/faMain"]
 	});
 	
-	require(["app/app.init"]);                  
+	require(["app/app.init"]);
 })();
