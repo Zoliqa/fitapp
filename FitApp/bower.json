@@ -15,7 +15,6 @@
     "bcryptjs": "~2.3.0"
   },
   "devDependencies": {
-    "jasq": "~0.4.2",
-    "jasmine-core": "jasmine#~2.4.1"
+    "angular-mocks": "~1.4.9"
   }
 }

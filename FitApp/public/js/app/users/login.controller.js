@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function LoginController($http, $location, bcrypt, userDataService) { 
+		function LoginController($http, $location, userDataService) { 
 		
 			var vm = this;    
 		 
@@ -28,7 +28,6 @@ define([],
 				vm.errorMessage = "";
 			
 				if (!vm.isUsernameEmpty() && !vm.isPasswordEmpty()) {
-					var salt = bcrypt.genSaltSync(10);
 				
 					$http.post("/user/login", vm.credentials)
 						.success(function (user) {

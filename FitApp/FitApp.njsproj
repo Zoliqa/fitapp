@@ -38,9 +38,9 @@
     <Compile Include="public\js\app\app.init.js" />
     <Compile Include="public\js\app\main\home.controller.js" />
     <Compile Include="public\js\app\main\main.module.js" />
-    <Compile Include="public\js\app\tests\demo2spec.js" />
     <Compile Include="public\js\app\users\profile.controller.js" />
     <Compile Include="public\js\app\users\login.controller.js" />
+    <Compile Include="public\js\app\users\tests\login.controller.spec.js" />
     <Compile Include="public\js\app\users\user.data.service.js" />
     <Compile Include="public\js\app\users\user.resource.service.js" />
     <Compile Include="public\js\app\users\register.controller.js" />
@@ -65,7 +65,7 @@
   <ItemGroup>
     <Folder Include="data\" />
     <Folder Include="data\user\" />
-    <Folder Include="public\js\app\tests\" />
+    <Folder Include="public\js\app\users\tests\" />
     <Folder Include="tests\" />
     <Folder Include="public\css\" />
     <Folder Include="public\css\less\" />

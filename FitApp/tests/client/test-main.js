@@ -19,6 +19,7 @@ require.config({
 	paths: {
 		"app": "public/js/app", 
 		"angular": "public/lib/angular/angular",
+		"angularMocks": "public/lib/angular-mocks/angular-mocks",
 		"angularRoute": "public/lib/angular-route/angular-route",
 		"angularResource": "public/lib/angular-resource/angular-resource",
 		"jQuery": "public/lib/jQuery/dist/jquery",
@@ -31,6 +32,10 @@ require.config({
 	shim: {
 		"angular": {
 			exports: "angular"
+		},
+		"angularMocks": {
+			exports: "angularMocks",
+			deps: ["angular"]
 		},
 		"angularRoute": {
 			deps: ["angular"],
