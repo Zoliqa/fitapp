@@ -30,10 +30,6 @@ module.exports = function (grunt) {
 			},
 			server: {
 				files: ['views/index.html']
-			},
-			tests: {
-				files: ["public/**/*.js"],
-				tasks: ["jasmine_node"]
 			}
 		},
 		concurrent: {  

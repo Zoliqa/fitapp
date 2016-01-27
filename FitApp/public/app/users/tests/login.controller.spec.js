@@ -5,40 +5,45 @@ define([
 	], 
 	function (angularMocks, usersModule) {
 	
-	var $controller, $httpBackend, loginController, $locationMock, userDataServiceMock;
-	
-	beforeEach(module("users"));
-	
-	beforeEach(inject(function ($injector) {
-		$controller = $injector.get("$controller");
-		
-		$httpBackend = $injector.get("$httpBackend");
-		
-		userDataServiceMock = {
-			loggedInUser: function (user) { 
-			}
-		};
-		
-		$locationMock = {
-			hash: '/not-changed',
-			updateHash: function (hash) {
-				this.hash = hash;
-			},
-			search: function () {
-				return {
-					username: "username"
-				}
-			}
-		};
-
-		loginController = $controller("LoginController", { 
-			$location: $locationMock,
-			userDataService: userDataServiceMock
-		});
-	}));
-
 	describe("LoginController", function () {
 		
+		var $controller, $httpBackend, loginController, $locationMock, $scopeMock, userDataServiceMock;
+
+		beforeEach(module("users"));
+		
+		beforeEach(inject(function ($injector) {
+			$controller = $injector.get("$controller");
+			
+			$httpBackend = $injector.get("$httpBackend");
+			
+			$scopeMock = $injector.get("$rootScope");
+			
+			userDataServiceMock = {
+				loggedInUser: function (user) { 
+				}
+			};
+			
+			$locationMock = {
+				hash: '/not-changed',
+				updateHash: function (hash) {
+					this.hash = hash;
+				},
+				search: function () {
+					return {
+						username: "username"
+					}
+				},
+				path: function () { 
+				}
+			};
+			
+			loginController = $controller("LoginController", {
+				$scope: $scopeMock,
+				$location: $locationMock,
+				userDataService: userDataServiceMock
+			});
+		}));
+
 		it("should create the LoginController", function () { 
 			expect(loginController).toBeDefined();
 		});
@@ -73,7 +78,7 @@ define([
 			expect(loginController.errorMessage).toBe("Username and/or password is empty");
 		});
 
-		it("should set the logged in user in the service for existing user", function () {
+		it("should set the logged in user in the service for existing user and notify scope that user is logged in", function () {
 			
 			var user = {
 				username: "Joe",
@@ -87,6 +92,8 @@ define([
 			
 			loginController.credentials.username = user.username;
 			loginController.credentials.password = user.password;
+			
+			spyOn($scopeMock, "$emit");
 
 			loginController.logIn();
 			
@@ -94,6 +101,8 @@ define([
 
 			expect(userDataServiceMock.loggedInUser).toHaveBeenCalled();
 			expect(userDataServiceMock.loggedInUser.calls.argsFor(0)).toEqual([user]);
+
+			expect($scopeMock.$emit).toHaveBeenCalled();
 		});
 
 		it("should show error message for user who doesn't exist", function () {
@@ -117,6 +126,16 @@ define([
 			
 			expect(userDataServiceMock.loggedInUser).not.toHaveBeenCalled();
 			expect(loginController.errorMessage).toBe("Wrong username and/or password");
+		});
+
+		it("should redirect user to register page", function () { 
+			
+			spyOn($locationMock, "path");
+
+			loginController.register();
+
+			expect($locationMock.path).toHaveBeenCalled();
+			expect($locationMock.path.calls.argsFor(0)).toEqual(["/user/register"]);
 		});
 	});
 });

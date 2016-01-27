@@ -30,11 +30,16 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="data\user\session.model.js" />
     <Compile Include="data\user\user.model.js" />
+    <Compile Include="data\user\session.queries.js" />
     <Compile Include="data\user\user.queries.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="passport\passport.utilities.js" />
     <Compile Include="passport\passport.init.js" />
+    <Compile Include="public\app\main\session.resource.service.js" />
+    <Compile Include="public\app\main\newsession.controller.js" />
+    <Compile Include="public\app\main\main.routes.js" />
     <Compile Include="public\app\require.main.js" />
     <Compile Include="public\app\app.init.js" />
     <Compile Include="public\app\main\home.controller.js" />
@@ -42,10 +47,12 @@
     <Compile Include="public\app\users\login.controller.js" />
     <Compile Include="public\app\users\profile.controller.js" />
     <Compile Include="public\app\users\register.controller.js" />
+    <Compile Include="public\app\users\tests\newsession.controller.spec.js" />
     <Compile Include="public\app\users\tests\login.controller.spec.js" />
     <Compile Include="public\app\users\user.data.service.js" />
     <Compile Include="public\app\users\user.resource.service.js" />
     <Compile Include="public\app\users\users.module.js" />
+    <Compile Include="routes\routes.session.js" />
     <Compile Include="routes\routes.user.js" />
     <Compile Include="routes\routes.index.js" />
     <Compile Include="server.js" />
@@ -54,6 +61,7 @@
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
+    <Content Include="public\app\main\new-session.html" />
     <Content Include="public\app\main\home.html" />
     <Content Include="public\app\users\login.html" />
     <Content Include="public\app\users\profile.html" />

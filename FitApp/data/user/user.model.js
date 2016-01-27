@@ -1,6 +1,7 @@
 ﻿
 var mongoose = require("mongoose"),
-	Schema = mongoose.Schema;
+	Schema	 = mongoose.Schema,
+	Session  = require("../session.model.js");
 
 var User = mongoose.model("User", {
 	id: String,
@@ -10,7 +11,8 @@ var User = mongoose.model("User", {
 	lastname: String,
 	email: String,
 	gender: Number,
-	birthdate: Date
+	birthdate: Date,
+	sessions: [Session.SessionSchema]
 });
 
 module.exports = User;

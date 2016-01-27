@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function LoginController($http, $location, userDataService) { 
+		function LoginController($scope, $http, $location, userDataService) {  
 		
 			var vm = this;    
 		 
@@ -32,9 +32,9 @@ define([],
 					$http.post("/user/login", vm.credentials)
 						.success(function (user) {
 							if (user) {
-								// $location.path("/home");
-
 								userDataService.loggedInUser(user);
+							
+								$scope.$emit("USER_LOGGED_IN");
 							}
 							else
 								vm.errorMessage = "Wrong username and/or password";
@@ -45,7 +45,7 @@ define([],
 			} 
 		
 			function register () {
-				$location.path("/register");
+				$location.path("/user/register");
 			};
 		}
 

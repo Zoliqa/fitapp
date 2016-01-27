@@ -9,6 +9,6 @@ define([],
 			this.message = "Welcome home " + userDataService.loggedInUser().username;
 		}
 
-		return HomeController;
+		return HomeController; 
 	}
 );

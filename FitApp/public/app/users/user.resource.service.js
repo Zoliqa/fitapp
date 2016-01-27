@@ -1,6 +1,5 @@
 ﻿
-define([], 
-	function () { 
+define([], function () { 
 
 		function userResourceService($resource) {
 			

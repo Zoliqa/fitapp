@@ -7,8 +7,7 @@ var express				= require("express"),
 
 function init() {
 	router.post("/login", function (req, res, next) {
-		console.log(req.body.username);
-
+		
 		userQueries.find({ username: req.body.username }, function (err, user) {
 			if (err)
 				return next(err);

@@ -2,31 +2,29 @@
 define([
 	"angular", 
 	"angularRoute", 
-	"public/app/main/home.controller",
-	"public/app/users/users.module"], 
-	function (angular, angularRoute, HomeController, usersModule) { 
-
-		angular.module("main", ["ngRoute", "users"])
+	"app/main/main.routes",
+	"app/main/home.controller",
+	"app/main/newsession.controller",
+	"app/main/session.resource.service"], 
+	function (angular, 
+			  angularRoute, 
+			  mainRoutes, 
+			  HomeController, 
+			  NewSessionController,
+			  sessionResourceService) {
+	
+		angular.module("main", ["ngRoute"])
 			.controller("HomeController", HomeController)
-			.config(function ($routeProvider) { 
-
-				$routeProvider
-					.when("/home", {
-						templateUrl: "/public/app/main/home.html",
-						controller: "HomeController",
-						controllerAs: "vm"
-					})
-					.otherwise({
-						redirectTo: "/user/login"
-					});
-			})
-			.run(function ($rootScope, $location, userDataService) {
+			.controller("NewSessionController", NewSessionController)
+			.factory("sessionResourceService", sessionResourceService)
+			.config(function ($routeProvider) {
 		
-				$rootScope.$watch(function () { 
-					return userDataService.loggedInUser();
-				}, function (user) { 
-					if (user) 
-						$location.path("/home");
+				mainRoutes($routeProvider);
+			})
+			.run(function ($rootScope, $location) {
+		
+				$rootScope.$on("USER_LOGGED_IN", function (event, data) { 
+					$location.path("/home");
 				});
 			});
 	}
