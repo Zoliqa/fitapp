@@ -24,15 +24,15 @@ function create(userId, session, next) {
 	});
 }
 
-function update(userId, sessionId, session, next) {
-	var newSession = new Session(session);
+function update(userId, session, next) {
+	//var newSession = new Session(session);
 	
 	//if (!sessionId)
 	//	newSession.id = mongoose.Types.ObjectId();
 
 	User.findOneAndUpdate({
 		_id: userId, 
-		"sessions.id": sessionId
+		"sessions.id": session.id
 	}, {
 		$set: {
 			"session.$": session

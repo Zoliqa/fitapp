@@ -8,10 +8,9 @@ define(["underscore"],
 		
 			this.newSession = {
 				date: new Date(),
-				group: "",
+				selectedGroups: [],
 				notes: "",
-				location: "",
-				selectedGroups: []
+				location: ""
 			};
 			this.dateOptions = { formatYear: 'yy', startingDay: 1 };
 			this.datePickerIsOpened = false;

@@ -1,7 +1,7 @@
 ﻿
 var mongoose = require("mongoose"),
 	Schema	 = mongoose.Schema,
-	Session  = require("../session.model.js");
+	Session  = require("./session.model.js");
 
 var User = mongoose.model("User", {
 	id: String,

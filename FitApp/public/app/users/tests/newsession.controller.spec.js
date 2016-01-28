@@ -7,7 +7,12 @@ define([
 	
 	describe("HomeController", function () {
 		
-		var $controller, $httpBackend, newSessionController, $locationMock, userDataServiceMock;
+		var $controller, 
+			$httpBackend, 
+			newSessionController, 
+			$locationMock, 
+			userDataServiceMock,
+			sessionResourceServiceMock;
 		
 		beforeEach(module("main"));
 		
@@ -35,9 +40,11 @@ define([
 				}
 			};
 			
+			sessionResourceServiceMock = {};
+
 			newSessionController = $controller("NewSessionController", {
-				$location: $locationMock
-				// userDataService: userDataServiceMock
+				$location: $locationMock,
+				sessionResourceService: sessionResourceServiceMock
 			});
 		}));
 
@@ -45,7 +52,7 @@ define([
 			expect(newSessionController).toBeDefined();
 		});
 
-		it("should redirect user to new session page", function () {
+		it("should create new session", function () {
 			
 			
 		});
