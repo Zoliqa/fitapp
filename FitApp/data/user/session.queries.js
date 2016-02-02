@@ -24,6 +24,22 @@ function create(userId, session, next) {
 	});
 }
 
+function findActiveSession(userId, next) {
+	User.findOne({
+		_id: userId,
+		"sessions.endDate": null
+	},
+	"sessions.$",
+	function (err, user) {
+		console.log("found session: " + (user && JSON.stringify(user.sessions[0]) || "null"));
+
+		if (err)
+			return next(err);
+		
+		return next(null, user && user.sessions[0]);
+	});
+}
+
 function update(userId, session, next) {
 	//var newSession = new Session(session);
 	
@@ -67,6 +83,7 @@ function remove(userId, sessionId, next) {
 
 module.exports = {
 	create: create,
+	findActiveSession: findActiveSession,
 	update: update,
 	remove: remove
 };

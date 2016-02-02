@@ -9,7 +9,7 @@ define([], function () {
 					url: "/user/logout",
 					method: "GET"
 				},
-				"profile": {
+				"getProfile": {
 					url: "/user/profile",
 					method: "GET"
 				}

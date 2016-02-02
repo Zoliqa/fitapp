@@ -37,6 +37,7 @@
     <Compile Include="gruntfile.js" />
     <Compile Include="passport\passport.utilities.js" />
     <Compile Include="passport\passport.init.js" />
+    <Compile Include="public\app\main\editsession.controller.js" />
     <Compile Include="public\app\main\session.resource.service.js" />
     <Compile Include="public\app\main\newsession.controller.js" />
     <Compile Include="public\app\main\main.routes.js" />
@@ -61,6 +62,7 @@
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
+    <Content Include="public\app\main\edit-session.html" />
     <Content Include="public\app\main\new-session.html" />
     <Content Include="public\app\main\home.html" />
     <Content Include="public\app\users\login.html" />

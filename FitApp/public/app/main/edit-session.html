@@ -1,0 +1,33 @@
+﻿<div id="edit-session">
+    <div class="page-header">
+        <h3 class="">Edit session </h3>
+    </div>
+
+    <!--<div class="form-group" ng-class="{ 'has-error': false }">
+        <label>Date</label>
+
+        <p class="input-group">
+            <input type="text"
+                    class="form-control input-lg"
+                    uib-datepicker-popup="longDate"
+                    ng-model="vm.newSession.startDate"
+                    is-open="vm.datePickerIsOpened"
+                    datepicker-options="dateOptions"
+                    ng-required="true"
+                    close-text="Close"
+                    disabled="disabled" />
+            <span class="input-group-btn">
+                <button type="button"
+                        class="btn btn-default btn-lg"
+                        ng-click="vm.datePickerIsOpened = !vm.datePickerIsOpened">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>-->
+
+    <div class="form-group text-right">
+        <button class="btn btn-primary btn-lg" ng-click="vm.saveSession()">Start</button>
+        <button class="btn btn-primary btn-lg" ng-click="vm.cancelEditSession()">Cancel</button>
+    </div>
+</div>

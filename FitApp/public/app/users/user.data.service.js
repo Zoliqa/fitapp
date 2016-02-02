@@ -3,7 +3,7 @@ define([],
 	function () { 
 
 		function userDataService() {
-			var _user = {};
+			var _user = null;
 			var service = {
 				loggedInUser: loggedInUser
 			};

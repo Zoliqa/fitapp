@@ -10,7 +10,7 @@
             <input type="text"
                     class="form-control input-lg"
                     uib-datepicker-popup="longDate"
-                    ng-model="vm.newSession.date"
+                    ng-model="vm.newSession.startDate"
                     is-open="vm.datePickerIsOpened"
                     datepicker-options="dateOptions"
                     ng-required="true"
@@ -31,7 +31,7 @@
 
         <div class="start-time">
             <div class="pull-left">
-                <uib-timepicker ng-model="vm.newSession.date"></uib-timepicker>
+                <uib-timepicker ng-model="vm.newSession.startDate"></uib-timepicker>
             </div>
 
             <button type="button"

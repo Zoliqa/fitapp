@@ -4,7 +4,8 @@ var mongoose = require("mongoose"),
 
 var SessionSchema = {
 	id: String,
-	date: Date,
+	startDate: Date,
+	endDate: Date,
 	selectedGroups: [Number],
 	notes: String,
 	location: String

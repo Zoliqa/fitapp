@@ -25,28 +25,38 @@ define([
 			.controller("ProfileController", ProfileController)
 			.factory("userResourceService", userResourceService)
 			.factory("userDataService", userDataService)
-			.config(function ($provide, $routeProvider) { 
-				$provide.value("bcrypt", bcrypt);
+			.config(myconfig)
+			.run(function (userResourceService, userDataService) { 
 
-				$routeProvider
-					.when("/user/login", {
-						templateUrl: "/public/app/users/login.html",
-						controller: "LoginController",
-						controllerAs: "vm"
-					})
-					.when("/user/register", {
-						templateUrl: "/public/app/users/register.html",
-						controller: "RegisterController",
-						controllerAs: "vm"
-					})
-					.when("/user/profile", {
-						templateUrl: "/public/app/users/profile.html",
-						controller: "ProfileController",
-						controllerAs: "vm"
-					})
-					.otherwise({
-						redirectTo: "/user/login"
-					});
+				//userResourceService.getProfile(function (user) { 
+				//	userDataService.loggedInUser(user.id && user);
+				//});
 			});
+	
+		myconfig.$inject = ["$provide", "$routeProvider"];
+
+		function myconfig($provide, $routeProvider) {
+			$provide.value("bcrypt", bcrypt);
+		
+			$routeProvider
+				.when("/user/login", {
+					templateUrl: "/public/app/users/login.html",
+					controller: "LoginController",
+					controllerAs: "vm"
+				})
+				.when("/user/register", {
+					templateUrl: "/public/app/users/register.html",
+					controller: "RegisterController",
+					controllerAs: "vm"
+				})
+				.when("/user/profile", {
+					templateUrl: "/public/app/users/profile.html",
+					controller: "ProfileController",
+					controllerAs: "vm"
+				})
+				.otherwise({
+					redirectTo: "/user/login"
+				});
+		}
 	}
 );
