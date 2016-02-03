@@ -6,39 +6,34 @@ define([
 	"app/main/home.controller",
 	"app/main/newsession.controller",
 	"app/main/editsession.controller",
-	"app/main/session.resource.service"], 
+	"app/main/session.service"], 
 	function (angular, 
 			  angularRoute, 
 			  mainRoutes, 
 			  HomeController, 
 			  NewSessionController,
 			  EditSessionController,
-			  sessionResourceService) {
+			  SessionService) {
 	
 		angular.module("main", ["ngRoute"])
 			.controller("HomeController", HomeController)
 			.controller("NewSessionController", NewSessionController)
 			.controller("EditSessionController", EditSessionController)
-			.factory("sessionResourceService", sessionResourceService)
+			.factory("SessionService", SessionService)
 			.config(function ($routeProvider) {
 		
 				mainRoutes($routeProvider);
 			})
-			.run(function ($rootScope, $location, userResourceService, userDataService) {
+			.run(function ($rootScope, $location) {
 		
 				$rootScope.$on("USER_LOGGED_IN", function (event, data) { 
 					$location.path("/home");
 				});
 
-				$rootScope.$on("$routeChangeStart", function (event, next) {
-			
-					if (!userDataService.loggedInUser())
-						userResourceService.getProfile(function (user) {
-							if (!user._id)
-								$location.path("/user/login");
-							else
-								userDataService.loggedInUser(user);
-						});
+				$rootScope.$on("$routeChangeError", function (evt, current, previous, rejection) {
+					if (rejection == "UNAUTHORIZED") {
+						$location.path("/user/login");
+					}
 				});
 			});
 	}

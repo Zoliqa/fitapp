@@ -6,23 +6,22 @@ var express		   = require("express"),
 	_			   = require("../public/lib/underscore/underscore");  
 
 function init() {
-	router.get("/activesession", utilities.isAuthenticated, function (req, res, next) {
-		sessionQueries.findActiveSession(req.user._id, function (err, session) {
-			if (err)
-				return next(err);
-			
-			return res.json(session);
-		});
-	});
-
 	router.get("/(:id)?", utilities.isAuthenticated, function (req, res, next) {
-		if (!req.params.id)
-			return res.json(req.user.sessions);
+		
+		if (!req.params.id) { 
+			if (req.query.active === "true")
+				sessionQueries.findActiveSession(req.user._id, function (err, session) {
+					if (err)
+						return next(err);
+					
+					return res.json(session);
+				});
+		}
 		else {
 			var session = _.find(req.user.sessions, function (session) {
-				return session.id == req.params.id; 
+				return session.id == req.params.id;
 			});
-
+				
 			return res.json(session);
 		}
 	});

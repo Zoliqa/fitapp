@@ -2,7 +2,7 @@
 define(["underscore"], 
 	function (_) { 
 
-		function NewSessionController(sessionResourceService) {
+		function NewSessionController(SessionService) {
 			
 			var vm = this;
 		
@@ -42,7 +42,7 @@ define(["underscore"],
 			
 				console.log(vm.newSession.selectedGroups);
 
-				sessionResourceService.save(vm.newSession);
+				SessionService.save(vm.newSession);
 			};
 		
 			function cancel() {

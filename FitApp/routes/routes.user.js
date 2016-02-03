@@ -37,7 +37,7 @@ function init() {
 		res.json({});
 	});
 	
-	router.get("/profile", function (req, res, next) {
+	router.get("/", function (req, res, next) {
 		if (req.isAuthenticated())
 			return res.json(req.user);
 		

@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function LoginController($scope, $http, $location, userDataService) {  
+		function LoginController($scope, $http, $location) {  
 		
 			var vm = this;    
 		 
@@ -32,7 +32,7 @@ define([],
 					$http.post("/user/login", vm.credentials)
 						.success(function (user) {
 							if (user) {
-								userDataService.loggedInUser(user);
+								// userDataService.loggedInUser(user);
 							
 								$scope.$emit("USER_LOGGED_IN");
 							}

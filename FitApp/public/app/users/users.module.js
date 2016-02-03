@@ -7,8 +7,7 @@ define([
 	"app/users/login.controller",
 	"app/users/register.controller",
 	"app/users/profile.controller",
-	"app/users/user.resource.service",
-	"app/users/user.data.service"], 
+	"app/users/user.service"], 
 	function (angular, 
 			  angularRoute, 
 			  angularResource, 
@@ -16,21 +15,20 @@ define([
 			  LoginController, 
 			  RegisterController,
 			  ProfileController, 
-			  userResourceService, 
-			  userDataService) { 
+			  UserService) { 
 
-		angular.module("users", ["ngRoute", "ngResource"])
+	angular.module("users", ["ngRoute", "ngResource"])
 			.controller("LoginController", LoginController)
 			.controller("RegisterController", RegisterController)
 			.controller("ProfileController", ProfileController)
-			.factory("userResourceService", userResourceService)
-			.factory("userDataService", userDataService)
+			.factory("UserService", UserService)
 			.config(myconfig)
-			.run(function (userResourceService, userDataService) { 
+			.run(function ($rootScope, UserService) { 
 
-				//userResourceService.getProfile(function (user) { 
-				//	userDataService.loggedInUser(user.id && user);
-				//});
+				UserService.get(function (user) { 
+					if (user._id)
+						$rootScope.$emit("USER_LOGGED_IN");
+				});
 			});
 	
 		myconfig.$inject = ["$provide", "$routeProvider"];

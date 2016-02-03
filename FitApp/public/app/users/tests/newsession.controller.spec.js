@@ -5,7 +5,7 @@ define([
 	], 
 	function (angularMocks, mainModule) {
 	
-	describe("HomeController", function () {
+	describe("NewSessionController", function () {
 		
 		var $controller, 
 			$httpBackend, 
@@ -48,7 +48,7 @@ define([
 			});
 		}));
 
-		it("should create the HomeController", function () { 
+		it("should create the NewSessionController", function () { 
 			expect(newSessionController).toBeDefined();
 		});
 

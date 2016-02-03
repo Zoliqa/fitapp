@@ -2,12 +2,16 @@
 define([], 
 	function () { 
 
-		function HomeController($scope, userDataService, sessionResourceService) {
+		function HomeController($scope, SessionService, UserService) {
 			
 			var vm = this;
 		
-			this.message = "Welcome home " + (userDataService.loggedInUser() && userDataService.loggedInUser().username || "not logged in");
-			this.activeSession = sessionResourceService.getActiveSession();
+			// this.message = "Welcome home " + userDataService.loggedInUser().username;
+			this.activeSession = SessionService.get({ active: true });
+
+			UserService.get(function (user) { 
+				vm.message = "Welcome home " + user.username;
+			});
 		}
 
 		return HomeController; 

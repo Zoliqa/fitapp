@@ -1,16 +1,13 @@
 ﻿
 define([], function () { 
 
-		function userResourceService($resource) {
+		function UserService($resource) {
 			
 			var resource = $resource("/user/:id", null, {
+				//"get": { cache: true },
 				"update": { method: "PUT" },
 				"logout": {
 					url: "/user/logout",
-					method: "GET"
-				},
-				"getProfile": {
-					url: "/user/profile",
 					method: "GET"
 				}
 			});
@@ -18,6 +15,6 @@ define([], function () {
 			return resource;
 		}
 
-		return userResourceService;
+		return UserService;
 	}
 );
