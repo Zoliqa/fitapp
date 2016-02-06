@@ -7,7 +7,8 @@ define([
 	"app/users/login.controller",
 	"app/users/register.controller",
 	"app/users/profile.controller",
-	"app/users/user.service"], 
+	"app/users/user.service",
+	"app/users/cache.service"], 
 	function (angular, 
 			  angularRoute, 
 			  angularResource, 
@@ -15,13 +16,15 @@ define([
 			  LoginController, 
 			  RegisterController,
 			  ProfileController, 
-			  UserService) { 
+			  UserService,
+			  CacheService) { 
 
 	angular.module("users", ["ngRoute", "ngResource"])
 			.controller("LoginController", LoginController)
 			.controller("RegisterController", RegisterController)
 			.controller("ProfileController", ProfileController)
 			.factory("UserService", UserService)
+			.factory('CacheService', CacheService)
 			.config(myconfig)
 			.run(function ($rootScope, UserService) { 
 

@@ -50,7 +50,7 @@
     <Compile Include="public\app\users\register.controller.js" />
     <Compile Include="public\app\users\tests\newsession.controller.spec.js" />
     <Compile Include="public\app\users\tests\login.controller.spec.js" />
-    <Compile Include="public\app\users\user.data.service.js" />
+    <Compile Include="public\app\users\cache.service.js" />
     <Compile Include="public\app\users\user.service.js" />
     <Compile Include="public\app\users\users.module.js" />
     <Compile Include="routes\routes.session.js" />
