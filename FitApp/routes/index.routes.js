@@ -9,11 +9,11 @@ function init(app, passport) {
 	
 	app.use("/", router);
 	
-	var routesUser = require("./routes.user")(passport);
-	app.use("/user", routesUser);
+	var userRoutes = require("./user.routes");
+	app.use("/user", userRoutes);
 
-	var routesSession = require("./routes.session")(passport);
-	app.use("/session", routesSession);
+	var sessionRoutes = require("./session.routes");
+	app.use("/session", sessionRoutes);
 }
 
 module.exports = init;

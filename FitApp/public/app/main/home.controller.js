@@ -6,7 +6,6 @@ define([],
 			
 			var vm = this;
 		
-			// this.message = "Welcome home " + userDataService.loggedInUser().username;
 			this.activeSession = SessionService.get({ active: true });
 
 			UserService.get(function (user) { 

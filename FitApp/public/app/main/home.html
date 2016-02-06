@@ -3,12 +3,12 @@
 
     <div class="row">
         <div class="col-xs-4 col-xs-offset-2">
-            <a href="#/newsession" class="btn btn-primary btn-lg btn-block" ng-if="!vm.activeSession.id">
+            <a href="#/newsession" class="btn btn-primary btn-lg btn-block" ng-if="!vm.activeSession._id">
                 <div>
                     New session
                 </div>
             </a>
-            <a href="#/editsession" class="btn btn-primary btn-lg btn-block" ng-if="!!vm.activeSession.id">
+            <a href="#/editsession" class="btn btn-success btn-lg btn-block" ng-if="!!vm.activeSession._id">
                 <div>
                     Edit session
                 </div>

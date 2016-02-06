@@ -1,33 +1,64 @@
 ﻿<div id="edit-session">
     <div class="page-header">
-        <h3 class="">Edit session </h3>
+        <h3 class="">
+            Edit session
+        </h3>
     </div>
 
-    <!--<div class="form-group" ng-class="{ 'has-error': false }">
-        <label>Date</label>
+    <div class="session-info">
+        <p class="bg-info">Started: {{ vm.session.startDate | date: "short" }}</p>
+        <p class="bg-info">Groups: {{ vm.formatGroups() }}</p>
+        <p class="bg-info">Notes: {{ vm.session.notes }}</p>
+        <p class="bg-info">Location: {{ vm.session.location }}</p>
+    </div>
 
-        <p class="input-group">
-            <input type="text"
-                    class="form-control input-lg"
-                    uib-datepicker-popup="longDate"
-                    ng-model="vm.newSession.startDate"
-                    is-open="vm.datePickerIsOpened"
-                    datepicker-options="dateOptions"
-                    ng-required="true"
-                    close-text="Close"
-                    disabled="disabled" />
-            <span class="input-group-btn">
-                <button type="button"
-                        class="btn btn-default btn-lg"
-                        ng-click="vm.datePickerIsOpened = !vm.datePickerIsOpened">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                </button>
-            </span>
-        </p>
+    <button class="btn btn-primary btn-md" ng-click="vm.addExercise()">Add exercise</button>
+
+    <!--<div class="new-exercise">
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Name</label>
+            <input type="text" class="form-control input-md" ng-model="vm.newExercise.name">
+        </div>
+
     </div>-->
 
     <div class="form-group text-right">
-        <button class="btn btn-primary btn-lg" ng-click="vm.saveSession()">Start</button>
-        <button class="btn btn-primary btn-lg" ng-click="vm.cancelEditSession()">Cancel</button>
+        <button class="btn btn-primary btn-lg" ng-click="vm.removeSession()">Remove</button>
     </div>
 </div>
+
+<script type="text/ng-template" id="add-exercise">
+    <div id="add-exercise" class="container-fluid">
+        <div class="page-header">
+            <h4 class="">
+                Add exercise
+            </h4>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': false }">
+            <label>Name</label>
+            <input type="text" class="form-control input-md" ng-model="vm.newExercise.name">
+        </div>
+
+        <div class="form-group">
+            <label>Start time</label>
+
+            <div class="start-time">
+                <div class="pull-left">
+                    <uib-timepicker ng-model="vm.newExercise.startTime"></uib-timepicker>
+                </div>
+
+                <button type="button"
+                        class="btn btn-default btn-lg pull-right"
+                        ng-click="vm.resetStartTime()">
+                    Now
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Notes</label>
+            <textarea rows="3" class="form-control input-lg" ng-model="vm.newExercise.notes"></textarea>
+        </div>
+    </div>
+</script>

@@ -9,13 +9,6 @@ define([],
 					controller: "HomeController",
 					controllerAs: "vm",
 					resolve: {
-						//auth: function ($q, userDataService) { 
-						//	if (userDataService.loggedInUser())
-						//		return true;
-						//	else
-						//		return $q.reject("UNAUTHORIZED");
-						//}
-
 						auth: function ($q, UserService) {
 					
 							return UserService.get().$promise.then(function (user) { 
@@ -32,13 +25,22 @@ define([],
 					controller: "NewSessionController",
 					controllerAs: "vm",
 					resolve: {
-						//auth: function ($q, userDataService) { 
-						//	if (userDataService.loggedInUser())
-						//		return true;
-						//	else
-						//		return $q.reject("UNAUTHORIZED");
-						//}
-
+						auth: function ($q, UserService) {
+					
+							return UserService.get().$promise.then(function (user) {
+								if (user._id)
+									return true;
+						
+								return $q.reject("UNAUTHORIZED");
+							});
+						}
+					}
+				})
+				.when("/editsession", {
+					templateUrl: "/public/app/main/edit-session.html",
+					controller: "EditSessionController",
+					controllerAs: "vm",
+					resolve: {
 						auth: function ($q, UserService) {
 					
 							return UserService.get().$promise.then(function (user) {

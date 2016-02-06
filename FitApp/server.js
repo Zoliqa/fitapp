@@ -6,7 +6,7 @@
 	cookieParser = require("cookie-parser"),
 	mongoose = require("mongoose"),
 	passportInit = require("./passport/passport.init"),
-	routesIndex = require("./routes/routes.index"),
+	indexRoutes = require("./routes/index.routes"),
 	dbUrl = "mongodb://localhost:27017/fitAppDb",
 	app = express();
 
@@ -32,7 +32,7 @@ passportInit(passport);
 
 app.use("/public", express.static(__dirname + "/public"));
 
-routesIndex(app, passport);
+indexRoutes(app, passport);
 
 if (!module.parent) {
 	app.listen(4000);

@@ -21,8 +21,19 @@ define([
 			.controller("EditSessionController", EditSessionController)
 			.factory("SessionService", SessionService)
 			.config(function ($routeProvider) {
-		
 				mainRoutes($routeProvider);
+			})
+			.value("groups", {
+				1: "Chest",
+				2: "Lats",
+				3: "Biceps" ,
+				4: "Triceps",
+				5: "Legs",
+				6: "Shoulders",
+				7: "Traps",
+				8: "Abs",
+				9: "Cardio",
+				10: "Other"
 			})
 			.run(function ($rootScope, $location) {
 		

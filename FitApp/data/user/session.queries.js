@@ -6,7 +6,7 @@ var User	  = require("./user.model"),
 function create(userId, session, next) {
 	var newSession = new Session.Session(session);
 	
-	newSession.id = mongoose.Types.ObjectId();
+	// newSession.id = mongoose.Types.ObjectId();
 
 	User.findOneAndUpdate({
 		_id: userId
@@ -27,12 +27,11 @@ function create(userId, session, next) {
 function findActiveSession(userId, next) {
 	User.findOne({
 		_id: userId,
-		"sessions.endDate": null
+		"sessions.endDate": null,
+		sessions: { $exists: true }
 	},
 	"sessions.$",
 	function (err, user) {
-		console.log("found session: " + (user && JSON.stringify(user.sessions[0]) || "null"));
-
 		if (err)
 			return next(err);
 		
@@ -48,7 +47,7 @@ function update(userId, session, next) {
 
 	User.findOneAndUpdate({
 		_id: userId, 
-		"sessions.id": session.id
+		"sessions.id": session._id
 	}, {
 		$set: {
 			"session.$": session
@@ -70,10 +69,10 @@ function remove(userId, sessionId, next) {
 	}, {
 		$pull: {
 			sessions: {
-				id: sessionId
+				_id: sessionId
 			}
 		}
-	}, function (err, rd) {
+	}, function (err) {
 		if (err)
 			return next(err);
 		

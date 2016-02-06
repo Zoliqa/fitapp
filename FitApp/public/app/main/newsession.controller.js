@@ -2,10 +2,10 @@
 define(["underscore"], 
 	function (_) { 
 
-		function NewSessionController(SessionService) {
-			
+		function NewSessionController($location, SessionService, groups) {
 			var vm = this;
 		
+			this.errorMessage = "";
 			this.newSession = {
 				startDate: new Date(),
 				selectedGroups: [],
@@ -14,18 +14,7 @@ define(["underscore"],
 			};
 			this.dateOptions = { formatYear: 'yy', startingDay: 1 };
 			this.datePickerIsOpened = false;
-			this.groups = [
-				{ id: 1, name: "Chest" },
-				{ id: 2, name: "Lats" },
-				{ id: 3, name: "Biceps" },
-				{ id: 4, name: "Triceps" },
-				{ id: 5, name: "Legs" },
-				{ id: 6, name: "Shoulders" },
-				{ id: 7, name: "Traps" },
-				{ id: 8, name: "Abs" },
-				{ id: 9, name: "Cardio" },
-				{ id: 10, name: "Other" }
-			];
+			this.groups = _.values(_.mapObject(groups, function (val, key) { return { id: key, name: val }; }));
 			this.resetDate = resetDate;
 			this.addSession = addSession;
 			this.cancel = cancel;
@@ -39,10 +28,13 @@ define(["underscore"],
 					if (group.selected)
 						vm.newSession.selectedGroups.push(group.id);
 				})
-			
-				console.log(vm.newSession.selectedGroups);
 
-				SessionService.save(vm.newSession);
+				SessionService.save(vm.newSession, function (session) { 
+					if (session._id)
+						$location.path("/home");
+				}, function () { 
+					vm.errorMessage = "Error occurred saving the session.";	
+				});
 			};
 		
 			function cancel() {

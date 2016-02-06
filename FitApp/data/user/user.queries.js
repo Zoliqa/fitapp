@@ -3,14 +3,14 @@ var User = require('./user.model');
 
 function find(where, next) {
 	if (where)
-		User.findOne(where, function (err, user) {
+		User.findOne(where, { sessions: 0 }, function (err, user) {
 			if (err)
 				return next(err);
 			
 			return next(null, user);
 		});
 	else
-		User.find(function (err, users) {
+		User.find({}, { sessions: 0 }, function (err, users) {
 			if (err)
 				return next(err);
 			

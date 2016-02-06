@@ -49,9 +49,9 @@
 
         <div class="groups btn-group">
             <label class="btn btn-default group"
-                    ng-repeat="group in vm.groups"
-                    ng-model="group.selected"
-                    uib-btn-checkbox>
+                   ng-repeat="group in vm.groups"
+                   ng-model="group.selected"
+                   uib-btn-checkbox>
                 <div class="inner">
                     {{ group.name }}
                 </div>
@@ -73,4 +73,6 @@
         <button class="btn btn-primary btn-lg" ng-click="vm.addSession()">Start</button>
         <button class="btn btn-primary btn-lg" ng-click="vm.cancel()">Cancel</button>
     </div>
+
+    <div class="alert alert-danger" ng-if="!!vm.errorMessage">{{ vm.errorMessage }}</div>
 </div>
