@@ -31,14 +31,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="data\user\session.model.js" />
+    <Compile Include="data\user\exercise.model.js" />
     <Compile Include="data\user\user.model.js" />
     <Compile Include="data\user\session.queries.js" />
+    <Compile Include="data\user\exercise.queries.js" />
     <Compile Include="data\user\user.queries.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="passport\passport.utilities.js" />
     <Compile Include="passport\passport.init.js" />
+    <Compile Include="public\app\main\addexercise.controller.js" />
     <Compile Include="public\app\main\editsession.controller.js" />
     <Compile Include="public\app\main\groups.service.js" />
+    <Compile Include="public\app\main\exercise.service.js" />
+    <Compile Include="public\app\main\musclegroups.service.js" />
     <Compile Include="public\app\main\session.service.js" />
     <Compile Include="public\app\main\newsession.controller.js" />
     <Compile Include="public\app\main\main.routes.js" />
@@ -54,6 +59,7 @@
     <Compile Include="public\app\users\cache.service.js" />
     <Compile Include="public\app\users\user.service.js" />
     <Compile Include="public\app\users\users.module.js" />
+    <Compile Include="routes\exercise.routes.js" />
     <Compile Include="routes\session.routes.js" />
     <Compile Include="routes\user.routes.js" />
     <Compile Include="routes\index.routes.js" />

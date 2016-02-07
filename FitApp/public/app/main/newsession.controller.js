@@ -2,7 +2,7 @@
 define(["underscore"], 
 	function (_) { 
 
-		function NewSessionController($location, SessionService, groups) {
+		function NewSessionController($location, SessionService, MuscleGroupsService) {
 			var vm = this;
 		
 			this.errorMessage = "";
@@ -14,7 +14,7 @@ define(["underscore"],
 			};
 			this.dateOptions = { formatYear: 'yy', startingDay: 1 };
 			this.datePickerIsOpened = false;
-			this.groups = _.values(_.mapObject(groups, function (val, key) { return { id: key, name: val }; }));
+			this.groups = MuscleGroupsService.getAll();
 			this.resetDate = resetDate;
 			this.addSession = addSession;
 			this.cancel = cancel;

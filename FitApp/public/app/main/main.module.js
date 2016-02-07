@@ -6,34 +6,31 @@ define([
 	"app/main/home.controller",
 	"app/main/newsession.controller",
 	"app/main/editsession.controller",
-	"app/main/session.service"], 
+	"app/main/addexercise.controller",
+	"app/main/musclegroups.service",
+	"app/main/session.service",
+	"app/main/exercise.service"], 
 	function (angular, 
 			  angularRoute, 
 			  mainRoutes, 
 			  HomeController, 
 			  NewSessionController,
 			  EditSessionController,
-			  SessionService) {
+			  AddExerciseController,
+			  MuscleGroupsService,
+			  SessionService,
+			  ExerciseService) {
 	
 		angular.module("main", ["ngRoute"])
 			.controller("HomeController", HomeController)
 			.controller("NewSessionController", NewSessionController)
 			.controller("EditSessionController", EditSessionController)
+			.controller("AddExerciseController", AddExerciseController)
 			.factory("SessionService", SessionService)
+			.factory("ExerciseService", ExerciseService)
+			.factory("MuscleGroupsService", MuscleGroupsService)
 			.config(function ($routeProvider) {
 				mainRoutes($routeProvider);
-			})
-			.value("groups", {
-				1: "Chest",
-				2: "Lats",
-				3: "Biceps" ,
-				4: "Triceps",
-				5: "Legs",
-				6: "Shoulders",
-				7: "Traps",
-				8: "Abs",
-				9: "Cardio",
-				10: "Other"
 			})
 			.run(function ($rootScope, $location) {
 		

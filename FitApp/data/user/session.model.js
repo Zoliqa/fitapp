@@ -1,6 +1,7 @@
 ﻿
 var mongoose = require("mongoose"),
-	Schema	 = mongoose.Schema;
+	Schema	 = mongoose.Schema,
+	Exercise = require("./exercise.model");
 
 var SessionSchema = {
 	id: String,
@@ -8,7 +9,8 @@ var SessionSchema = {
 	endDate: Date,
 	selectedGroups: [Number],
 	notes: String,
-	location: String
+	location: String,
+	exercises: [Exercise.ExerciseSchema]
 };
 
 var Session = mongoose.model("Session", SessionSchema);

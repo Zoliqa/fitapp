@@ -6,8 +6,6 @@ var User	  = require("./user.model"),
 function create(userId, session, next) {
 	var newSession = new Session.Session(session);
 	
-	// newSession.id = mongoose.Types.ObjectId();
-
 	User.findOneAndUpdate({
 		_id: userId
 	}, {

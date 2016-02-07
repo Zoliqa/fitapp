@@ -2,11 +2,11 @@
 define(["underscore"], 
 	function (_) { 
 
-		function EditSessionController($location, $uibModal, SessionService, groups) {
-			
+		function EditSessionController($location, $uibModal, MuscleGroupsService, SessionService, ExerciseService) {
 			var vm = this;
 		
 			this.session = SessionService.get({ active: true });
+			this.getMuscleGroupById = MuscleGroupsService.getById;
 			this.removeSession = removeSession;
 			this.formatGroups = formatGroups;
 			this.addExercise = addExercise;
@@ -19,17 +19,25 @@ define(["underscore"],
 		
 			function formatGroups() {
 				return _.reduce(vm.session.selectedGroups, function (memo, groupId) { 
-					return memo + ", " + groups[groupId];
+					return memo + ", " + MuscleGroupsService.getById(groupId).name;
 				}, "").slice(1);
 			}
 
 			function addExercise() {
 				var modal = $uibModal.open({
-					templateUrl: 'add-exercise',
-					size: "md"
+					templateUrl: "start-exercise",
+					size: "md",
+					controller: "AddExerciseController",
+					controllerAs: "vm",
+					resolve: {
+						session: function () {
+							return vm.session;
+						}	
+					}
 				});
 			
-				modal.result.then(function (selectedItem) {
+				modal.result.then(function (newExercise) {
+					console.log(newExercise);
 				}, function () {
 				});
 			}

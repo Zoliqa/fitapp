@@ -14,6 +14,9 @@ function init(app, passport) {
 
 	var sessionRoutes = require("./session.routes");
 	app.use("/session", sessionRoutes);
+
+	var exerciseRoutes = require("./exercise.routes");
+	app.use("/exercise", exerciseRoutes);
 }
 
 module.exports = init;
