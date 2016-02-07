@@ -25,7 +25,7 @@ define(["underscore"],
 
 			function addExercise() {
 				var modal = $uibModal.open({
-					templateUrl: "start-exercise",
+					templateUrl: "/public/app/main/add-exercise.html",
 					size: "md",
 					controller: "AddExerciseController",
 					controllerAs: "vm",
@@ -36,8 +36,8 @@ define(["underscore"],
 					}
 				});
 			
-				modal.result.then(function (newExercise) {
-					console.log(newExercise);
+				modal.result.then(function (exercise) {
+					vm.session.exercises.push(exercise);
 				}, function () {
 				});
 			}

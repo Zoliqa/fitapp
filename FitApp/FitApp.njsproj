@@ -69,6 +69,7 @@
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
+    <Content Include="public\app\main\add-exercise.html" />
     <Content Include="public\app\main\edit-session.html" />
     <Content Include="public\app\main\new-session.html" />
     <Content Include="public\app\main\home.html" />
