@@ -1,7 +1,7 @@
 ﻿
 var mongoose = require("mongoose"),
 	Schema	 = mongoose.Schema,
-	Session  = require("./session.model.js");
+	Workout  = require("./workout.model.js");
 
 var User = mongoose.model("User", {
 	id: String,
@@ -12,7 +12,7 @@ var User = mongoose.model("User", {
 	email: String,
 	gender: Number,
 	birthdate: Date,
-	sessions: [Session.SessionSchema]
+	workouts: [Workout.WorkoutSchema]
 });
 
 module.exports = User;

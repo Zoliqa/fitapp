@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function CacheService($cacheFactory) {
+		function cacheService($cacheFactory) {
 			var $httpDefaultCache = $cacheFactory.get('$http');
 		
 			return {
@@ -12,6 +12,6 @@ define([],
 			}
 		}
 
-		return CacheService;
+		return cacheService;
 	}
 );

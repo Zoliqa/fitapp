@@ -1,25 +1,25 @@
-﻿<div id="edit-session">
+﻿<div id="edit-workout">
     <div class="page-header">
         <h3 class="">
-            Edit session
+            Edit workout
         </h3>
     </div>
 
     <div class="session-info">
-        <p class="bg-info">Started: {{ vm.session.startDate | date: "short" }}</p>
+        <p class="bg-info">Started: {{ vm.workout.startDate | date: "short" }}</p>
         <p class="bg-info">Groups: {{ vm.formatGroups() }}</p>
-        <p class="bg-info">Notes: {{ vm.session.notes }}</p>
-        <p class="bg-info">Location: {{ vm.session.location }}</p>
+        <p class="bg-info">Notes: {{ vm.workout.notes }}</p>
+        <p class="bg-info">Location: {{ vm.workout.location }}</p>
     </div>
 
     <button class="btn btn-primary btn-md" ng-click="vm.addExercise()">Add exercise</button>
 
-    <div class="panel panel-default" ng-if="vm.session.exercises.length > 0">
+    <div class="panel panel-default" ng-if="vm.workout.exercises.length > 0">
         <div class="panel-heading">Exercises</div>
         <div class="panel-body">
 
             <uib-tabset vertical="true" type="pills">
-                <uib-tab ng-repeat="exercise in vm.session.exercises" heading="{{ exercise.name }}">
+                <uib-tab ng-repeat="exercise in vm.workout.exercises" heading="{{ exercise.name }}">
                     Content...
                 </uib-tab>
             </uib-tabset>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group text-right">
-        <button class="btn btn-primary btn-lg" ng-click="vm.removeSession()">Remove</button>
+        <button class="btn btn-primary btn-lg" ng-click="vm.removeWorkout()">Remove</button>
     </div>
 </div>
 

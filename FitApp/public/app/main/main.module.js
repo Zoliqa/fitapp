@@ -4,31 +4,31 @@ define([
 	"angularRoute", 
 	"app/main/main.routes",
 	"app/main/home.controller",
-	"app/main/newsession.controller",
-	"app/main/editsession.controller",
+	"app/main/newworkout.controller",
+	"app/main/editworkout.controller",
 	"app/main/addexercise.controller",
 	"app/main/musclegroups.service",
-	"app/main/session.service",
+	"app/main/workout.service",
 	"app/main/exercise.service"], 
 	function (angular, 
 			  angularRoute, 
 			  mainRoutes, 
 			  HomeController, 
-			  NewSessionController,
-			  EditSessionController,
+			  NewWorkoutController,
+			  EditWorkoutController,
 			  AddExerciseController,
-			  MuscleGroupsService,
-			  SessionService,
-			  ExerciseService) {
+			  muscleGroupsService,
+			  workoutService,
+			  exerciseService) {
 	
 		angular.module("main", ["ngRoute"])
 			.controller("HomeController", HomeController)
-			.controller("NewSessionController", NewSessionController)
-			.controller("EditSessionController", EditSessionController)
+			.controller("NewWorkoutController", NewWorkoutController)
+			.controller("EditWorkoutController", EditWorkoutController)
 			.controller("AddExerciseController", AddExerciseController)
-			.factory("SessionService", SessionService)
-			.factory("ExerciseService", ExerciseService)
-			.factory("MuscleGroupsService", MuscleGroupsService)
+			.factory("muscleGroupsService", muscleGroupsService)
+			.factory("workoutService", workoutService)
+			.factory("exerciseService", exerciseService)
 			.config(function ($routeProvider) {
 				mainRoutes($routeProvider);
 			})

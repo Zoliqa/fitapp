@@ -30,22 +30,21 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="data\user\session.model.js" />
     <Compile Include="data\user\exercise.model.js" />
     <Compile Include="data\user\user.model.js" />
-    <Compile Include="data\user\session.queries.js" />
     <Compile Include="data\user\exercise.queries.js" />
     <Compile Include="data\user\user.queries.js" />
+    <Compile Include="data\user\workout.model.js" />
+    <Compile Include="data\user\workout.queries.js" />
     <Compile Include="gruntfile.js" />
     <Compile Include="passport\passport.utilities.js" />
     <Compile Include="passport\passport.init.js" />
     <Compile Include="public\app\main\addexercise.controller.js" />
-    <Compile Include="public\app\main\editsession.controller.js" />
-    <Compile Include="public\app\main\groups.service.js" />
+    <Compile Include="public\app\main\editworkout.controller.js" />
     <Compile Include="public\app\main\exercise.service.js" />
     <Compile Include="public\app\main\musclegroups.service.js" />
-    <Compile Include="public\app\main\session.service.js" />
-    <Compile Include="public\app\main\newsession.controller.js" />
+    <Compile Include="public\app\main\workout.service.js" />
+    <Compile Include="public\app\main\newworkout.controller.js" />
     <Compile Include="public\app\main\main.routes.js" />
     <Compile Include="public\app\require.main.js" />
     <Compile Include="public\app\app.init.js" />
@@ -60,7 +59,6 @@
     <Compile Include="public\app\users\user.service.js" />
     <Compile Include="public\app\users\users.module.js" />
     <Compile Include="routes\exercise.routes.js" />
-    <Compile Include="routes\session.routes.js" />
     <Compile Include="routes\user.routes.js" />
     <Compile Include="routes\index.routes.js" />
     <Compile Include="server.js" />
@@ -70,8 +68,8 @@
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="public\app\main\add-exercise.html" />
-    <Content Include="public\app\main\edit-session.html" />
-    <Content Include="public\app\main\new-session.html" />
+    <Content Include="public\app\main\edit-workout.html" />
+    <Content Include="public\app\main\new-workout.html" />
     <Content Include="public\app\main\home.html" />
     <Content Include="public\app\users\login.html" />
     <Content Include="public\app\users\profile.html" />

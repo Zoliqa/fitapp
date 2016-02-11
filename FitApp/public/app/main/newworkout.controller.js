@@ -2,11 +2,11 @@
 define(["underscore"], 
 	function (_) { 
 
-		function NewSessionController($location, SessionService, MuscleGroupsService) {
+		function NewWorkoutController($location, workoutService, muscleGroupsService, cacheService) {
 			var vm = this;
 		
 			this.errorMessage = "";
-			this.newSession = {
+			this.workout = {
 				startDate: new Date(),
 				selectedGroups: [],
 				notes: "",
@@ -14,24 +14,27 @@ define(["underscore"],
 			};
 			this.dateOptions = { formatYear: 'yy', startingDay: 1 };
 			this.datePickerIsOpened = false;
-			this.groups = MuscleGroupsService.getAll();
+			this.groups = muscleGroupsService.getAll();
 			this.resetDate = resetDate;
 			this.addSession = addSession;
 			this.cancel = cancel;
 
 			function resetDate () {
-				vm.newSession.startDate = new Date();
+				vm.workout.startDate = new Date();
 			}
 		
 			function addSession() {
 				_.each(vm.groups, function (group) {
 					if (group.selected)
-						vm.newSession.selectedGroups.push(group.id);
+						vm.workout.selectedGroups.push(group.id);
 				})
 
-				SessionService.save(vm.newSession, function (session) { 
-					if (session._id)
+				workoutService.save(vm.workout, function (session) { 
+					if (session._id) {
 						$location.path("/home");
+					
+						cacheService.invalidate("/user");
+					}
 				}, function () { 
 					vm.errorMessage = "Error occurred saving the session.";	
 				});
@@ -42,7 +45,7 @@ define(["underscore"],
 			}
 		}
 
-		return NewSessionController;
+		return NewWorkoutController;
 	}
 );
 

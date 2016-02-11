@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function LoginController($scope, $http, $location, CacheService) {  
+		function LoginController($scope, $http, $location, cacheService) {  
 		
 			var vm = this;    
 		 
@@ -36,7 +36,7 @@ define([],
 							else
 								vm.errorMessage = "Wrong username and/or password";
 
-							CacheService.invalidate("/user");
+							cacheService.invalidate("/user");
 						});
 				}
 				else

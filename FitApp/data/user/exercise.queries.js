@@ -16,10 +16,10 @@ function create(userId, exercise, next) {
 	
 	User.findOneAndUpdate({
 		_id: userId,
-		"sessions.endDate": null
+		"workouts.endDate": null
 	}, {
 		$push: {
-			"sessions.$.exercises": newExercise
+			"workouts.$.exercises": newExercise
 		}
 	}, {
 		new: true

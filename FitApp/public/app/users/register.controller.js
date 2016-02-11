@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function RegisterController($location, bcrypt, userResourceService) {
+		function RegisterController($location, bcrypt, userService) {
 		
 			var vm = this;
 
@@ -34,7 +34,7 @@ define([],
 				var salt = bcrypt.genSaltSync(10);
 				vm.user.password = bcrypt.hashSync(vm.user.password, salt);
 			
-				userResourceService.save(vm.user, function (user) {
+				userService.save(vm.user, function (user) {
 					$location.path("/login").search("username", user.username);
 				});
 			};

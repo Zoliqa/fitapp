@@ -9,9 +9,9 @@ define([],
 					controller: "HomeController",
 					controllerAs: "vm",
 					resolve: {
-						auth: function ($q, UserService) {
+						auth: function ($q, userService) {
 					
-							return UserService.get().$promise.then(function (user) { 
+							return userService.get().$promise.then(function (user) { 
 								if (user._id)
 									return true;
 						
@@ -20,14 +20,14 @@ define([],
 						}
 					}
 				})
-				.when("/newsession", {
-					templateUrl: "/public/app/main/new-session.html",
-					controller: "NewSessionController",
+				.when("/newworkout", {
+					templateUrl: "/public/app/main/new-workout.html",
+					controller: "NewWorkoutController",
 					controllerAs: "vm",
 					resolve: {
-						auth: function ($q, UserService) {
+						auth: function ($q, userService) {
 					
-							return UserService.get().$promise.then(function (user) {
+							return userService.get().$promise.then(function (user) {
 								if (user._id)
 									return true;
 						
@@ -36,14 +36,14 @@ define([],
 						}
 					}
 				})
-				.when("/editsession", {
-					templateUrl: "/public/app/main/edit-session.html",
-					controller: "EditSessionController",
+				.when("/editworkout", {
+					templateUrl: "/public/app/main/edit-workout.html",
+					controller: "EditWorkoutController",
 					controllerAs: "vm",
 					resolve: {
-						auth: function ($q, UserService) {
+						auth: function ($q, userService) {
 					
-							return UserService.get().$promise.then(function (user) {
+							return userService.get().$promise.then(function (user) {
 								if (user._id)
 									return true;
 						

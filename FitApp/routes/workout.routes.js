@@ -1,6 +1,6 @@
 ﻿
 var express		   = require("express"),
-	sessionQueries = require("../data/user/session.queries"),
+	workoutQueries = require("../data/user/workout.queries"),
 	utilities	   = require("../passport/passport.utilities"),
 	router		   = express.Router(),
 	_			   = require("../public/lib/underscore/underscore");  
@@ -26,29 +26,29 @@ router.get("/(:id)?", utilities.isAuthenticated, function (req, res, next) {
 });
 
 router.post("/", utilities.isAuthenticated, function (req, res, next) {
-	sessionQueries.create(req.user._id, req.body, function (err, session) {
+	workoutQueries.create(req.user._id, req.body, function (err, workout) {
 		if (err)
 			return next(err);
 			
-		res.json(session);
+		res.json(workout);
 	});
 });
 	
 router.put("/:id", utilities.isAuthenticated, function (req, res, next) {
-	sessionQueries.update(req.params.id, req.body, function (err, session) {
+	workoutQueries.update(req.params.id, req.body, function (err, workout) {
 		if (err)
 			return next(err);
 			
-		res.json(session);
+		res.json(workout);
 	});
 });
 	
 router.delete("/:id", utilities.isAuthenticated, function (req, res, next) {
-	sessionQueries.remove(req.user._id, req.params.id, function (err, session) {
+	workoutQueries.remove(req.user._id, req.params.id, function (err, workout) {
 		if (err)
 			return next(err);
 			
-		res.json(session);
+		res.json(workout);
 	});
 });
 

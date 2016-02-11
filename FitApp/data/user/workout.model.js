@@ -3,7 +3,7 @@ var mongoose = require("mongoose"),
 	Schema	 = mongoose.Schema,
 	Exercise = require("./exercise.model");
 
-var SessionSchema = {
+var WorkoutSchema = {
 	id: String,
 	startDate: Date,
 	endDate: Date,
@@ -13,9 +13,9 @@ var SessionSchema = {
 	exercises: [Exercise.ExerciseSchema]
 };
 
-var Session = mongoose.model("Session", SessionSchema);
+var Workout = mongoose.model("Workout", WorkoutSchema);
 
 module.exports = {
-	Session: Session,
-	SessionSchema: SessionSchema
+	Workout: Workout,
+	WorkoutSchema: WorkoutSchema
 };

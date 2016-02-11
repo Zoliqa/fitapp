@@ -2,13 +2,13 @@
 define(["underscore"], 
 	function (_) { 
 
-		function AddExerciseController($uibModalInstance, MuscleGroupsService, ExerciseService, session) {
+		function AddExerciseController($uibModalInstance, muscleGroupsService, exerciseService, workout) {
 			var vm = this;
 		
-			this.session = session;
-			this.getMuscleGroupById = MuscleGroupsService.getById;
-			this.newExercise = {
-				groupId: session.selectedGroups[0],
+			this.workout = workout;
+			this.getMuscleGroupById = muscleGroupsService.getById;
+			this.exercise = {
+				groupId: workout.selectedGroups[0],
 				name: "",
 				startTime: "",
 				notes: ""
@@ -17,7 +17,7 @@ define(["underscore"],
 			this.cancelStartExercise = cancelStartExercise;
 		
 			function startExercise() {
-				ExerciseService.save(vm.newExercise, function (exercise) { 
+				exerciseService.save(vm.exercise, function (exercise) { 
 					if (exercise._id) 
 						$uibModalInstance.close(exercise);
 				}, function () { 

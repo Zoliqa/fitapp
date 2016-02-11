@@ -1,12 +1,12 @@
 ﻿
 define([], function () {
 	
-	function ExerciseService($resource) {
+	function exerciseService($resource) {
 		var resource = $resource("/exercise/:id", null, {
 		});
 		
 		return resource;
 	}
 	
-	return ExerciseService;
+	return exerciseService;
 });

@@ -1,7 +1,7 @@
 ﻿
 define(["underscore"], function (_) {
 	
-	function MuscleGroupsService() {
+	function muscleGroupsService() {
 		var groups = {
 			1: { id: 1, name: "Chest" },
 			2: { id: 2, name: "Lats" },
@@ -29,5 +29,5 @@ define(["underscore"], function (_) {
 		}
 	}
 	
-	return MuscleGroupsService;
+	return muscleGroupsService;
 });

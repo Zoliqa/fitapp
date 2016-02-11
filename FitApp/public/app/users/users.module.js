@@ -16,19 +16,19 @@ define([
 			  LoginController, 
 			  RegisterController,
 			  ProfileController, 
-			  UserService,
-			  CacheService) { 
+			  userService,
+			  cacheService) { 
 
 	angular.module("users", ["ngRoute", "ngResource"])
 			.controller("LoginController", LoginController)
 			.controller("RegisterController", RegisterController)
 			.controller("ProfileController", ProfileController)
-			.factory("UserService", UserService)
-			.factory('CacheService', CacheService)
+			.factory("userService", userService)
+			.factory('cacheService', cacheService)
 			.config(myconfig)
-			.run(function ($rootScope, UserService) { 
+			.run(function ($rootScope, userService) { 
 
-				UserService.get(function (user) { 
+				userService.get(function (user) { 
 					if (user._id)
 						$rootScope.$emit("USER_LOGGED_IN");
 				});

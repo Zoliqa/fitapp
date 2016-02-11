@@ -7,7 +7,7 @@ function init(passport) {
 	});
 	
 	passport.deserializeUser(function (id, done) {
-		userQueries.find({ _id: id }, function (err, user) {
+		userQueries.findById(id, function (err, user) {
 			if (err)
 				return done(null);
 			

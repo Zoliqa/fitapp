@@ -2,14 +2,15 @@
 define([], 
 	function () { 
 
-		function HomeController($scope, SessionService, UserService) {
+		function HomeController($scope, userService) {
 			
 			var vm = this;
 		
-			this.activeSession = SessionService.get({ active: true });
+			this.activeWorkout = null;
 
-			UserService.get(function (user) { 
+			userService.get(function (user) { 
 				vm.message = "Welcome home " + user.username;
+				vm.activeWorkout = user.workouts && user.workouts[0];
 			});
 		}
 

@@ -1,21 +1,53 @@
 ﻿
 var User = require('./user.model');
 
-function find(where, next) {
-	if (where)
-		User.findOne(where, { sessions: 0 }, function (err, user) {
-			if (err)
-				return next(err);
+//function find(where, next) {
+//	if (where)
+//		User.findOne(where, { sessions: 0 }, function (err, user) {
+//			if (err)
+//				return next(err);
 			
-			return next(null, user);
-		});
-	else
-		User.find({}, { sessions: 0 }, function (err, users) {
-			if (err)
-				return next(err);
+//			return next(null, user);
+//		});
+//	else
+//		User.find({}, { sessions: 0 }, function (err, users) {
+//			if (err)
+//				return next(err);
 			
-			return next(null, users);
-		});
+//			return next(null, users);
+//		});
+//}
+
+function findByUsername(username, next) {
+	User.findOne({
+		username: username
+	}, function (err, user) {
+		if (err)
+			return next(err);
+		
+		if (user && user.workouts)
+			user.workouts = user.workouts.filter(function (workout) {
+				return !workout.endDate;
+			});
+
+		return next(null, user);
+	});
+}
+
+function findById(id, next) {
+	User.findOne({
+		_id: id
+	}, function (err, user) {
+		if (err)
+			return next(err);
+		
+		if (user && user.workouts)
+			user.workouts = user.workouts.filter(function (workout) {
+				return !workout.endDate;
+			});
+
+		return next(null, user);
+	});
 }
 
 function create(user, next) {
@@ -50,7 +82,8 @@ function remove(id, next) {
 }
 
 module.exports = {
-	find: find,
+	findByUsername: findByUsername,
+	findById: findById,
 	create: create,
 	update: update,
 	remove: remove

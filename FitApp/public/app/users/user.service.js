@@ -1,7 +1,7 @@
 ﻿
 define([], function () { 
 
-		function UserService($resource) {
+		function userService($resource) {
 			
 			var resource = $resource("/user/:id", null, {
 				"get": { cache: true },
@@ -15,6 +15,6 @@ define([], function () {
 			return resource;
 		}
 
-		return UserService;
+		return userService;
 	}
 );

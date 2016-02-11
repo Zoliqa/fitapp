@@ -1,6 +1,6 @@
-﻿<div id="new-session">
+﻿<div id="new-workout">
     <div class="page-header">
-        <h3 class="">Add new session </h3>
+        <h3 class="">Add new workout </h3>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error': false }">
@@ -10,7 +10,7 @@
             <input type="text"
                     class="form-control input-lg"
                     uib-datepicker-popup="longDate"
-                    ng-model="vm.newSession.startDate"
+                    ng-model="vm.workout.startDate"
                     is-open="vm.datePickerIsOpened"
                     datepicker-options="dateOptions"
                     ng-required="true"
@@ -31,7 +31,7 @@
 
         <div class="start-time">
             <div class="pull-left">
-                <uib-timepicker ng-model="vm.newSession.startDate"></uib-timepicker>
+                <uib-timepicker ng-model="vm.workout.startDate"></uib-timepicker>
             </div>
 
             <button type="button"
@@ -61,12 +61,12 @@
 
     <div class="form-group" ng-class="{ 'has-error': false }">
         <label>Notes</label>
-        <textarea rows="3" class="form-control input-lg" ng-model="vm.newSession.notes"></textarea>
+        <textarea rows="3" class="form-control input-lg" ng-model="vm.workout.notes"></textarea>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error': false }">
         <label>Location</label>
-        <input type="text" class="form-control input-lg" ng-model="vm.newSession.location">
+        <input type="text" class="form-control input-lg" ng-model="vm.workout.location">
     </div>
     
     <div class="form-group text-right">

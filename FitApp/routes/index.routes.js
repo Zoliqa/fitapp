@@ -12,8 +12,8 @@ function init(app, passport) {
 	var userRoutes = require("./user.routes");
 	app.use("/user", userRoutes);
 
-	var sessionRoutes = require("./session.routes");
-	app.use("/session", sessionRoutes);
+	var workoutRoutes = require("./workout.routes");
+	app.use("/workout", workoutRoutes);
 
 	var exerciseRoutes = require("./exercise.routes");
 	app.use("/exercise", exerciseRoutes);
