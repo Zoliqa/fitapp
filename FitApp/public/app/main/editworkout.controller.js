@@ -1,6 +1,6 @@
 ﻿
-define(["underscore"], 
-	function (_) { 
+define(["underscore", "angular"], 
+	function (_, angular) { 
 
 		function EditWorkoutController($location, $uibModal, muscleGroupsService, workoutService, exerciseService, userService) {
 			var vm = this;
@@ -10,11 +10,15 @@ define(["underscore"],
 			this.removeWorkout = removeWorkout;
 			this.formatGroups = formatGroups;
 			this.addExercise = addExercise;
+			this.nrRepetitions = _.range(1, 30);
+			this.newSet = {};
+			this.addNewSet = addNewSet;
+			this.selectExercise = selectExercise;
 		
 			userService.get(function (user) {
 				vm.workout = user.workouts[0];
 			});
-
+		
 			function removeWorkout() {
 				workoutService.delete({ id: vm.session._id }, function () { 
 					$location.path("/home");
@@ -44,6 +48,22 @@ define(["underscore"],
 					vm.workout.exercises.push(exercise);
 				}, function () {
 				});
+			}
+
+			function addNewSet(exercise) {
+				if (vm.newSet.nrRepetition && vm.newSet.weight) {
+					if (!exercise.sets)
+						exercise.sets = [];
+
+					exercise.sets.push(angular.copy(vm.newSet));
+
+					exerciseService.update({ id: exercise._id }, exercise);
+				}
+			}
+
+			function selectExercise() {
+				vm.newSet.nrRepetition = null;
+				vm.newSet.weight = null;
 			}
 		}
 

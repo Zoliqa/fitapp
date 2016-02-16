@@ -10,7 +10,6 @@ define([],
 					controllerAs: "vm",
 					resolve: {
 						auth: function ($q, userService) {
-					
 							return userService.get().$promise.then(function (user) { 
 								if (user._id)
 									return true;
@@ -26,7 +25,6 @@ define([],
 					controllerAs: "vm",
 					resolve: {
 						auth: function ($q, userService) {
-					
 							return userService.get().$promise.then(function (user) {
 								if (user._id)
 									return true;
@@ -42,7 +40,6 @@ define([],
 					controllerAs: "vm",
 					resolve: {
 						auth: function ($q, userService) {
-					
 							return userService.get().$promise.then(function (user) {
 								if (user._id)
 									return true;

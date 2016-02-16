@@ -33,7 +33,6 @@ define([
 				mainRoutes($routeProvider);
 			})
 			.run(function ($rootScope, $location) {
-		
 				$rootScope.$on("USER_LOGGED_IN", function (event, data) { 
 					$location.path("/home");
 				});

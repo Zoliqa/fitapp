@@ -26,6 +26,7 @@ function findByUsername(username, next) {
 			return next(err);
 		
 		if (user && user.workouts)
+			// TODO: retrieve only the first active workout
 			user.workouts = user.workouts.filter(function (workout) {
 				return !workout.endDate;
 			});

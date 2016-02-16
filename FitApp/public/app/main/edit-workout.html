@@ -19,8 +19,73 @@
         <div class="panel-body">
 
             <uib-tabset vertical="true" type="pills">
-                <uib-tab ng-repeat="exercise in vm.workout.exercises" heading="{{ exercise.name }}">
-                    Content...
+                <uib-tab ng-repeat="exercise in vm.workout.exercises" heading="{{ exercise.name }}" select="vm.selectExercise()">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Group</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">{{ vm.getMuscleGroupById(exercise.groupId).name }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Started</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">{{ exercise.startTime | date: "short" }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Ended</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">{{ exercise.endTime | date: "short" }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Notes</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" class="form-control input-md" ng-model="exercise.notes"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Sets</label>
+                            <div class="col-sm-10 form-inline">
+                                <div class="btn-group" uib-dropdown>
+                                    <button id="split-button" type="button" class="btn btn-default">{{ vm.newSet.nrRepetition || "Select repetition" }}</button>
+                                    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                        <li role="menuitem" ng-repeat="nrRepetition in vm.nrRepetitions">
+                                            <a ng-click="vm.newSet.nrRepetition = nrRepetition">
+                                                {{ nrRepetition }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <input type="number" class="form-control form-inline" placeholder="Enter weight" ng-model="vm.newSet.weight" />
+
+                                <button class="btn btn-primary" ng-click="vm.addNewSet(exercise)">Add set</button>
+
+                                <table class="table table-condensed" ng-if="exercise.sets.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Reps</th>
+                                            <th>Weight</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="set in exercise.sets">
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ set.nrRepetition }}</td>
+                                            <td>{{ set.weight }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
                 </uib-tab>
             </uib-tabset>
 

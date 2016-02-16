@@ -31,6 +31,25 @@ function create(userId, exercise, next) {
 	});
 }
 
+function update(userId, exercise, next) {
+	User.findOneAndUpdate({
+		_id: userId,
+		"workouts.endDate": null,
+		"workouts.exercises._id": exercise._id
+	}, {
+		$set: {
+			"workouts.exercises.$": exercise
+		}
+	}, {
+		new: true
+	}, function (err, updatedExercise) { 
+		if (err)
+			return next(err);
+
+		return next(updatedExercise);
+	});
+}
+
 function remove(userId, sessionId, exerciseId, next) {
 	//User.findOneAndUpdate({
 	//	_id: userId
@@ -50,5 +69,6 @@ function remove(userId, sessionId, exerciseId, next) {
 
 module.exports = {
 	create: create,
+	update: update,
 	remove: remove
 };
