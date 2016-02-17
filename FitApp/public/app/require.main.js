@@ -7,7 +7,7 @@
 			"angular": "public/lib/angular/angular",
 			"angularRoute": "public/lib/angular-route/angular-route",
 			"angularResource": "public/lib/angular-resource/angular-resource",
-			"jQuery": "public/lib/jQuery/dist/jquery",
+			"jquery": "public/lib/jQuery/dist/jquery",
 			"underscore": "public/lib/underscore/underscore",
 			"bootstrap": "public/lib/bootstrap/dist/js/bootstrap",
 			"uiBootstrapTpls": "public/lib/angular-bootstrap/ui-bootstrap-tpls",
@@ -37,7 +37,7 @@
 				exports: "underscore"
 			},
 			"bootstrap": {
-				deps: ["jQuery"],
+				deps: ["jquery"],
 				exports: "bootstrap"
 			},
 			"bcrypt": {

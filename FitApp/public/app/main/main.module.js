@@ -2,6 +2,7 @@
 define([
 	"angular", 
 	"angularRoute", 
+	"public/lib/jquery-ui/ui/slider",
 	"app/main/main.routes",
 	"app/main/home.controller",
 	"app/main/newworkout.controller",
@@ -12,6 +13,7 @@ define([
 	"app/main/exercise.service"], 
 	function (angular, 
 			  angularRoute, 
+			  jqSlider,
 			  mainRoutes, 
 			  HomeController, 
 			  NewWorkoutController,
@@ -45,3 +47,4 @@ define([
 			});
 	}
 );
+

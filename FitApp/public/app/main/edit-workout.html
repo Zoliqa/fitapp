@@ -63,6 +63,8 @@
                                     </ul>
                                 </div>
 
+                                <div class="form-inline" id="slider"></div>
+
                                 <input type="number" class="form-control form-inline" placeholder="Enter weight" ng-model="vm.newSet.weight" />
 
                                 <button class="btn btn-primary" ng-click="vm.addNewSet(exercise)">Add set</button>
@@ -96,5 +98,27 @@
         <button class="btn btn-primary btn-lg" ng-click="vm.removeWorkout()">Remove</button>
     </div>
 </div>
+
+<script>
+    setTimeout(function () {
+    $("#slider").slider({
+        min: 0, 
+        max: 50,
+        //slide: function(event, ui){
+        //    var value;
+        //    if(ui.value == -1)
+        //    {
+        //        value = "--";
+        //    }
+        //    else
+        //    {
+        //        value = ui.value;
+        //    }
+
+        //    $(this).find("input.slider-value").val(value);
+        //},
+    });
+    }, 1000);
+</script>
 
 
