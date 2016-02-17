@@ -1,6 +1,7 @@
 ﻿
 var User	 = require("./user.model"),
-	Exercise = require("./exercise.model");
+	Exercise = require("./exercise.model"),
+	_		 = require("../../public/lib/underscore/underscore");
 
 //function find(userId, next) {
 //	User.findOne(where, { sessions: 0 }, function (err, user) {
@@ -16,7 +17,7 @@ function create(userId, exercise, next) {
 	
 	User.findOneAndUpdate({
 		_id: userId,
-		"workouts.endDate": null
+		"workouts.ended": null
 	}, {
 		$push: {
 			"workouts.$.exercises": newExercise
@@ -31,22 +32,37 @@ function create(userId, exercise, next) {
 	});
 }
 
-function update(userId, exercise, next) {
-	User.findOneAndUpdate({
+function update(userId, exerciseId, exercise, next) {
+	User.findOne({
 		_id: userId,
-		"workouts.endDate": null,
-		"workouts.exercises._id": exercise._id
+		"workouts.ended": null
 	}, {
-		$set: {
-			"workouts.exercises.$": exercise
-		}
-	}, {
-		new: true
-	}, function (err, updatedExercise) { 
+		"workouts.$": 1
+	}).lean().exec(function (err, user) { 
 		if (err)
-			return next(err);
+			next(err);
+		
+		var storedExercises = user.workouts[0].exercises;
+		var index = _.findIndex(storedExercises, function (storedExercise) { 
+			return storedExercise._id.toString() === exerciseId;
+		});
+		
+		var setObject = {};
+		setObject["workouts.$.exercises." + index] = exercise;
 
-		return next(updatedExercise);
+		User.findOneAndUpdate({
+			_id: userId,
+			"workouts.ended": null
+		}, {
+			$set: setObject
+		}, {
+			new: true
+		}, function (err, user) { 
+			if (err)
+				return next(err);
+
+			return next(null, exercise);
+		});
 	});
 }
 

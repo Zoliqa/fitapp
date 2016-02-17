@@ -14,7 +14,7 @@ router.post("/", utilities.isAuthenticated, function (req, res, next) {
 });
 
 router.put("/:id", utilities.isAuthenticated, function (req, res, next) {
-	exerciseQueries.update(req.user._id, req.body, function (err, exercise) {
+	exerciseQueries.update(req.user._id, req.params.id, req.body, function (err, exercise) {
 		if (err)
 			return next(err);
 		

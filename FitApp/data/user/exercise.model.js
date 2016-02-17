@@ -6,8 +6,10 @@ var ExerciseSchema = {
 	id: String,
 	groupId: Number,
 	name: String,
-	startTime: Date,
-	notes: String
+	started: Date,
+	ended: Date,
+	notes: String,
+	sets: Array
 };
 
 var Exercise = mongoose.model("Exercise", ExerciseSchema);

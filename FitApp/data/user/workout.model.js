@@ -5,8 +5,8 @@ var mongoose = require("mongoose"),
 
 var WorkoutSchema = {
 	id: String,
-	startDate: Date,
-	endDate: Date,
+	started: Date,
+	ended: Date,
 	selectedGroups: [Number],
 	notes: String,
 	location: String,

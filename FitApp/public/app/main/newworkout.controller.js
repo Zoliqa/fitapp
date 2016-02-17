@@ -7,7 +7,7 @@ define(["underscore"],
 		
 			this.errorMessage = "";
 			this.workout = {
-				startDate: new Date(),
+				started: new Date(),
 				selectedGroups: [],
 				notes: "",
 				location: ""
@@ -20,7 +20,7 @@ define(["underscore"],
 			this.cancel = cancel;
 
 			function resetDate () {
-				vm.workout.startDate = new Date();
+				vm.workout.started = new Date();
 			}
 		
 			function addSession() {

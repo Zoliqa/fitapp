@@ -10,7 +10,7 @@ define(["underscore"],
 			this.exercise = {
 				groupId: workout.selectedGroups[0],
 				name: "",
-				startTime: "",
+				started: "",
 				notes: ""
 			};
 			this.startExercise = startExercise;

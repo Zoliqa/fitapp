@@ -6,7 +6,7 @@
     </div>
 
     <div class="session-info">
-        <p class="bg-info">Started: {{ vm.workout.startDate | date: "short" }}</p>
+        <p class="bg-info">Started: {{ vm.workout.started | date: "short" }}</p>
         <p class="bg-info">Groups: {{ vm.formatGroups() }}</p>
         <p class="bg-info">Notes: {{ vm.workout.notes }}</p>
         <p class="bg-info">Location: {{ vm.workout.location }}</p>
@@ -30,13 +30,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Started</label>
                             <div class="col-sm-10">
-                                <p class="form-control-static">{{ exercise.startTime | date: "short" }}</p>
+                                <p class="form-control-static">{{ exercise.started | date: "short" }}</p>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Ended</label>
                             <div class="col-sm-10">
-                                <p class="form-control-static">{{ exercise.endTime | date: "short" }}</p>
+                                <p class="form-control-static">{{ exercise.ended | date: "short" }}</p>
                             </div>
                         </div>
                         <div class="form-group">
