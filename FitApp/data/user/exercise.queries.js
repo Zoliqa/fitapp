@@ -66,21 +66,22 @@ function update(userId, exerciseId, exercise, next) {
 	});
 }
 
-function remove(userId, sessionId, exerciseId, next) {
-	//User.findOneAndUpdate({
-	//	_id: userId
-	//}, {
-	//	$pull: {
-	//		sessions: {
-	//			_id: sessionId
-	//		}
-	//	}
-	//}, function (err) {
-	//	if (err)
-	//		return next(err);
-		
-	//	return next(null, null);
-	//});
+function remove(userId, exerciseId, next) {
+	User.findOneAndUpdate({
+		_id: userId,
+		"workouts.ended": null
+	}, {
+		$pull: {
+			"workouts.$.exercises": {
+				_id: exerciseId
+			}
+		}
+	}, function (err) {
+		if (err)
+			return next(err);
+			
+		return next(null);
+	});
 }
 
 module.exports = {

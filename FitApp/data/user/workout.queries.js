@@ -73,13 +73,13 @@ function find(userId, workoutId, next) {
 //	});
 //}
 
-function remove(userId, sessionId, next) {
+function remove(userId, workoutId, next) {
 	User.findOneAndUpdate({
 		_id: userId
 	}, {
 		$pull: {
-			sessions: {
-				_id: sessionId
+			workouts: {
+				_id: workoutId
 			}
 		}
 	}, function (err) {

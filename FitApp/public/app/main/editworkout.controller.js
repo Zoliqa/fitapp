@@ -10,10 +10,10 @@ define(["underscore", "angular"],
 			this.removeWorkout = removeWorkout;
 			this.formatGroups = formatGroups;
 			this.addExercise = addExercise;
-			this.nrRepetitions = _.range(1, 30);
 			this.newSet = {};
 			this.addNewSet = addNewSet;
 			this.selectExercise = selectExercise;
+			this.removeExercise = removeExercise;
 		
 			userService.get(function (user) {
 				vm.workout = user.workouts[0];
@@ -51,7 +51,7 @@ define(["underscore", "angular"],
 			}
 
 			function addNewSet(exercise) {
-				if (vm.newSet.nrRepetition && vm.newSet.weight) {
+				if (vm.newSet.reps > 0 && vm.newSet.weight > 0) {
 					if (!exercise.sets)
 						exercise.sets = [];
 
@@ -62,8 +62,16 @@ define(["underscore", "angular"],
 			}
 
 			function selectExercise() {
-				vm.newSet.nrRepetition = null;
+				vm.newSet.reps = 0;
 				vm.newSet.weight = null;
+			}
+
+			function removeExercise(exercise) {
+				exerciseService.remove({ id: exercise._id }, function () { 
+					vm.workout.exercises = _.filter(vm.workout.exercises, function (exercise2) { 
+						return exercise2._id !== exercise._id;
+					});
+				});
 			}
 		}
 

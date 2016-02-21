@@ -2,7 +2,6 @@
 define([
 	"angular", 
 	"angularRoute", 
-	"public/lib/jquery-ui/ui/slider",
 	"app/main/main.routes",
 	"app/main/home.controller",
 	"app/main/newworkout.controller",
@@ -10,10 +9,10 @@ define([
 	"app/main/addexercise.controller",
 	"app/main/musclegroups.service",
 	"app/main/workout.service",
-	"app/main/exercise.service"], 
+	"app/main/exercise.service",
+	"app/main/fa-slider.directive"], 
 	function (angular, 
 			  angularRoute, 
-			  jqSlider,
 			  mainRoutes, 
 			  HomeController, 
 			  NewWorkoutController,
@@ -21,7 +20,8 @@ define([
 			  AddExerciseController,
 			  muscleGroupsService,
 			  workoutService,
-			  exerciseService) {
+			  exerciseService,
+			  faSlider) {
 	
 		angular.module("main", ["ngRoute"])
 			.controller("HomeController", HomeController)
@@ -31,6 +31,7 @@ define([
 			.factory("muscleGroupsService", muscleGroupsService)
 			.factory("workoutService", workoutService)
 			.factory("exerciseService", exerciseService)
+			.directive("faSlider", faSlider)
 			.config(function ($routeProvider) {
 				mainRoutes($routeProvider);
 			})

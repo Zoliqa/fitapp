@@ -23,11 +23,11 @@ router.put("/:id", utilities.isAuthenticated, function (req, res, next) {
 });
 
 router.delete("/:id", utilities.isAuthenticated, function (req, res, next) {
-	sessionQueries.remove(req.user._id, req.params.id, function (err, session) {
+	exerciseQueries.remove(req.user._id, req.params.id, function (err) {
 		if (err)
 			return next(err);
 			
-		res.json(session);
+		res.json(null);
 	});
 });
 
