@@ -2,8 +2,7 @@
 define([], 
 	function () { 
 
-		function LoginController($scope, $http, $location, cacheService) {  
-		
+		function LoginController($scope, $http, $location, cacheService, USER_LOGGED_IN) {  
 			var vm = this;    
 		 
 			vm.credentials = {
@@ -28,14 +27,14 @@ define([],
 				vm.errorMessage = "";
 			
 				if (!vm.isUsernameEmpty() && !vm.isPasswordEmpty()) {
-				
 					$http.post("/user/login", vm.credentials)
 						.success(function (user) {
 							if (user) 
-								$scope.$emit("USER_LOGGED_IN");
+								$scope.$emit(USER_LOGGED_IN);
 							else
 								vm.errorMessage = "Wrong username and/or password";
-
+					
+							// need to empty cache because next time we want to get the real user instead of empty object
 							cacheService.invalidate("/user");
 						});
 				}

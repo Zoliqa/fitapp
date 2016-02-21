@@ -6,8 +6,7 @@ define([
 	function (angularMocks, usersModule) {
 	
 	describe("LoginController", function () {
-		
-		var $controller, $httpBackend, loginController, $locationMock, $scopeMock, userDataServiceMock;
+		var $controller, $httpBackend, loginController, $locationMock, $scopeMock, cacheServiceMock, USER_LOGGED_IN; 
 
 		beforeEach(module("users"));
 		
@@ -16,10 +15,15 @@ define([
 			
 			$httpBackend = $injector.get("$httpBackend");
 			
+			USER_LOGGED_IN = $injector.get("USER_LOGGED_IN");
+
+			// suppose the user is not logged in, i.e. doesn't have any cookies in the browser which stores his/her identity
+			$httpBackend.whenGET("/user").respond(null);
+
 			$scopeMock = $injector.get("$rootScope");
 			
-			userDataServiceMock = {
-				loggedInUser: function (user) { 
+			cacheServiceMock = {
+				invalidate: function (path) { 
 				}
 			};
 			
@@ -40,7 +44,7 @@ define([
 			loginController = $controller("LoginController", {
 				$scope: $scopeMock,
 				$location: $locationMock,
-				userDataService: userDataServiceMock
+				cacheService: cacheServiceMock
 			});
 		}));
 
@@ -49,7 +53,6 @@ define([
 		});
 
 		it("should show error message if username is missing", function () {
-			
 			loginController.isUsernameEmpty = function () {
 				return true;
 			};
@@ -64,7 +67,6 @@ define([
 		});
 
 		it("should show error message if password is missing", function () {
-			
 			loginController.isUsernameEmpty = function () {
 				return false;
 			};
@@ -79,57 +81,54 @@ define([
 		});
 
 		it("should set the logged in user in the service for existing user and notify scope that user is logged in", function () {
-			
 			var user = {
 				username: "Joe",
 				password: "123"
 			};
 
-			$httpBackend.whenPOST("/user/login")
-				.respond(user);
-			
-			spyOn(userDataServiceMock, "loggedInUser");
+			$httpBackend.whenPOST("/user/login").respond(user);
 			
 			loginController.credentials.username = user.username;
 			loginController.credentials.password = user.password;
 			
 			spyOn($scopeMock, "$emit");
+			spyOn(cacheServiceMock, "invalidate");
 
 			loginController.logIn();
 			
 			$httpBackend.flush();  
 
-			expect(userDataServiceMock.loggedInUser).toHaveBeenCalled();
-			expect(userDataServiceMock.loggedInUser.calls.argsFor(0)).toEqual([user]);
-
 			expect($scopeMock.$emit).toHaveBeenCalled();
+			expect($scopeMock.$emit.calls.argsFor(0)).toEqual([USER_LOGGED_IN]);
+
+			expect(cacheServiceMock.invalidate).toHaveBeenCalled();
+			expect(cacheServiceMock.invalidate.calls.argsFor(0)).toEqual(["/user"]);
 		});
 
 		it("should show error message for user who doesn't exist", function () {
-			
 			var user = {
 				username: "Joe",
 				password: "123"
 			};
 			
-			$httpBackend.whenPOST("/user/login")
-				.respond(null);
-			
-			spyOn(userDataServiceMock, "loggedInUser");
+			$httpBackend.whenPOST("/user/login").respond(null);
 			
 			loginController.credentials.username = user.username;
 			loginController.credentials.password = user.password;
 			
+			spyOn(cacheServiceMock, "invalidate");
+
 			loginController.logIn();
 			
 			$httpBackend.flush();
 			
-			expect(userDataServiceMock.loggedInUser).not.toHaveBeenCalled();
 			expect(loginController.errorMessage).toBe("Wrong username and/or password");
+
+			expect(cacheServiceMock.invalidate).toHaveBeenCalled();
+			expect(cacheServiceMock.invalidate.calls.argsFor(0)).toEqual(["/user"]);
 		});
 
 		it("should redirect user to register page", function () { 
-			
 			spyOn($locationMock, "path");
 
 			loginController.register();
