@@ -2,7 +2,9 @@
 define(["underscore", "angular"], 
 	function (_, angular) { 
 
-		function EditWorkoutController($location, $uibModal, muscleGroupsService, workoutService, exerciseService, userService) {
+		function EditWorkoutController(
+			$location, $uibModal, muscleGroupsService, workoutService, exerciseService, userService, cacheService) {
+		
 			var vm = this;
 		
 			this.workout = null;
@@ -22,6 +24,8 @@ define(["underscore", "angular"],
 			function removeWorkout() {
 				workoutService.delete({ id: vm.workout._id }, function () { 
 					$location.path("/home");
+
+					cacheService.invalidate("/user");
 				});
 			}
 		

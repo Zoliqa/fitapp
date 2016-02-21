@@ -32,20 +32,6 @@ define(["angular", "angularMocks", "public/app/main/main.module"],
 				}
 			};
 			
-			//locationMock = {
-			//	hash: '/not-changed',
-			//	updateHash: function (hash) {
-			//		this.hash = hash;
-			//	},
-			//	search: function () {
-			//		return {
-			//			username: "username"
-			//		}
-			//	},
-			//	path: function () { 
-			//	}
-			//};
-			
 			locationMock = jasmine.createSpyObj("$location", ["path"]);
 
 			workoutServiceMock = {
@@ -62,11 +48,6 @@ define(["angular", "angularMocks", "public/app/main/main.module"],
 			muscleGroupsServiceMock = {
 				getAll: function () {
 					return muscleGroups;
-				}
-			};
-			
-			cacheServiceMock1 = {
-				invalidate: function () { 
 				}
 			};
 			
