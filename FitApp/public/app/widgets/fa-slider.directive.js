@@ -1,5 +1,5 @@
 ﻿
-define(["public/lib/jquery-ui/ui/slider", "jquery"], function ($, jqSlider) {
+define(["jquery", "public/lib/jquery-ui/ui/slider"], function ($, jqSlider) {
 	
 	function faSlider() {
 		return {

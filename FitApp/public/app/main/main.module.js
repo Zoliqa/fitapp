@@ -9,8 +9,7 @@ define([
 	"app/main/addexercise.controller",
 	"app/main/musclegroups.service",
 	"app/main/workout.service",
-	"app/main/exercise.service",
-	"app/main/fa-slider.directive"], 
+	"app/main/exercise.service"], 
 	function (angular, 
 			  angularRoute, 
 			  mainRoutes, 
@@ -20,8 +19,7 @@ define([
 			  AddExerciseController,
 			  muscleGroupsService,
 			  workoutService,
-			  exerciseService,
-			  faSlider) {
+			  exerciseService) {
 	
 		angular.module("main", ["ngRoute"])
 			.controller("HomeController", HomeController)
@@ -31,7 +29,6 @@ define([
 			.factory("muscleGroupsService", muscleGroupsService)
 			.factory("workoutService", workoutService)
 			.factory("exerciseService", exerciseService)
-			.directive("faSlider", faSlider)
 			.config(function ($routeProvider) {
 				mainRoutes($routeProvider);
 			})

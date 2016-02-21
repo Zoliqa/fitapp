@@ -46,7 +46,6 @@ define(["underscore", "angular"],
 			
 				modal.result.then(function (exercise) {
 					vm.workout.exercises.push(exercise);
-				}, function () {
 				});
 			}
 

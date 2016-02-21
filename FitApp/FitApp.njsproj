@@ -43,7 +43,7 @@
     <Compile Include="public\app\main\editworkout.controller.js" />
     <Compile Include="public\app\main\exercise.service.js" />
     <Compile Include="public\app\main\musclegroups.service.js" />
-    <Compile Include="public\app\main\fa-slider.directive.js" />
+    <Compile Include="public\app\widgets\fa-slider.directive.js" />
     <Compile Include="public\app\main\workout.service.js" />
     <Compile Include="public\app\main\newworkout.controller.js" />
     <Compile Include="public\app\main\main.routes.js" />
@@ -59,6 +59,7 @@
     <Compile Include="public\app\users\cache.service.js" />
     <Compile Include="public\app\users\user.service.js" />
     <Compile Include="public\app\users\users.module.js" />
+    <Compile Include="public\app\widgets\widgets.module.js" />
     <Compile Include="routes\exercise.routes.js" />
     <Compile Include="routes\user.routes.js" />
     <Compile Include="routes\index.routes.js" />
@@ -85,6 +86,7 @@
     <Folder Include="data\user\" />
     <Folder Include="public\app\" />
     <Folder Include="public\app\main\" />
+    <Folder Include="public\app\widgets\" />
     <Folder Include="public\app\users\" />
     <Folder Include="public\app\users\tests\" />
     <Folder Include="tests\" />

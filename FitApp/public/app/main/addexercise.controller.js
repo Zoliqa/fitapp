@@ -26,7 +26,7 @@ define(["underscore"],
 			}
 
 			function cancelStartExercise() {
-				$uibModalInstance.close(null);
+				$uibModalInstance.dismiss();
 			}
 		}
 
