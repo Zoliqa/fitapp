@@ -1,8 +1,5 @@
 ﻿
-define([
-	"angularMocks",
-	"public/app/users/users.module"
-	], 
+define(["angularMocks", "public/app/users/users.module"], 
 	function (angularMocks, usersModule) {
 	
 	describe("LoginController", function () {
@@ -125,7 +122,7 @@ define([
 			expect(loginController.errorMessage).toBe("Wrong username and/or password");
 
 			expect(cacheServiceMock.invalidate).toHaveBeenCalled();
-			expect(cacheServiceMock.invalidate.calls.argsFor(0)).toEqual(["/user"]);
+			expect(cacheServiceMock.invalidate.calls.argsFor(0)[0]).toEqual("/user");
 		});
 
 		it("should redirect user to register page", function () { 
@@ -134,7 +131,7 @@ define([
 			loginController.register();
 
 			expect($locationMock.path).toHaveBeenCalled();
-			expect($locationMock.path.calls.argsFor(0)).toEqual(["/user/register"]);
+			expect($locationMock.path.calls.argsFor(0)[0]).toEqual("/user/register");
 		});
 	});
 });

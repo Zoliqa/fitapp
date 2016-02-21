@@ -16,27 +16,28 @@ define(["underscore"],
 			this.datePickerIsOpened = false;
 			this.groups = muscleGroupsService.getAll();
 			this.resetDate = resetDate;
-			this.addSession = addSession;
+			this.addWorkout = addWorkout;
 			this.cancel = cancel;
 
 			function resetDate () {
 				vm.workout.started = new Date();
 			}
 		
-			function addSession() {
+			function addWorkout() {
 				_.each(vm.groups, function (group) {
 					if (group.selected)
 						vm.workout.selectedGroups.push(group.id);
 				})
 
-				workoutService.save(vm.workout, function (session) { 
-					if (session._id) {
+				workoutService.save(vm.workout, function (workout) { 
+					if (workout._id) {
 						$location.path("/home");
 					
+						// remove the user from cache since next time we want to retrieve the user with his/her newly added active workout
 						cacheService.invalidate("/user");
 					}
 				}, function () { 
-					vm.errorMessage = "Error occurred saving the session.";	
+					vm.errorMessage = "Error occurred saving the workout.";	
 				});
 			};
 		

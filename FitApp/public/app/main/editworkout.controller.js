@@ -20,7 +20,7 @@ define(["underscore", "angular"],
 			});
 		
 			function removeWorkout() {
-				workoutService.delete({ id: vm.session._id }, function () { 
+				workoutService.delete({ id: vm.workout._id }, function () { 
 					$location.path("/home");
 				});
 			}

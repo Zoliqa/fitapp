@@ -44,6 +44,8 @@
     <Compile Include="public\app\main\editworkout.controller.js" />
     <Compile Include="public\app\main\exercise.service.js" />
     <Compile Include="public\app\main\musclegroups.service.js" />
+    <Compile Include="public\app\main\main.config.js" />
+    <Compile Include="public\app\main\main.run.js" />
     <Compile Include="public\app\users\users.config.js" />
     <Compile Include="public\app\users\users.run.js" />
     <Compile Include="public\app\users\users.routes.js" />
@@ -58,7 +60,7 @@
     <Compile Include="public\app\users\login.controller.js" />
     <Compile Include="public\app\users\profile.controller.js" />
     <Compile Include="public\app\users\register.controller.js" />
-    <Compile Include="public\app\users\tests\newsession.controller.spec1.js" />
+    <Compile Include="public\app\main\tests\newworkout.controller.spec.js" />
     <Compile Include="public\app\users\tests\login.controller.spec.js" />
     <Compile Include="public\app\common\cache.service.js" />
     <Compile Include="public\app\users\user.service.js" />
@@ -91,6 +93,7 @@
     <Folder Include="public\app\" />
     <Folder Include="public\app\main\" />
     <Folder Include="public\app\common\" />
+    <Folder Include="public\app\main\tests\" />
     <Folder Include="public\app\widgets\" />
     <Folder Include="public\app\users\" />
     <Folder Include="public\app\users\tests\" />

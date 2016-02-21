@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function configureRoutes($routeProvider) {
+		function mainRoutes($routeProvider, $q, userService) {
 			$routeProvider
 				.when("/home", {
 					templateUrl: "/public/app/main/home.html",
@@ -54,6 +54,6 @@ define([],
 				});
 		}
 
-		return configureRoutes;		
+		return mainRoutes;		
 	}
 );
