@@ -35,7 +35,7 @@ define([],
 				vm.user.password = bcrypt.hashSync(vm.user.password, salt);
 			
 				userService.save(vm.user, function (user) {
-					$location.path("/login").search("username", user.username);
+					$location.path("/login");
 				});
 			};
 

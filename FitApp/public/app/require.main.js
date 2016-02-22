@@ -11,7 +11,8 @@
 			"underscore": "public/lib/underscore/underscore",
 			"bootstrap": "public/lib/bootstrap/dist/js/bootstrap",
 			"uiBootstrapTpls": "public/lib/angular-bootstrap/ui-bootstrap-tpls",
-			"bcrypt": "public/lib/bcryptjs/dist/bcrypt"
+			"bcrypt": "public/lib/bcryptjs/dist/bcrypt",
+			"offline": "public/lib/offline/offline"
 		},
 		
 		shim: {
@@ -42,6 +43,9 @@
 			},
 			"bcrypt": {
 				exports: "bcrypt"
+			},
+			"offline": {
+				exports: "offline"
 			}
 		}
 

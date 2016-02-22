@@ -85,7 +85,8 @@
     <Content Include="public\css\less\helpers.less" />
     <Content Include="public\css\less\main.less" />
     <Content Include="public\css\less\index.less" />
-    <Content Include="views\index.html" />
+    <Content Include="public\images\favicon.ico" />
+    <Content Include="views\index.ejs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
@@ -97,6 +98,7 @@
     <Folder Include="public\app\widgets\" />
     <Folder Include="public\app\users\" />
     <Folder Include="public\app\users\tests\" />
+    <Folder Include="public\images\" />
     <Folder Include="tests\" />
     <Folder Include="public\css\" />
     <Folder Include="public\css\less\" />

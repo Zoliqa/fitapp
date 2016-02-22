@@ -3,6 +3,7 @@ define([
 	"angular", 
 	"angularRoute", 
 	"angularResource",
+	"offline",
 	"app/users/login.controller",
 	"app/users/register.controller",
 	"app/users/profile.controller",
@@ -12,12 +13,15 @@ define([
 	function (angular, 
 			  angularRoute, 
 			  angularResource, 
+			  offline,
 			  LoginController, 
 			  RegisterController,
 			  ProfileController, 
 			  userService,
 			  usersConfig,
-			  usersRun) { 
+			  usersRun) {
+	
+	console.log(Offline.check());
 
 	angular.module("users", ["ngRoute", "ngResource"])
 		.controller("LoginController", LoginController)

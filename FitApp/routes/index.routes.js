@@ -1,10 +1,18 @@
 ﻿
 var express = require('express'),
-	router  = express.Router();
+	router  = express.Router(),
+	path	= require("path");
 
 function init(app, passport) {
 	router.get("/", function (req, res) {
-		res.render("index");
+		res.render("index", { title: "FitApp" });
+	});
+	
+	router.get("/favicon.ico", function (req, res) { 
+		res.sendFile(path.resolve(__dirname + "/../public/images/favicon.ico"), function (err) {
+			if (err) 
+				res.status(err.status).end();
+		}); 
 	});
 	
 	app.use("/", router);

@@ -1,5 +1,4 @@
 ﻿var express = require("express"),
-	swig = require("swig"),
 	passport = require("passport");
 	bodyParser = require("body-parser"),
 	session = require("express-session"),
@@ -12,10 +11,8 @@
 
 mongoose.connect(dbUrl);
 
-app.engine("html", swig.renderFile);
-
-app.set("view engine", "html");
 app.set("views", "./views");
+app.set("view engine", "ejs");
 
 app.use(session({
 	secret: "secret", 
