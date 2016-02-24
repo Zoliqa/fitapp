@@ -4,11 +4,19 @@ define([],
 
 		function cacheService($cacheFactory) {
 			var $httpDefaultCache = $cacheFactory.get('$http');
-		
-			return {
-				invalidate: function (key) {
-					$httpDefaultCache.remove(key);
-				}
+			var service = {
+				invalidate: invalidate, 
+				store: store
+			}
+
+			return service;
+
+			function invalidate(key) {
+				$httpDefaultCache.remove(key);
+			}
+
+			function store(key, value) {
+				$httpDefaultCache.put(key, value);
 			}
 		}
 

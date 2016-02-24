@@ -17,7 +17,7 @@ define(["underscore", "angular"],
 			this.selectExercise = selectExercise;
 			this.removeExercise = removeExercise;
 		
-			userService.get(function (user) {
+			userService.current.get().$promise.then(function (user) {
 				vm.workout = user.workouts[0];
 			});
 		

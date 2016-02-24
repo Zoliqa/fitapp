@@ -12,7 +12,9 @@
 			"bootstrap": "public/lib/bootstrap/dist/js/bootstrap",
 			"uiBootstrapTpls": "public/lib/angular-bootstrap/ui-bootstrap-tpls",
 			"bcrypt": "public/lib/bcryptjs/dist/bcrypt",
-			"offline": "public/lib/offline/offline"
+			"offline": "public/lib/offline/offline",
+			"offlineSimulateUI": "public/lib/offlinejs-simulate-ui/offline-simulate-ui.min",
+			"dexie": "public/lib/dexie/dist/latest/dexie"
 		},
 		
 		shim: {
@@ -34,18 +36,9 @@
 			"jQuery": {
 				exports: "jQuery"
 			},
-			"underscore": {
-				exports: "underscore"
-			},
 			"bootstrap": {
 				deps: ["jquery"],
 				exports: "bootstrap"
-			},
-			"bcrypt": {
-				exports: "bcrypt"
-			},
-			"offline": {
-				exports: "offline"
 			}
 		}
 

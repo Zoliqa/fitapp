@@ -1,12 +1,18 @@
 ﻿
 define([
 	"angular", 
-	"app/common/cache.service"], 
+	"dexie",
+	"app/common/cache.service",
+	"app/common/db.service"], 
 	function (angular, 
-			  cacheService) {
+			  Dexie,
+			  cacheService,
+			  dbService) {
 	
 		angular.module("common", [])
-			.factory("cacheService", cacheService);
+			.factory("cacheService", cacheService)
+			.factory("dbService", dbService)
+			.constant("Dexie", Dexie);
 	}
 );
 

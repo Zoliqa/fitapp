@@ -39,6 +39,7 @@
     <Compile Include="gruntfile.js" />
     <Compile Include="passport\passport.utilities.js" />
     <Compile Include="passport\passport.init.js" />
+    <Compile Include="public\app\common\db.service.js" />
     <Compile Include="public\app\common\common.module.js" />
     <Compile Include="public\app\main\addexercise.controller.js" />
     <Compile Include="public\app\main\editworkout.controller.js" />
@@ -47,6 +48,8 @@
     <Compile Include="public\app\main\main.config.js" />
     <Compile Include="public\app\main\main.run.js" />
     <Compile Include="public\app\main\tests\newworkout.controller.spec.js" />
+    <Compile Include="public\app\users\user.online.service.js" />
+    <Compile Include="public\app\users\user.offline.service.js" />
     <Compile Include="public\app\users\users.config.js" />
     <Compile Include="public\app\users\users.run.js" />
     <Compile Include="public\app\users\users.routes.js" />
