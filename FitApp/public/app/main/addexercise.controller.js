@@ -1,8 +1,7 @@
 ﻿
-define(["underscore"], 
-	function (_) { 
+define([], function () { 
 
-		function AddExerciseController($uibModalInstance, muscleGroupsService, exerciseService, workout) {
+		function AddExerciseController($uibModalInstance, _, muscleGroupsService, exerciseService, workout) {
 			var vm = this;
 		
 			this.workout = workout;

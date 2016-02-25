@@ -1,8 +1,7 @@
 ﻿
-define(["underscore"], 
-	function (_) { 
+define([], function () { 
 
-		function NewWorkoutController($location, workoutService, muscleGroupsService, cacheService) {
+		function NewWorkoutController($location, _, workoutService, muscleGroupsService, cacheService) {
 			var vm = this;
 		
 			this.errorMessage = "";
@@ -29,7 +28,7 @@ define(["underscore"],
 						vm.workout.selectedGroups.push(group.id);
 				})
 
-				workoutService.save(vm.workout, function (workout) { 
+				workoutService.current.save(vm.workout).$promise.then(function (workout) { 
 					if (workout._id) {
 						$location.path("/home");
 					
@@ -42,7 +41,7 @@ define(["underscore"],
 			};
 		
 			function cancel() {
-				
+				$location.path("/home");
 			}
 		}
 

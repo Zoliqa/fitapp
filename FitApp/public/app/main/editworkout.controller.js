@@ -21,7 +21,7 @@ define([], function () {
 			});
 		
 			function removeWorkout() {
-				workoutService.delete({ id: vm.workout._id }, function () { 
+				workoutService.current.delete({ id: vm.workout._id }).$promise.then(function () { 
 					$location.path("/home");
 
 					cacheService.invalidate("/user");

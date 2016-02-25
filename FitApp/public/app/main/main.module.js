@@ -9,6 +9,8 @@ define([
 	"app/main/addexercise.controller",
 	"app/main/musclegroups.service",
 	"app/main/workout.service",
+	"app/main/workout.online.service",
+	"app/main/workout.offline.service",
 	"app/main/exercise.service",
 	"app/main/main.config",
 	"app/main/main.run"], 
@@ -21,6 +23,8 @@ define([
 			  AddExerciseController,
 			  muscleGroupsService,
 			  workoutService,
+			  workoutOnlineService,
+			  workoutOfflineService,
 			  exerciseService,
 			  mainConfig,
 			  mainRun) {
@@ -32,6 +36,8 @@ define([
 			.controller("AddExerciseController", AddExerciseController)
 			.factory("muscleGroupsService", muscleGroupsService)
 			.factory("workoutService", workoutService)
+			.factory("workoutOnlineService", workoutOnlineService)
+			.factory("workoutOfflineService", workoutOfflineService)
 			.factory("exerciseService", exerciseService)
 			.constant("_", _)
 			.config(mainConfig)

@@ -3,7 +3,7 @@ define([], function () {
 
 	function userService(Offline, userOnlineService, userOfflineService) {
 		var service =  {
-			current: userOnlineService
+			current: Offline.state === "down" ? userOfflineService : userOnlineService
 		};
 	
 		Offline.on("confirmed-down", function () {

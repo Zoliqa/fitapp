@@ -1,11 +1,11 @@
 ﻿
-define(["dexie"], function (Dexie) { 
+define([], function () { 
 
-		function dbService() {
+		function dbService(Dexie) {
 			var db;
 			var service = {
 				saveUser: saveUser,
-				getAllUsers: getAllUsers
+				getAllUsers: getAllUsers,
 			};
 		
 			init();

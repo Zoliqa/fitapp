@@ -1,12 +1,20 @@
 ﻿
 define([], function () {
 	
-	function workoutService($resource) {
-		var resource = $resource("/workout/:id", null, {
-			"update": { method: "PUT" }
+	function workoutService(Offline, workoutOnlineService, workoutOfflineService) {
+		var service = {
+			current: Offline.state === "down" ? workoutOfflineService : workoutOnlineService
+		};
+
+		Offline.on("confirmed-down", function () {
+			service.current = workoutOfflineService;
 		});
 		
-		return resource;
+		Offline.on("confirmed-up", function () {
+			service.current = workoutOnlineService;
+		});
+		
+		return service;
 	}
 	
 	return workoutService;
