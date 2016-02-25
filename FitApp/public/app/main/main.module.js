@@ -2,6 +2,7 @@
 define([
 	"angular", 
 	"angularRoute", 
+	"underscore",
 	"app/main/home.controller",
 	"app/main/newworkout.controller",
 	"app/main/editworkout.controller",
@@ -13,6 +14,7 @@ define([
 	"app/main/main.run"], 
 	function (angular, 
 			  angularRoute, 
+			  _,
 			  HomeController, 
 			  NewWorkoutController,
 			  EditWorkoutController,
@@ -31,6 +33,7 @@ define([
 			.factory("muscleGroupsService", muscleGroupsService)
 			.factory("workoutService", workoutService)
 			.factory("exerciseService", exerciseService)
+			.constant("_", _)
 			.config(mainConfig)
 			.run(mainRun);
 	}

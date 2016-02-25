@@ -1,13 +1,23 @@
 ﻿
 define([
 	"angular", 
+	"uiBootstrapTpls",
+	"bootstrap",
+	"offline",
+	"offlineSimulateUI",
 	"app/main/main.module",
 	"app/users/users.module",
 	"app/widgets/widgets.module",
-	"app/common/common.module",
-	"uiBootstrapTpls",
-	"bootstrap"], 
-	function (angular, mainModule, usersModule, widgetsModule, commonModule, uiBootstrapTpls, bootstrap) {
+	"app/common/common.module"], 
+	function (angular, 
+			  uiBootstrapTpls, 
+			  bootstrap, 
+			  offline, 
+			  offlineSimulatorUI, 
+			  mainModule, 
+			  usersModule, 
+			  widgetsModule, 
+			  commonModule) {
 	
 		var fitApp = angular.module("fitApp", ["ngRoute", "ui.bootstrap", "main", "users", "widgets", "common"]);  
 

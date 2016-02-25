@@ -1,9 +1,8 @@
 ﻿
-define(["underscore", "angular"], 
-	function (_, angular) { 
+define([], function () { 
 
 		function EditWorkoutController(
-			$location, $uibModal, muscleGroupsService, workoutService, exerciseService, userService, cacheService) {
+			$location, $uibModal, _, muscleGroupsService, workoutService, exerciseService, userService, cacheService) {
 		
 			var vm = this;
 		
@@ -58,7 +57,7 @@ define(["underscore", "angular"],
 					if (!exercise.sets)
 						exercise.sets = [];
 
-					exercise.sets.push(angular.copy(vm.newSet));
+					exercise.sets.push({ reps: vm.newSet.reps, weight: vm.newSet.weight });
 
 					exerciseService.update({ id: exercise._id }, exercise);
 				}

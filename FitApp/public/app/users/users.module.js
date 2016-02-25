@@ -3,6 +3,8 @@ define([
 	"angular", 
 	"angularRoute", 
 	"angularResource",
+	"underscore",
+	"bcrypt",
 	"app/users/login.controller",
 	"app/users/register.controller",
 	"app/users/profile.controller",
@@ -10,14 +12,12 @@ define([
 	"app/users/user.online.service",
 	"app/users/user.offline.service",
 	"app/users/users.config",
-	"app/users/users.run",
-	"underscore",
-	"bcrypt",
-	"offline", 
-	"offlineSimulateUI"], 
+	"app/users/users.run"], 
 	function (angular, 
 			  angularRoute, 
-			  angularResource, 
+			  angularResource,
+			  _,
+			  bcrypt,
 			  LoginController, 
 			  RegisterController,
 			  ProfileController, 
@@ -25,9 +25,7 @@ define([
 			  userOnlineService,
 			  userOfflineService,
 			  usersConfig,
-			  usersRun,
-			  _,
-			  bcrypt) {
+			  usersRun) {
 	
 		angular.module("users", ["ngRoute", "ngResource"])
 			.controller("LoginController", LoginController)
