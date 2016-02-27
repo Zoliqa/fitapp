@@ -9,22 +9,30 @@ define([], function () {
 			this.exercise = {
 				groupId: workout.selectedGroups[0],
 				name: "",
-				started: "",
+				started: new Date(),
 				notes: ""
 			};
-			this.startExercise = startExercise;
-			this.cancelStartExercise = cancelStartExercise;
+			this.resetDate = resetDate;
+			this.addExercise = addExercise;
+			this.cancel = cancel;
 		
-			function startExercise() {
-				exerciseService.save(vm.exercise, function (exercise) { 
-					if (exercise._id) 
-						$uibModalInstance.close(exercise);
-				}, function () { 
-					vm.errorMessage = "Error occurred saving the exercise.";
-				})
+			function resetDate() {
+				vm.exercise.started = new Date();
 			}
 
-			function cancelStartExercise() {
+			function addExercise() {
+				exerciseService.save(vm.exercise).$promise.then(function (exercise) { 
+					if (exercise._id) {
+						$uibModalInstance.close();
+					
+						workout.exercises.push(exercise);
+					}
+				}).catch(function () { 
+					vm.errorMessage = "Error occurred saving the exercise.";
+				});
+			}
+
+			function cancel() {
 				$uibModalInstance.dismiss();
 			}
 		}

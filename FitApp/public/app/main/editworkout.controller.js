@@ -15,6 +15,7 @@ define([], function () {
 			this.addNewSet = addNewSet;
 			this.selectExercise = selectExercise;
 			this.removeExercise = removeExercise;
+			this.removeSet = removeSet;
 		
 			userService.current.get().$promise.then(function (user) {
 				vm.workout = user.workouts[0];
@@ -47,9 +48,9 @@ define([], function () {
 					}
 				});
 			
-				modal.result.then(function (exercise) {
-					vm.workout.exercises.push(exercise);
-				});
+				//modal.result.then(function (exercise) {
+				//	vm.workout.exercises.push(exercise);
+				//});
 			}
 
 			function addNewSet(exercise) {
@@ -69,11 +70,21 @@ define([], function () {
 			}
 
 			function removeExercise(exercise) {
-				exerciseService.remove({ id: exercise._id }, function () { 
+				exerciseService.remove({ id: exercise._id }).$promise.then(function () { 
 					vm.workout.exercises = _.filter(vm.workout.exercises, function (exercise2) { 
 						return exercise2._id !== exercise._id;
 					});
 				});
+			}
+
+			function removeSet(exercise, set) {
+				var index = _.indexOf(exercise.sets, function (set2) { 
+					return set2 == set;
+				});			
+			
+				exercise.sets.splice(index, 1);
+
+				exerciseService.update({ id: exercise._id }, exercise);
 			}
 		}
 
