@@ -44,6 +44,8 @@
     <Compile Include="public\app\common\common.module.js" />
     <Compile Include="public\app\main\addexercise.controller.js" />
     <Compile Include="public\app\main\editworkout.controller.js" />
+    <Compile Include="public\app\main\exercise.online.service.js" />
+    <Compile Include="public\app\main\exercise.offline.service.js" />
     <Compile Include="public\app\main\exercise.service.js" />
     <Compile Include="public\app\main\musclegroups.service.js" />
     <Compile Include="public\app\main\main.config.js" />

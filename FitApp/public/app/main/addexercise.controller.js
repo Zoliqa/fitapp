@@ -21,7 +21,7 @@ define([], function () {
 			}
 
 			function addExercise() {
-				exerciseService.save(vm.exercise).$promise.then(function (exercise) { 
+				exerciseService.current.save(vm.exercise).$promise.then(function (exercise) { 
 					if (exercise._id) {
 						$uibModalInstance.close();
 					

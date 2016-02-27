@@ -1,5 +1,5 @@
 ﻿
-define([], function () { 
+define(["angular"], function (angular) { 
 
 	function userOfflineService($q, _, bcrypt, dbService) {
 		var currentUser;
@@ -11,7 +11,7 @@ define([], function () {
 		return service;
 		
 		function get() { 
-			return { $promise: $q.when(currentUser) };
+			return { $promise: $q.when(angular.copy(currentUser)) };
 		}	
 
 		function login(credentials) {
@@ -23,6 +23,8 @@ define([], function () {
 
 					return isMatch;
 				});
+				
+				currentUser = angular.copy(currentUser);
 
 				deferred.resolve(currentUser);
 			});

@@ -47,10 +47,6 @@ define([], function () {
 						}	
 					}
 				});
-			
-				//modal.result.then(function (exercise) {
-				//	vm.workout.exercises.push(exercise);
-				//});
 			}
 
 			function addNewSet(exercise) {
@@ -60,7 +56,10 @@ define([], function () {
 
 					exercise.sets.push({ reps: vm.newSet.reps, weight: vm.newSet.weight });
 
-					exerciseService.update({ id: exercise._id }, exercise);
+					exerciseService.current.update({ id: exercise._id }, exercise).$promise.then(function () { 
+						vm.newSet.reps = "";
+						vm.newSet.weight = "";	
+					});
 				}
 			}
 
@@ -70,7 +69,7 @@ define([], function () {
 			}
 
 			function removeExercise(exercise) {
-				exerciseService.remove({ id: exercise._id }).$promise.then(function () { 
+				exerciseService.current.delete({ id: exercise._id }).$promise.then(function () { 
 					vm.workout.exercises = _.filter(vm.workout.exercises, function (exercise2) { 
 						return exercise2._id !== exercise._id;
 					});
@@ -84,7 +83,7 @@ define([], function () {
 			
 				exercise.sets.splice(index, 1);
 
-				exerciseService.update({ id: exercise._id }, exercise);
+				exerciseService.current.update({ id: exercise._id }, exercise);
 			}
 		}
 
