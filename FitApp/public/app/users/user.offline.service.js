@@ -5,7 +5,8 @@ define(["angular"], function (angular) {
 		var currentUser;
 		var service = {
 			get: get,
-			login: login
+			login: login,
+			setLoggedInUser: setLoggedInUser
 		};
 		
 		return service;
@@ -41,6 +42,10 @@ define(["angular"], function (angular) {
 
 			return { $promise: deferred.promise };
 		}
+
+		function setLoggedInUser(user) { 
+			currentUser = user;
+		} 
 	}
 
 	return userOfflineService;

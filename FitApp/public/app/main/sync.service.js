@@ -22,8 +22,8 @@ define([], function () {
 								return workoutOnlineService.save(offlineWorkout);
 							}
 							else
-								if (offlineWorkout.lastModified > onlineWorkout.lastModified) {
-									return workoutOnlineService.update({ id: offlineWorkout._id }, workoutOffline);
+								if (new Date(offlineWorkout.lastModified) > new Date(onlineWorkout.lastModified)) {
+									return workoutOnlineService.update({ id: offlineWorkout._id }, offlineWorkout);
 								}
 						}
 						else
@@ -37,7 +37,13 @@ define([], function () {
 				
 				cacheService.invalidate("/user");
 				
-				$q.all(reqs).then(userOnlineServiceGet).then(dbService.save).then(function () {
+				$q.all(reqs).then(function () { 
+					return userOnlineServiceGet().$promise;
+				}).then(function (user) {
+					dbService.saveUser(user);
+
+					return user;
+				}).then(function (user) {
 					deferred.resolve(user);
 				});
 			});

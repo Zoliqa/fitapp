@@ -1,7 +1,7 @@
 ﻿
 define([], function () { 
 
-	function userOnlineService($resource, syncService) {
+	function userOnlineService($resource, syncService, userOfflineService) {
 		var resource = $resource("/user/:id", null, {
 			"get": {
 				cache: true
@@ -13,7 +13,11 @@ define([], function () {
 				interceptor: {
 					response: function (result) {
 						if (result && result.data && result.data._id)
-							return syncService.synchronizeData(resource.get, result.data);
+							return syncService.synchronizeData(resource.get, result.data).then(function (user) {
+								userOfflineService.setLoggedInUser(user);
+
+								return user;
+							});
 						
 						return {};
 					}

@@ -25,6 +25,9 @@ function create(userId, workout, next) {
 }
 
 function find(userId, workoutId, next) {
+	if (!/^[0-9a-fA-F]{24}$/.exec(workoutId))
+		return next(null);
+
 	User.findOne({
 		_id: userId,
 		"workouts._id": workoutId 
