@@ -6,12 +6,15 @@ define(["angular"], function (angular) {
 		var service = {
 			get: get,
 			login: login,
-			setLoggedInUser: setLoggedInUser
+			setCurrentUser: setCurrentUser
 		};
 		
 		return service;
 		
 		function get() {
+			if (!currentUser)
+				return { $promise: $q.when({}) };
+			
 			var deferred = $q.defer();
 
 			dbService.getUser(currentUser._id).then(function (user) {
@@ -43,9 +46,9 @@ define(["angular"], function (angular) {
 			return { $promise: deferred.promise };
 		}
 
-		function setLoggedInUser(user) { 
-			currentUser = user;
-		} 
+		function setCurrentUser(user) {
+			currentUser = user
+		}
 	}
 
 	return userOfflineService;

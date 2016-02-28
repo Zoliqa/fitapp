@@ -6,7 +6,7 @@ var User	  = require("./user.model"),
 function create(userId, workout, next) {
 	var newWorkout = new Workout.Workout(workout);
 	
-	newWorkout.lastModified = new Date();
+	newWorkout.lastModified = new Date(); 
 
 	User.findOneAndUpdate({
 		_id: userId

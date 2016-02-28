@@ -4,7 +4,7 @@ define([], function () {
 	// mainRun.$inject = ["$rootScope", "$location", "USER_LOGGED_IN", "Offline"];
 
 	function mainRun(
-		$rootScope, $location, _, USER_LOGGED_IN, Offline, dbService, userOnlineService, workoutOnlineService, cacheService) {
+		$rootScope, $location, _, USER_LOGGED_IN, Offline, cacheService, userOnlineService, userOfflineService) {
 		
 		$rootScope.$on(USER_LOGGED_IN, function (event, data) {
 			$location.path("/home");
@@ -16,10 +16,22 @@ define([], function () {
 			}
 		});
 		
-		// return;
+		Offline.on("down", function () {
+			$rootScope.$apply(function () {
+				// cacheService.invalidate("/user");
+				userOfflineService.setCurrentUser(null);
 
-		//Offline.on("confirmed-up", function () {
-		//});
+				$location.path("/user/login");
+			});
+		});
+
+		Offline.on("up", function () {
+			$rootScope.$apply(function () {
+				userOnlineService.logout().$promise.then(function () {
+					$location.path("/user/login");
+				});
+			});
+		});
 	}
 
 	return mainRun;

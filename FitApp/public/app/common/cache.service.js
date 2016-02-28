@@ -1,9 +1,7 @@
 ﻿
-define([], 
-	function () { 
+define([], function () { 
 
 		function cacheService($cacheFactory) {
-			var $httpDefaultCache = $cacheFactory.get('$http');
 			var service = {
 				invalidate: invalidate, 
 				store: store
@@ -12,10 +10,14 @@ define([],
 			return service;
 
 			function invalidate(key) {
+				var $httpDefaultCache = $cacheFactory.get('$http');
+
 				$httpDefaultCache.remove(key);
 			}
 
 			function store(key, value) {
+				var $httpDefaultCache = $cacheFactory.get('$http');
+			
 				$httpDefaultCache.put(key, value);
 			}
 		}
