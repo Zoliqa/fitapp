@@ -14,6 +14,7 @@ define([
 	"app/main/exercise.service",
 	"app/main/exercise.online.service",
 	"app/main/exercise.offline.service",
+	"app/main/sync.service",
 	"app/main/main.config",
 	"app/main/main.run"], 
 	function (angular, 
@@ -30,6 +31,7 @@ define([
 			  exerciseService,
 			  exerciseOnlineService,
 			  exerciseOfflineService,
+			  syncService,
 			  mainConfig,
 			  mainRun) {
 	
@@ -45,6 +47,7 @@ define([
 			.factory("exerciseService", exerciseService)
 			.factory("exerciseOnlineService", exerciseOnlineService)
 			.factory("exerciseOfflineService", exerciseOfflineService)
+			.factory("syncService", syncService)
 			.constant("_", _)
 			.config(mainConfig)
 			.run(mainRun);

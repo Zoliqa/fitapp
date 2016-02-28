@@ -2,7 +2,7 @@
 define([], 
 	function () { 
 
-		function LoginController($scope, $location, Offline, userService, cacheService, USER_LOGGED_IN, dbService) {  
+		function LoginController($scope, $location, userService, cacheService, USER_LOGGED_IN, dbService) {  
 			var vm = this;    
 		 
 			vm.credentials = {
@@ -28,11 +28,8 @@ define([],
 			
 				if (!vm.isUsernameEmpty() && !vm.isPasswordEmpty()) {
 					userService.current.login(vm.credentials).$promise.then(function (user) {
-						if (user) {
+						if (user._id) {
 							$scope.$emit(USER_LOGGED_IN);
-						
-							if (Offline.state === "up")
-								dbService.saveUser(user);
 						}
 						else
 							vm.errorMessage = "Wrong username and/or password";

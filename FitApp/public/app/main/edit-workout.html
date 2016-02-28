@@ -81,7 +81,7 @@
                                             <td>{{ set.reps }}</td>
                                             <td>{{ set.weight }}</td>
                                             <td class="remove-set-cell text-center">
-                                                <span class="glyphicon glyphicon-remove" 
+                                                <span class="glyphicon glyphicon-remove"
                                                       ng-click="vm.removeSet(exercise, set)">
                                                 </span>
                                             </td>
@@ -98,28 +98,7 @@
     </div>
 
     <div class="form-group text-right">
+        <button class="btn btn-primary btn-lg" ng-click="vm.endWorkout()">End workout</button>
         <button class="btn btn-primary btn-lg" ng-click="vm.removeWorkout()">Remove</button>
     </div>
 </div>
-
-<!--<script>
-    setTimeout(function () {
-    $("#slider").slider({
-        min: 0,
-        max: 50,
-        //slide: function(event, ui){
-        //    var value;
-        //    if(ui.value == -1)
-        //    {
-        //        value = "--";
-        //    }
-        //    else
-        //    {
-        //        value = ui.value;
-        //    }
-
-        //    $(this).find("input.slider-value").val(value);
-        //},
-    });
-    }, 1000);
-</script>-->

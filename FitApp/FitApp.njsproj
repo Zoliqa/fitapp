@@ -53,6 +53,7 @@
     <Compile Include="public\app\main\tests\newworkout.controller.spec.js" />
     <Compile Include="public\app\main\workout.offline.service.js" />
     <Compile Include="public\app\main\workout.online.service.js" />
+    <Compile Include="public\app\main\sync.service.js" />
     <Compile Include="public\app\users\user.online.service.js" />
     <Compile Include="public\app\users\user.offline.service.js" />
     <Compile Include="public\app\users\users.config.js" />

@@ -10,8 +10,9 @@ var WorkoutSchema = {
 	selectedGroups: [Number],
 	notes: String,
 	location: String,
-	exercises: [Exercise.ExerciseSchema]
-};
+	exercises: [Exercise.ExerciseSchema],
+	lastModified: Date
+};  
 
 var Workout = mongoose.model("Workout", WorkoutSchema);
 

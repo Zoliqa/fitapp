@@ -35,7 +35,7 @@ router.post("/", utilities.isAuthenticated, function (req, res, next) {
 });
 	
 router.put("/:id", utilities.isAuthenticated, function (req, res, next) {
-	workoutQueries.update(req.params.id, req.body, function (err, workout) {
+	workoutQueries.update(req.user._id, req.params.id, req.body, function (err, workout) {
 		if (err)
 			return next(err);
 			

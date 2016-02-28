@@ -39,6 +39,10 @@
 			"bootstrap": {
 				deps: ["jquery"],
 				exports: "bootstrap"
+			},
+			"offlineSimulateUI": {
+				deps: ["offline"],
+				exports: "offlineSimulateUI"
 			}
 		}
 

@@ -10,8 +10,20 @@ define(["angular"], function (angular) {
 		
 		return service;
 		
-		function get() { 
-			return { $promise: $q.when(angular.copy(currentUser)) };
+		function get() {
+			var deferred = $q.defer();
+
+			dbService.getUser(currentUser._id).then(function (user) {
+				var copiedUser = angular.copy(user);
+
+				copiedUser.workouts = _.filter(copiedUser.workouts, function (workout) { 
+					return !workout.ended;
+				});
+
+				deferred.resolve(copiedUser);
+			});
+			 
+			return { $promise: deferred.promise };
 		}	
 
 		function login(credentials) {
@@ -24,9 +36,7 @@ define(["angular"], function (angular) {
 					return isMatch;
 				});
 				
-				currentUser = angular.copy(currentUser);
-
-				deferred.resolve(currentUser);
+				deferred.resolve(get().$promise);
 			});
 
 			return { $promise: deferred.promise };

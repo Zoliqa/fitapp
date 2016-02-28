@@ -8,6 +8,7 @@ define([], function () {
 		
 			this.workout = null;
 			this.getMuscleGroupById = muscleGroupsService.getById;
+			this.endWorkout = endWorkout;
 			this.removeWorkout = removeWorkout;
 			this.formatGroups = formatGroups;
 			this.addExercise = addExercise;
@@ -21,6 +22,16 @@ define([], function () {
 				vm.workout = user.workouts[0];
 			});
 		
+			function endWorkout() {
+				vm.workout.ended = new Date();
+
+				workoutService.current.update({ id: vm.workout._id }, vm.workout).$promise.then(function () { 
+					$location.path("/home");
+					
+					cacheService.invalidate("/user");	
+				});	
+			}
+
 			function removeWorkout() {
 				workoutService.current.delete({ id: vm.workout._id }).$promise.then(function () { 
 					$location.path("/home");
@@ -30,9 +41,10 @@ define([], function () {
 			}
 		
 			function formatGroups() {
-				return _.reduce(vm.workout.selectedGroups, function (memo, groupId) { 
-					return memo + ", " + muscleGroupsService.getById(groupId).name;
-				}, "").slice(1);
+				if (vm.workout)
+					return _.reduce(vm.workout.selectedGroups, function (memo, groupId) { 
+						return memo + ", " + muscleGroupsService.getById(groupId).name;
+					}, "").slice(1);
 			}
 
 			function addExercise() {

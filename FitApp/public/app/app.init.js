@@ -13,7 +13,7 @@ define([
 			  uiBootstrapTpls, 
 			  bootstrap, 
 			  offline, 
-			  offlineSimulatorUI, 
+			  offlineSimulateUI, 
 			  mainModule, 
 			  usersModule, 
 			  widgetsModule, 

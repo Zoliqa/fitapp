@@ -6,6 +6,8 @@ var User	  = require("./user.model"),
 function create(userId, workout, next) {
 	var newWorkout = new Workout.Workout(workout);
 	
+	newWorkout.lastModified = new Date();
+
 	User.findOneAndUpdate({
 		_id: userId
 	}, {
@@ -34,44 +36,25 @@ function find(userId, workoutId, next) {
 	});
 }
 
-//function findActiveSession(userId, next) {
-//	User.findOne({
-//		_id: userId,
-//		"sessions.endDate": null,
-//		sessions: { $exists: true }
-//	},
-//	"sessions.$",
-//	function (err, user) {
-//		if (err)
-//			return next(err);
-		
-//		return next(null, user && user.sessions[0]);
-//	});
-//}
+function update(userId, workoutId, workout, next) {
+	workout.lastModified = new Date();
 
-//function update(userId, session, next) {
-//	//var newSession = new Session(session);
-	
-//	//if (!sessionId)
-//	//	newSession.id = mongoose.Types.ObjectId();
-
-//	User.findOneAndUpdate({
-//		_id: userId, 
-//		"sessions.id": session._id
-//	}, {
-//		$set: {
-//			"session.$": session
-//		}
-//	}, {
-//		new: true,
-//		upsert: true,
-//	}, function (err, user) {
-//		if (err)
-//			return next(err);
+	User.findOneAndUpdate({
+		_id: userId, 
+		"workouts._id": workoutId
+	}, {
+		$set: {
+			"workouts.$": workout
+		}
+	}, {
+		new: true
+	}, function (err) {
+		if (err)
+			return next(err);
 		
-//		return next(null, session);
-//	});
-//}
+		return next(null, workout);
+	});
+}
 
 function remove(userId, workoutId, next) {
 	User.findOneAndUpdate({
@@ -93,7 +76,6 @@ function remove(userId, workoutId, next) {
 module.exports = {
 	create: create,
 	find: find,
-	// findActiveSession: findActiveSession,
-	// update: update,
+	update: update,
 	remove: remove
 };

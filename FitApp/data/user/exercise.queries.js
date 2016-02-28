@@ -19,6 +19,9 @@ function create(userId, exercise, next) {
 		_id: userId,
 		"workouts.ended": null
 	}, {
+		$set: {
+			"workouts.$.lastModified": new Date()
+		},
 		$push: {
 			"workouts.$.exercises": newExercise
 		}
@@ -49,6 +52,7 @@ function update(userId, exerciseId, exercise, next) {
 		
 		var setObject = {};
 		setObject["workouts.$.exercises." + index] = exercise;
+		setObject["workouts.$.lastModified"] = new Date();
 
 		User.findOneAndUpdate({
 			_id: userId,
@@ -71,6 +75,9 @@ function remove(userId, exerciseId, next) {
 		_id: userId,
 		"workouts.ended": null
 	}, {
+		$set: {
+			"workouts.$.lastModified": new Date()
+		},
 		$pull: {
 			"workouts.$.exercises": {
 				_id: exerciseId
