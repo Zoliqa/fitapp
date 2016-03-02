@@ -25,6 +25,9 @@ define([], function () {
 					if (exercise._id) {
 						$uibModalInstance.close();
 					
+						if (!workout.exercises)
+							workout.exercises = [];
+
 						workout.exercises.push(exercise);
 					}
 				}).catch(function () { 

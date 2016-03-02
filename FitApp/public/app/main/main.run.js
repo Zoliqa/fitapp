@@ -4,10 +4,17 @@ define([], function () {
 	// mainRun.$inject = ["$rootScope", "$location", "USER_LOGGED_IN", "Offline"];
 
 	function mainRun(
-		$rootScope, $location, _, USER_LOGGED_IN, Offline, cacheService, userOnlineService, userOfflineService) {
+		$rootScope, $location, $q, USER_LOGGED_IN, Offline, userOnlineService, userOfflineService, syncService) {
 		
 		$rootScope.$on(USER_LOGGED_IN, function (event, data) {
-			$location.path("/home");
+			$q.when({}).then(function () { 
+				if (Offline.state === "up")
+					return syncService.synchronizeData();
+
+				return {};
+			}).then(function () { 
+				$location.path("/home");
+			});
 		});
 		
 		$rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
@@ -18,16 +25,15 @@ define([], function () {
 		
 		Offline.on("down", function () {
 			$rootScope.$apply(function () {
-				// cacheService.invalidate("/user");
-				userOfflineService.setCurrentUser(null);
-
-				$location.path("/user/login");
+				userOfflineService.logout().$promise.finally(function () {
+					$location.path("/user/login");
+				});
 			});
 		});
 
 		Offline.on("up", function () {
 			$rootScope.$apply(function () {
-				userOnlineService.logout().$promise.then(function () {
+				userOnlineService.logout().$promise.finally(function () {
 					$location.path("/user/login");
 				});
 			});

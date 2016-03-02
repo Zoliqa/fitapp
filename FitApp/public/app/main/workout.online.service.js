@@ -1,8 +1,8 @@
 ﻿
 define([], function () {
 	
-	function workoutOnlineService($resource, dbService) {
-		var resource = $resource("/workout/:id", null, {
+	function workoutOnlineService($resource, $q, userOnlineService, dbService) {
+		var service = $resource("/workout/:id", null, {
 			save: {
 				method: "POST"
 				//interceptor: {
@@ -23,7 +23,21 @@ define([], function () {
 			}
 		});
 		
-		return resource;
+		service.getActiveWorkout = getActiveWorkout;
+
+		return service;
+		
+		function getActiveWorkout() {
+			var deferred = $q.defer();
+			
+			userOnlineService.get().$promise.then(function (user) {
+				deferred.resolve(user.workouts && user.workouts[0]);
+			}, function (err) {
+				deferred.reject(err);
+			});
+			
+			return deferred.promise;
+		}	
 
 		function addWorkout(result) { 
 			if (result && result.data && result.data._id) {

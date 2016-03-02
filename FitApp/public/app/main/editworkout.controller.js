@@ -2,7 +2,7 @@
 define([], function () { 
 
 		function EditWorkoutController(
-			$location, $uibModal, _, muscleGroupsService, workoutService, exerciseService, userService, cacheService) {
+			$location, $uibModal, _, muscleGroupsService, workoutService, exerciseService, cacheService) {
 		
 			var vm = this;
 		
@@ -18,10 +18,14 @@ define([], function () {
 			this.removeExercise = removeExercise;
 			this.removeSet = removeSet;
 		
-			userService.current.get().$promise.then(function (user) {
-				vm.workout = user.workouts[0];
-			});
+			//userService.current.get().$promise.then(function (user) {
+			//	vm.workout = user.workouts[0];
+			//});
 		
+			workoutService.current.getActiveWorkout().then(function (workout) {
+				vm.workout = workout;
+			});
+
 			function endWorkout() {
 				vm.workout.ended = new Date();
 

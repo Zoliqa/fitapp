@@ -1,17 +1,19 @@
 ﻿
 define([], function () {
 	
-	function syncService($q, dbService, workoutOnlineService, cacheService) {
+	function syncService($q, dbService, userOnlineService, workoutOnlineService, cacheService) {
 		var service = {
 			synchronizeData: synchronizeData
 		};
 		
 		return service;
 
-		function synchronizeData(userOnlineServiceGet, user) {
+		function synchronizeData() {
 			var deferred = $q.defer();
 			
-			dbService.getUser(user._id).then(function (offlineUser) {
+			userOnlineService.get().$promise.then(function (user) { 
+				return dbService.getUser(user._id);
+			}).then(function (offlineUser) {
 				var reqs = [],
 					req;
 				
@@ -38,7 +40,7 @@ define([], function () {
 				cacheService.invalidate("/user");
 				
 				$q.all(reqs).then(function () { 
-					return userOnlineServiceGet().$promise;
+					return userOnlineService.get().$promise; // userOnlineServiceGet().$promise;
 				}).then(function (user) {
 					dbService.saveUser(user);
 

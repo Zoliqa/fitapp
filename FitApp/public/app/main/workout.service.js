@@ -3,7 +3,7 @@ define([], function () {
 	
 	function workoutService(Offline, workoutOnlineService, workoutOfflineService) {
 		var service = {
-			current: Offline.state === "down" ? workoutOfflineService : workoutOnlineService
+			current: Offline.state === "down" ? workoutOfflineService : workoutOnlineService,
 		};
 
 		Offline.on("confirmed-down", function () {

@@ -35,7 +35,7 @@ function find(userId, workoutId, next) {
 		if (err)
 			return next(err);
 			
-		return next(null, user.workouts[0]);
+		return next(null, user && user.workouts[0]);
 	});
 }
 
