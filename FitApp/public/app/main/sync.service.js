@@ -40,7 +40,7 @@ define([], function () {
 				cacheService.invalidate("/user");
 				
 				$q.all(reqs).then(function () { 
-					return userOnlineService.get().$promise; // userOnlineServiceGet().$promise;
+					return userOnlineService.get().$promise;
 				}).then(function (user) {
 					dbService.saveUser(user);
 

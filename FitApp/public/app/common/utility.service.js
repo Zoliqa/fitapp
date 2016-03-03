@@ -3,7 +3,8 @@ define([], function () {
 
 		function utilityService() {
 			var service = {
-				generateGuid: generateGuid
+				generateGuid: generateGuid,
+				isGuid: isGuid
 			};
 		
 			return service;
@@ -14,6 +15,10 @@ define([], function () {
 				}
 
 				return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+			}
+
+			function isGuid(value) {
+				return !!/^([^-]+-){4}[^-]+$/.exec(value);	
 			}
 		}
 

@@ -1,19 +1,30 @@
 ﻿
 define([], function () {
 	
-	function workoutOnlineService($resource, $q, userOnlineService, dbService) {
+	function workoutOnlineService($resource, $q, _, userOnlineService, dbService, utilityService) {
 		var service = $resource("/workout/:id", null, {
 			save: {
-				method: "POST"
-				//interceptor: {
-				//	response: addWorkout
-				//}
+				method: "POST",
+				transformRequest: function (data, headers) {
+					validateWorkout(data);
+					
+					return JSON.stringify(data);
+				},
+				interceptor: {
+					// response: addWorkout,
+					request: validateWorkout
+				}
 			},
 			update: {
-				method: "PUT"
-				//interceptor: {
-				//	response: deleteWorkout
-				//}
+				method: "PUT",
+				transformRequest: function (data, headers) {
+					validateWorkout(data);
+					
+					return JSON.stringify(data);
+				},
+				interceptor: {
+					// response: deleteWorkout
+				}
 			},
 			"delete": {
 				method: "DELETE"
@@ -27,6 +38,13 @@ define([], function () {
 
 		return service;
 		
+		function validateWorkout(workout) {
+			_.each(workout.exercises, function (exercise) { 
+				if (utilityService.isGuid(exercise._id))
+					delete exercise._id;
+			});
+		}	
+
 		function getActiveWorkout() {
 			var deferred = $q.defer();
 			
